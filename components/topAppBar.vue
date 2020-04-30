@@ -13,7 +13,7 @@
         <share-icon fillColor="#ffffff" />
       </div>
       <div class="float-right bg-grey-3 h-full w-12 center-items">
-        <share-icon fillColor="#FF0000" />
+        <share-icon fillColor="#ffffff" />
       </div>
     </header>
   </div>

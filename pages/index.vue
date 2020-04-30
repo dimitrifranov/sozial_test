@@ -1,11 +1,13 @@
 <template>
   <div>
-    <post />
-    <post />
-    <post />
-    <post />
-    <post />
-    <post />
+    <div class="w-screen flex flex-col items-center">
+      <post />
+      <post />
+      <post />
+      <post />
+      <post />
+      <post />
+    </div>
   </div>
 </template>
 
