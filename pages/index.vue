@@ -1,9 +1,21 @@
 <template>
-  <div />
+  <div>
+    <post />
+    <post />
+    <post />
+    <post />
+    <post />
+    <post />
+  </div>
 </template>
 
 <script>
-export default {}
+import post from '@/components/post.vue'
+export default {
+  components: {
+    post
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

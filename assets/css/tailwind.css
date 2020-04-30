@@ -7,3 +7,7 @@
 html {
   @apply bg-grey w-screen h-screen;
 }
+
+.center-items {
+  @apply flex justify-center items-center;
+}
