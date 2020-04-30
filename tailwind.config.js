@@ -6,6 +6,10 @@
  */
 module.exports = {
   theme: {
+    fontFamily: {
+      display: ['Rubik', 'sans-serif'],
+      body: ['Montserrat', 'sans-serif']
+    },
     extend: {
       colors: {
         grey: '#121212',
@@ -17,6 +21,13 @@ module.exports = {
         white1: '#b3ffff',
         white2: '#80ffff',
         white3: '#1fffff'
+      },
+      fontSize: {
+        '7xl': '5rem',
+        '8xl': '6rem',
+        '9xl': '7rem',
+        '10xl': '8rem',
+        '11xl': '9rem'
       }
     }
   },
