@@ -22,16 +22,16 @@
         </p>
       </div>
       <div class="h-full float-right center-items w-8">
-        <share-icon fillColor="#ffffff" />
+        <chevron-down fillColor="#ffffff" size="32" />
       </div>
       <div class="h-full float-right center-items w-8">
         <share-icon fillColor="#ffffff" />
       </div>
       <div class="h-full float-right center-items w-8">
-        <share-icon fillColor="#ffffff" />
+        <chevron-up fillColor="#ffffff" size="32" />
       </div>
       <div class="h-full float-right center-items w-8">
-        <share-icon fillColor="#ffffff" />
+        <comment-outline fillColor="#ffffff" />
       </div>
     </div>
   </section>

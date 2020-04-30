@@ -4,13 +4,13 @@
       class="w-screen h-12 clearfix bg-grey1 bottom-0 fixed flex items-stretch justify-around shadow-lg"
     >
       <div class="center-items flex-grow">
-        <share-icon fillColor="#ffffff" />
+        <home-outline fillColor="#ffffff" size="32" />
       </div>
       <div class="center-items flex-grow">
-        <share-icon fillColor="#ffffff" />
+        <plus-icon fillColor="#ffffff" size="32" />
       </div>
       <div class="center-items flex-grow">
-        <share-icon fillColor="#ffffff" />
+        <share-icon fillColor="#ffffff" size="32" />
       </div>
     </nav>
   </div>
