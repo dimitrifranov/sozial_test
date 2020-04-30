@@ -1,27 +1,35 @@
 <template>
   <div>
-    <header />
-    <!-- <nav
-      class=" flex
-      flex-row
-      flex-no-wrap
-      w-screen
-     bg-teal-500 block"
-    >
-      <div class="bg-red-500 flex">
-        ehre
+    <header class="w-screen h-12 clearfix bg-grey1 fixed">
+      <div class="center-items float-left  h-full w-12">
+        <img src="icon.png" alt="icon" class="w-8 h-8" />
       </div>
-      <div class="bg-red-400">
-        ehre
+      <div class="float-left  h-full ml-8 flex items-center">
+        <h1 class="text-3xl text-white">
+          SOZIAL.IO
+        </h1>
       </div>
-      <div class="bg-red-300 ">
-        ehre
+      <div class="float-right bg-grey-2 h-full w-12 center-items">
+        <share-icon fillColor="#ffffff" />
       </div>
-      <div class="bg-red-200">
-        ehre
+      <div class="float-right bg-grey-3 h-full w-12 center-items">
+        <share-icon fillColor="#FF0000" />
       </div>
-    </nav> -->
+    </header>
     <nuxt />
+    <nav
+      class="w-screen h-12 clearfix bg-grey1 bottom-0 fixed flex items-stretch justify-around"
+    >
+      <div class="center-items flex-grow">
+        <share-icon />
+      </div>
+      <div class="center-items flex-grow">
+        <share-icon />
+      </div>
+      <div class="center-items flex-grow">
+        <share-icon />
+      </div>
+    </nav>
   </div>
 </template>
 
@@ -29,4 +37,8 @@
 export default {}
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.center-items {
+  @apply flex justify-center items-center;
+}
+</style>
