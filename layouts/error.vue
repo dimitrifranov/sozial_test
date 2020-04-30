@@ -1,13 +1,13 @@
 <template>
   <div class="container center-items h-screen">
     <div>
-      <h2 class="text-white text-l leading-none text-opacity-25 font-display">
+      <h2 class="text-white text-l leading-none text-opacity-25">
         ERROR
       </h2>
-      <h1 class="text-white text-10xl leading-none -mt-4 -mb-4 font-display">
+      <h1 class="text-white text-10xl leading-none -mt-4 -mb-4">
         {{ statusCode }}
       </h1>
-      <h2 class="text-white text-l leading-none uppercase font-display">
+      <h2 class="text-white text-l leading-none uppercase">
         {{ message }}
       </h2>
     </div>

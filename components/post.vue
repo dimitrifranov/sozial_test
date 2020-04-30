@@ -22,13 +22,13 @@
         </p>
       </div>
       <div class="h-full float-right center-items w-8">
-        <chevron-down fillColor="#ffffff" size="32" />
+        <chevron-down fillColor="#ffffff" :size="size" />
       </div>
       <div class="h-full float-right center-items w-8">
         <share-icon fillColor="#ffffff" />
       </div>
       <div class="h-full float-right center-items w-8">
-        <chevron-up fillColor="#ffffff" size="32" />
+        <chevron-up fillColor="#ffffff" :size="size" />
       </div>
       <div class="h-full float-right center-items w-8">
         <comment-outline fillColor="#ffffff" />
@@ -39,7 +39,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      size: 32
+    }
+  }
+}
 </script>
 
 <style scoped></style>

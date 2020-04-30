@@ -30,13 +30,13 @@ export default {
   //       error({ statusCode: 503, message: 'Unable to Fetch Events' })
   //     })
   // },
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('groups/fetchGroups')
-    } catch (e) {
-      error({ statusCode: 503, message: 'Unable to Fetch Groups' })
-    }
-  },
+  // async fetch({ store, error }) {
+  //   try {
+  //     await store.dispatch('groups/fetchGroups')
+  //   } catch (e) {
+  //     error({ statusCode: 503, message: 'Unable to Fetch Groups' })
+  //   }
+  // },
   computed: mapState({
     groups: (state) => state.groups.groups
   }),

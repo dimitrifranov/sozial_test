@@ -5,7 +5,7 @@
 @import 'tailwindcss/utilities';
 
 html {
-  @apply bg-grey w-screen h-screen;
+  @apply bg-grey w-screen h-screen font-display;
 }
 
 .center-items {
