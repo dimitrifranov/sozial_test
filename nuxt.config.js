@@ -67,5 +67,18 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  // router: {
+  //   middleware: 'autoLogin'
+  // }
+  pwa: {
+    manifest: {
+      name: 'Sozial.io - social in school',
+      short_name: 'Sozial.io',
+      start_url: 'http://social-tests.herokuapp.com/',
+      display: 'standalone',
+      background_color: '#121212',
+      description: 'Das beste Soziale Netzwerk.'
+    }
   }
 }

@@ -7,12 +7,17 @@
 </template>
 
 <script>
+import { authComputed } from '../store/helpers.js'
+
 import topAppBar from '@/components/topAppBar.vue'
 import bottomNav from '@/components/bottomNav.vue'
 export default {
   components: {
     topAppBar,
     bottomNav
+  },
+  computed: {
+    ...authComputed
   },
   head() {
     return {

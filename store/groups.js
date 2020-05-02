@@ -1,4 +1,4 @@
-import EventService from '@/services/EventService.js'
+import GroupService from '@/services/GroupService.js'
 export const state = () => ({
   groups: []
 })
@@ -9,7 +9,7 @@ export const mutations = {
 }
 export const actions = {
   fetchGroups({ commit }) {
-    return EventService.getGroups().then((response) => {
+    return GroupService.getGroups().then((response) => {
       commit('SET_GROUPS', response.data)
     })
   }

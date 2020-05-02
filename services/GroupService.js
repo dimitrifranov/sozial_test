@@ -15,5 +15,8 @@ export default {
   },
   getGroup(id) {
     return apiClient.get('/group/' + id)
+  },
+  registerUser(credentials) {
+    return apiClient.post('/users/', credentials)
   }
 }
