@@ -52,13 +52,16 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseUrl: 'http://localhost:8000/'
+  },
   /*
    ** Build configuration
    */
@@ -69,16 +72,38 @@ export default {
     extend(config, ctx) {}
   },
   // router: {
-  //   middleware: 'autoLogin'
-  // }
+  //   middleware: ['auth']
+  // },
   pwa: {
     manifest: {
       name: 'Sozial.io - social in school',
       short_name: 'Sozial.io',
-      start_url: 'http://social-tests.herokuapp.com/',
+      start_url: '.',
       display: 'standalone',
       background_color: '#121212',
       description: 'Das beste Soziale Netzwerk.'
+    }
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'http://localhost:8000/auth/login/',
+            method: 'post',
+            propertyName: 'key'
+          },
+          logout: { url: 'http://localhost:8000/auth/logout/', method: 'post' },
+          user: {
+            url: 'http://localhost:8000/auth/user/',
+            method: 'get',
+            propertyName: false
+          }
+        },
+        // tokenRequired: true,
+        tokenType: 'Token'
+        // autoFetchUser: true
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <form class="h-screen center-items" @submit.prevent="login">
+  <div class="container">
+    <form class="h-screen center-items" @submit.prevent="loginUser">
       <label for="username">
         Username:
       </label>
@@ -11,7 +11,16 @@
         value
         class="w-20 h-5 bg-white"
       />
-
+      <label for="email">
+        Email:
+      </label>
+      <input
+        v-model="email"
+        type="email"
+        name="email"
+        value
+        class="w-20 h-5 bg-white"
+      />
       <label for="password">
         Password:
       </label>
@@ -34,8 +43,9 @@
 export default {
   data() {
     return {
-      username: '',
-      password: ''
+      username: 'dimi',
+      password: 'Petz2001',
+      email: 'dfranov01@gmail.com'
     }
   },
   methods: {
@@ -44,6 +54,22 @@ export default {
         username: this.username,
         password: this.password
       })
+    },
+    loginUser() {
+      this.$auth
+        .loginWith('local', {
+          data: {
+            username: this.username,
+            password: this.password,
+            email: this.email
+          }
+        })
+        .then(() => {
+          this.$router.push('/')
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     }
   }
 }
