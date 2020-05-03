@@ -9,13 +9,14 @@
           SOZIAL.IO
         </h1>
       </div>
-      <div
+      <button
         v-if="this.$auth.loggedIn"
         class="float-right bg-grey-2 h-full w-12 center-items"
-        @click="$auth.logout()"
+        @mouseover="more = true"
+        @mouseleave="more = false"
       >
         <dots-vertical-icon fillColor="#ffffff" />
-      </div>
+      </button>
       <div
         v-else
         class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light"
@@ -27,15 +28,33 @@
           register
         </nuxt-link>
       </div>
-      <div class="float-right bg-grey-3 h-full w-12 center-items">
+      <button class="float-right bg-grey-3 h-full w-12 center-items">
         <magnify-icon fillColor="#ffffff" />
-      </div>
+      </button>
     </header>
+    <ul
+      v-if="more"
+      class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed"
+      @mouseover="more = true"
+      @mouseleave="more = false"
+    >
+      <li @click="$auth.logout()">
+        logout
+      </li>
+      <li>options</li>
+      <li>ehre</li>
+    </ul>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      more: false
+    }
+  }
+}
 </script>
 
 <style scoped></style>

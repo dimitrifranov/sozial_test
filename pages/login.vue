@@ -56,9 +56,9 @@
 export default {
   data() {
     return {
-      username: 'dimi',
-      password: 'Petz2001',
-      email: 'dfranov01@gmail.com'
+      username: '',
+      password: '',
+      email: ''
     }
   },
   methods: {

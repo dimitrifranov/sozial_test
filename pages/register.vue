@@ -44,7 +44,7 @@
       <button
         type="submit"
         name="button"
-        class=" bg- bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent"
+        class="bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent"
       >
         Register
       </button>
