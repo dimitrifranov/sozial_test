@@ -1,10 +1,7 @@
 <template>
   <div>
     <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg">
-      <div
-        v-if="this.$auth.loggedIn"
-        class="center-items float-left  h-full w-12"
-      >
+      <div class="center-items float-left  h-full w-12">
         <img src="icon.png" alt="icon" class="w-8 h-8" />
       </div>
       <div class="float-left  h-full ml-8 flex items-center">
@@ -12,8 +9,23 @@
           SOZIAL.IO
         </h1>
       </div>
-      <div class="float-right bg-grey-2 h-full w-12 center-items">
+      <div
+        v-if="this.$auth.loggedIn"
+        class="float-right bg-grey-2 h-full w-12 center-items"
+        @click="$auth.logout()"
+      >
         <dots-vertical-icon fillColor="#ffffff" />
+      </div>
+      <div
+        v-else
+        class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light"
+      >
+        <nuxt-link to="/login" class="text-white">
+          login
+        </nuxt-link>
+        <nuxt-link to="/register" class="text-white -mt-1">
+          register
+        </nuxt-link>
       </div>
       <div class="float-right bg-grey-3 h-full w-12 center-items">
         <magnify-icon fillColor="#ffffff" />

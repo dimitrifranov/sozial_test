@@ -8,6 +8,7 @@ import HomeOutline from 'vue-material-design-icons/HomeOutline.vue'
 import Plus from 'vue-material-design-icons/Plus.vue'
 import Magnify from 'vue-material-design-icons/Magnify.vue'
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue'
+import BellOutline from 'vue-material-design-icons/BellOutline.vue'
 
 export default function materialIcons() {
   Vue.component('share-icon', ShareIcon)
@@ -18,4 +19,5 @@ export default function materialIcons() {
   Vue.component('plus-icon', Plus)
   Vue.component('magnify-icon', Magnify)
   Vue.component('dots-vertical-icon', DotsVertical)
+  Vue.component('bell-outline-icon', BellOutline)
 }

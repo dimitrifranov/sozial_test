@@ -25,7 +25,9 @@
         <chevron-down fillColor="#ffffff" :size="size" />
       </div>
       <div class="h-full float-right center-items w-8">
-        <share-icon fillColor="#ffffff" />
+        <p class="text-s text-white font-light">
+          121
+        </p>
       </div>
       <div class="h-full float-right center-items w-8">
         <chevron-up fillColor="#ffffff" :size="size" />

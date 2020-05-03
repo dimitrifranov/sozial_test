@@ -10,7 +10,7 @@
         <plus-icon fillColor="#ffffff" :size="size" />
       </div>
       <div class="center-items flex-grow">
-        <share-icon fillColor="#ffffff" :size="size" />
+        <bell-outline-icon fillColor="#ffffff" :size="size" />
       </div>
     </nav>
   </div>

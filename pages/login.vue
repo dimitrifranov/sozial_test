@@ -1,38 +1,51 @@
 <template>
-  <div class="container">
-    <form class="h-screen center-items" @submit.prevent="loginUser">
-      <label for="username">
-        Username:
-      </label>
-      <input
-        v-model="username"
-        type="text"
-        name="username"
-        value
-        class="w-20 h-5 bg-white"
-      />
-      <label for="email">
-        Email:
-      </label>
-      <input
-        v-model="email"
-        type="email"
-        name="email"
-        value
-        class="w-20 h-5 bg-white"
-      />
-      <label for="password">
-        Password:
-      </label>
-      <input
-        v-model="password"
-        type="password"
-        name="password"
-        value
-        class="w-20 h-5 bg-white"
-      />
+  <div class="container center-items">
+    <form
+      class=" w-full max-w-xs h-screen center-items flex-col"
+      @submit.prevent="loginUser"
+    >
+      <div class="mb-4">
+        <label class="block text-white text-sm mb-2" for="username">
+          Username:
+        </label>
+        <input
+          v-model="username"
+          type="text"
+          name="username"
+          value
+          class="border border-white w-full py-2 px-3 text-white bg-transparent focus:rounded font-light"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-white text-sm mb-2" for="email">
+          Email:
+        </label>
+        <input
+          v-model="email"
+          type="email"
+          name="email"
+          value
+          class="border border-white w-full py-2 px-3 text-white bg-transparent focus:rounded font-light"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-white text-sm mb-2" for="password">
+          Password:
+        </label>
+        <input
+          v-model="password"
+          type="password"
+          name="password"
+          value
+          class="border border-white w-full py-2 px-3 text-white bg-transparent focus:rounded font-light"
+        />
+      </div>
 
-      <button type="submit" name="button" class="w-20 h-5 bg-white">
+      <button
+        type="submit"
+        name="button"
+        class=" bg- bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent"
+      >
         Login
       </button>
     </form>
