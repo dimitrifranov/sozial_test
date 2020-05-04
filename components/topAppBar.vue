@@ -12,8 +12,7 @@
       <button
         v-if="this.$auth.loggedIn"
         class="float-right bg-grey-2 h-full w-12 center-items"
-        @mouseover="more = true"
-        @mouseleave="more = false"
+        @click="toggle"
       >
         <dots-vertical-icon fillColor="#ffffff" />
       </button>
@@ -33,25 +32,38 @@
       </button>
     </header>
     <ul
-      v-if="more"
-      class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed"
-      @mouseover="more = true"
-      @mouseleave="more = false"
+      v-show="opened"
+      v-click-outside="close"
+      class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
     >
-      <li @click="$auth.logout()">
+      <button @click="$auth.logout()">
         logout
-      </li>
-      <li>options</li>
-      <li>ehre</li>
+      </button>
+      <button>options</button>
+      <button>ehre</button>
     </ul>
   </div>
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside'
 export default {
+  directives: {
+    ClickOutside
+  },
   data() {
     return {
-      more: false
+      opened: false
+    }
+  },
+  methods: {
+    toggle() {
+      setTimeout(() => {
+        this.opened = !this.opened
+      }, 1)
+    },
+    close() {
+      this.opened = false
     }
   }
 }

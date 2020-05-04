@@ -1,50 +1,33 @@
 <template>
-  <div class="container center-items">
+  <div class="center-items">
     <form
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="register"
     >
-      <div class="mb-4">
-        <label class="block text-white text-sm mb-2" for="username">
-          Username:
-        </label>
-        <input
-          v-model="username"
-          type="text"
-          name="username"
-          value
-          class="border border-white w-full py-2 px-3 text-white bg-transparent focus:rounded font-light"
-        />
-      </div>
-      <div class="mb-4">
-        <label class="block text-white text-sm mb-2" for="email">
-          Email:
-        </label>
-        <input
-          v-model="email"
-          type="email"
-          name="email"
-          value
-          class="border border-white w-full py-2 px-3 text-white bg-transparent focus:rounded font-light"
-        />
-      </div>
-      <div class="mb-4">
-        <label class="block text-white text-sm mb-2" for="password">
-          Password:
-        </label>
-        <input
-          v-model="password"
-          type="password"
-          name="password"
-          value
-          class="border border-white w-full py-2 px-3 text-white bg-transparent focus:rounded font-light"
-        />
-      </div>
-
+      <inputComponent
+        v-model="firstname"
+        value="firstname"
+        label="First Name:"
+      />
+      <inputComponent v-model="lasname" value="lastname" label="Last Name:" />
+      <inputComponent v-model="username" value="username" label="Username:" />
+      <inputComponent v-model="email" value="email" label="E-mail:" />
+      <inputComponent
+        v-model="password"
+        value="password"
+        label="Password:"
+        type="password"
+      />
+      <inputComponent
+        v-model="password2"
+        value="password2"
+        label="Password again:"
+        type="password"
+      />
       <button
         type="submit"
         name="button"
-        class="bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent"
+        class="font-light bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent"
       >
         Register
       </button>
@@ -53,12 +36,19 @@
 </template>
 
 <script>
+import inputComponent from '@/components/inputComponent.vue'
 export default {
+  components: {
+    inputComponent
+  },
   data() {
     return {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      password2: '',
+      firstname: '',
+      lasname: ''
     }
   },
   methods: {
