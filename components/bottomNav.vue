@@ -3,9 +3,9 @@
     <nav
       class="w-screen h-12 clearfix bg-grey1 bottom-0 fixed flex items-stretch justify-around shadow-lg"
     >
-      <div class="center-items flex-grow">
+      <nuxt-link to="/" class="center-items flex-grow">
         <home-outline fillColor="#ffffff" :size="size" />
-      </div>
+      </nuxt-link>
       <div class="center-items flex-grow">
         <plus-icon fillColor="#ffffff" :size="size" />
       </div>

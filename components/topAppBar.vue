@@ -18,25 +18,33 @@
       </button>
       <div
         v-else
-        class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light"
+        class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-3"
       >
-        <nuxt-link to="/login" class="text-white">
-          login
-        </nuxt-link>
-        <nuxt-link to="/register" class="text-white -mt-1">
+        <nuxt-link to="/register" class="text-white border py-1 px-2">
           register
         </nuxt-link>
       </div>
-      <button class="float-right bg-grey-3 h-full w-12 center-items">
+      <button
+        v-if="this.$auth.loggedIn"
+        class="float-right bg-grey-3 h-full w-12 center-items"
+      >
         <magnify-icon fillColor="#ffffff" />
       </button>
+      <div
+        v-else
+        class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-2"
+      >
+        <nuxt-link to="/login" class="text-white text-opacity-87">
+          login
+        </nuxt-link>
+      </div>
     </header>
     <ul
       v-show="opened"
       v-click-outside="close"
       class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
     >
-      <button @click="$auth.logout()">
+      <button @click="logout()">
         logout
       </button>
       <button>options</button>
@@ -63,6 +71,10 @@ export default {
       }, 1)
     },
     close() {
+      this.opened = false
+    },
+    logout() {
+      this.$auth.logout()
       this.opened = false
     }
   }
