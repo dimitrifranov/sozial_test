@@ -11,7 +11,7 @@ const apiClient = axios.create({
 
 export default {
   getGroups() {
-    return apiClient.get('/groups')
+    return apiClient.get('/groups/')
   },
   getGroup(id) {
     return apiClient.get('/group/' + id)

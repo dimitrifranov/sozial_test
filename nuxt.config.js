@@ -34,7 +34,12 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '@/plugins/vue-material-icons', mode: 'client' }],
+  plugins: [
+    { src: '@/plugins/vue-material-icons', mode: 'client' },
+    { src: '@/plugins/vue-advanced-cropper', mode: 'client' },
+    '@plugins/global.js',
+    { src: '~plugins/vue-infinite-scroll.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

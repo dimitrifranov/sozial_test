@@ -18,9 +18,12 @@
       </button>
       <div
         v-else
-        class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-3"
+        class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-4"
       >
-        <nuxt-link to="/register" class="text-white border py-1 px-2">
+        <nuxt-link
+          to="/register"
+          class="text-white border py-1 px-2 hover:text-grey hover:bg-white transition-colors duration-200"
+        >
           register
         </nuxt-link>
       </div>
@@ -34,22 +37,27 @@
         v-else
         class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-2"
       >
-        <nuxt-link to="/login" class="text-white text-opacity-87">
+        <nuxt-link
+          to="/login"
+          class="text-white text-opacity-87 hover:underline"
+        >
           login
         </nuxt-link>
       </div>
     </header>
-    <ul
-      v-show="opened"
-      v-click-outside="close"
-      class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
-    >
-      <button @click="logout()">
-        logout
-      </button>
-      <button>options</button>
-      <button>ehre</button>
-    </ul>
+    <transition name="scale">
+      <ul
+        v-show="opened"
+        v-click-outside="close"
+        class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
+      >
+        <button @click="logout()">
+          logout
+        </button>
+        <button>options</button>
+        <button>ehre</button>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -64,6 +72,14 @@ export default {
       opened: false
     }
   },
+  // created() {
+  //   // eslint-disable-next-line nuxt/no-globals-in-created
+  //   window.addEventListener('scroll', this.close)
+  // },
+  // destroyed() {
+  //   window.removeEventListener('scroll', this.close)
+  // },
+
   methods: {
     toggle() {
       setTimeout(() => {
@@ -81,4 +97,18 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.scale-enter,
+.scale-leave-to {
+  @apply transform scale-0 origin-top-right;
+}
+
+.scale-enter-to {
+  @apply transform scale-100 origin-top-right;
+}
+
+.scale-enter-active,
+.scale-leave-active {
+  @apply transition-transform duration-200 ease-out;
+}
+</style>

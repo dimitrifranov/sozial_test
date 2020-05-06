@@ -1,45 +1,53 @@
 <template>
   <div>
-    <div class="w-screen flex flex-col items-center">
-      <post />
-      <post />
-      <post />
-      <post />
-      <post />
-      <post />
+    <div
+      v-infinite-scroll="loadMore"
+      class="w-screen flex flex-col items-center pt-16"
+      infinite-scroll-disabled="autoLoadDisabled"
+      infinite-scroll-distance="10"
+    >
+      <postComponent
+        v-for="(post, i) in posts"
+        :key="i"
+        :title="post.title"
+        :src="post.src"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import post from '@/components/post.vue'
+import postComponent from '@/components/postComponent.vue'
 export default {
   components: {
-    post
+    postComponent
   },
-  // asyncData({ $axios, error }) {
-  //   return $axios
-  //     .get('http://127.0.0.1:8000/groups')
-  //     .then((response) => {
-  //       return {
-  //         groups: response.data
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       error({ statusCode: 503, message: 'Unable to Fetch Events' })
-  //     })
-  // },
-  // async fetch({ store, error }) {
-  //   try {
-  //     await store.dispatch('groups/fetchGroups')
-  //   } catch (e) {
-  //     error({ statusCode: 503, message: 'Unable to Fetch Groups' })
-  //   }
-  // },
-  computed: mapState({
-    groups: (state) => state.groups.groups
-  }),
+  data() {
+    return {
+      page: 1,
+      loading: false,
+      group: 1
+    }
+  },
+  computed: {
+    autoLoadDisabled() {
+      return this.loading
+      // || this.posts.length === 0
+    },
+    ...mapState({
+      posts: (state) => state.posts.posts
+    })
+  },
+
+  methods: {
+    loadMore($state) {
+      this.loading = true
+      this.$store
+        .dispatch('posts/fetchPosts', this.group)
+        .then((this.loading = false))
+    }
+  },
   head() {
     return {
       title: 'Home Page'

@@ -1,7 +1,9 @@
 <template>
   <div>
     <topAppBar />
-    <nuxt />
+    <transition name="fade" mode="out-in">
+      <nuxt />
+    </transition>
     <bottomNav />
   </div>
 </template>
@@ -34,4 +36,14 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.fade-enter,
+.fade-leave-to {
+  @apply opacity-0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity duration-500 ease-out;
+}
+</style>

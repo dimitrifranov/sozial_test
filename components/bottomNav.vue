@@ -6,12 +6,12 @@
       <nuxt-link to="/" class="center-items flex-grow">
         <home-outline fillColor="#ffffff" :size="size" />
       </nuxt-link>
-      <div class="center-items flex-grow">
+      <nuxt-link to="/post" class="center-items flex-grow">
         <plus-icon fillColor="#ffffff" :size="size" />
-      </div>
-      <div class="center-items flex-grow">
+      </nuxt-link>
+      <nuxt-link to="/" class="center-items flex-grow">
         <bell-outline-icon fillColor="#ffffff" :size="size" />
-      </div>
+      </nuxt-link>
     </nav>
   </div>
 </template>

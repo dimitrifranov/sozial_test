@@ -4,32 +4,24 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="loginUser"
     >
-      <inputComponent v-model="username" value="username" label="Username:" />
-      <inputComponent v-model="email" value="email" label="E-mail:" />
-      <inputComponent
+      <BaseInput v-model="username" value="username" label="Username:" />
+      <BaseInput v-model="email" value="email" label="E-mail:" />
+      <BaseInput
         v-model="password"
         value="password"
         label="Password:"
         type="password"
       />
 
-      <button
-        type="submit"
-        name="button"
-        class="font-light bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent transition-colors duration-200"
-      >
+      <BaseButton type="submit">
         Login
-      </button>
+      </BaseButton>
     </form>
   </div>
 </template>
 
 <script>
-import inputComponent from '@/components/inputComponent.vue'
 export default {
-  components: {
-    inputComponent
-  },
   data() {
     return {
       username: '',
