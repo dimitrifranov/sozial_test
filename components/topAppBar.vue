@@ -10,14 +10,14 @@
         </h1>
       </div>
       <button
-        v-if="this.$auth.loggedIn"
+        v-show="this.$auth.loggedIn"
         class="float-right bg-grey-2 h-full w-12 center-items"
         @click="toggle"
       >
         <dots-vertical-icon fillColor="#ffffff" />
       </button>
       <div
-        v-else
+        v-show="!this.$auth.loggedIn"
         class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-4"
       >
         <nuxt-link
@@ -28,13 +28,13 @@
         </nuxt-link>
       </div>
       <button
-        v-if="this.$auth.loggedIn"
+        v-show="this.$auth.loggedIn"
         class="float-right bg-grey-3 h-full w-12 center-items"
       >
         <magnify-icon fillColor="#ffffff" />
       </button>
       <div
-        v-else
+        v-show="!this.$auth.loggedIn"
         class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-2"
       >
         <nuxt-link
