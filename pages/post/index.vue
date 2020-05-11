@@ -40,6 +40,7 @@
 <script>
 import postingService from '@/services/postingService.js'
 export default {
+  middleware: 'auth',
   data() {
     return {
       coordinates: {

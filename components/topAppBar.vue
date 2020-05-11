@@ -1,9 +1,9 @@
 <template>
   <div>
     <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg">
-      <div class="center-items float-left  h-full w-12">
-        <img src="icon.png" alt="icon" class="w-8 h-8" />
-      </div>
+      <nuxt-link to="/users/me" class="center-items float-left  h-full w-12">
+        <img src="/profile.jpg" alt="icon" class="w-8 h-8" />
+      </nuxt-link>
       <div class="float-left  h-full ml-8 flex items-center">
         <h1 class="text-2xl text-white">
           SOZIAL.IO

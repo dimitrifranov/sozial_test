@@ -9,7 +9,7 @@
       <nuxt-link to="/post" class="center-items flex-grow">
         <plus-icon fillColor="#ffffff" :size="size" />
       </nuxt-link>
-      <nuxt-link to="/" class="center-items flex-grow">
+      <nuxt-link to="/notifications" class="center-items flex-grow">
         <bell-outline-icon fillColor="#ffffff" :size="size" />
       </nuxt-link>
     </nav>

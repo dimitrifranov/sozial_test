@@ -6,7 +6,7 @@
           <img src="icon.png" alt="icon" class="h-8 w-8 border border-white3" />
         </div>
         <div class="float-left h-full">
-          <h2 class="text-white2 ml-3">
+          <h2 class="text-white ml-3">
             fabian_01
           </h2>
         </div>
