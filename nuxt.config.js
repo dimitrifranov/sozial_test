@@ -86,7 +86,7 @@ export default {
     manifest: {
       name: 'Sozial.io - social in school',
       short_name: 'Sozial.io',
-      start_url: '.',
+      start_url: 'https://social-tests.herokuapp.com/',
       display: 'standalone',
       background_color: '#121212',
       description: 'Das beste Soziale Netzwerk.'
