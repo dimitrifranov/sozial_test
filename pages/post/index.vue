@@ -4,8 +4,13 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="postData"
     >
+      <h1 class="text-white font-light mb-6">
+        New Post:
+      </h1>
+      <!-- <v-select :options="['Ehre', 'degno']" /> -->
       <BaseInput v-model="title" value="title" label="Title:" />
       <cropper
+        v-show="file"
         ref="cropper"
         class="w-full h-64"
         classname="cropper"
@@ -18,7 +23,7 @@
       <label
         class="cursor-pointer font-light bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200"
         for="file"
-        >Upload</label
+        >Upload Picture</label
       >
       <input
         id="file"
@@ -119,6 +124,7 @@ export default {
 </script>
 
 <style scoped>
+/* @import 'vue-select/src/scss/vue-select.scss'; */
 .btn {
   @apply font-light bg-transparent text-white py-2 px-4 mt-2 border border-white transition-colors duration-200;
 }

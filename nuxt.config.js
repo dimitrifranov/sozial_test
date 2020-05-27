@@ -1,3 +1,4 @@
+require('dotenv').config()
 export default {
   mode: 'universal',
   /*
@@ -47,7 +48,8 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
@@ -55,6 +57,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/onesignal',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
@@ -108,6 +111,15 @@ export default {
         // tokenRequired: true,
         tokenType: 'Token'
         // autoFetchUser: true
+      }
+    }
+  },
+  oneSignal: {
+    init: {
+      appId: '56c16a44-f980-41c2-8a74-b4591cc6ab35',
+      allowLocalhostAsSecureOrigin: true,
+      welcomeNotification: {
+        disable: false
       }
     }
   }

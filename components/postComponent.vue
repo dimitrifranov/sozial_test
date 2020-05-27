@@ -3,7 +3,7 @@
     <section class="bg-grey max-w-md">
       <div class="bg-grey-3 h-8 w-full clearfix">
         <div class="float-left h-full">
-          <img src="icon.png" alt="icon" class="h-8 w-8 border border-white3" />
+          <img src="icon.png" alt="icon" class="h-8 w-8 border border-white" />
         </div>
         <div class="float-left h-full">
           <h2 class="text-white ml-3">

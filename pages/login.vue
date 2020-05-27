@@ -49,7 +49,10 @@ export default {
           this.$router.push('/')
         })
         .catch((e) => {
-          console.log(e)
+          this.error({
+            statusCode: 503,
+            message: 'Unable to login'
+          })
         })
     }
   }
