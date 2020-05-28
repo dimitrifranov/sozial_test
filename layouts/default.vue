@@ -25,10 +25,10 @@ export default {
     window.OneSignal = window.OneSignal || []
     window.OneSignal.push(() => {
       window.OneSignal.getUserId(async (userId) => {
-        await this.$store.dispatch('users/updateUser', {
-          id: this.$auth.user.pk,
-          params: { signal_id: userId }
-        })
+        await this.$store.dispatch(
+          'users/updateUser',
+          this.$auth.user.push({ signal_id: userId })
+        )
         console.log(userId)
       })
     })
