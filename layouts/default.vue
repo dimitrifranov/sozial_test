@@ -19,6 +19,9 @@ export default {
     bottomNav
   },
   computed: {
+    user() {
+      return this.$auth.user
+    },
     ...authComputed
   },
   mounted() {
@@ -27,7 +30,7 @@ export default {
       window.OneSignal.getUserId(async (userId) => {
         await this.$store.dispatch(
           'users/updateUser',
-          this.$auth.user.push({ signal_id: userId })
+          this.user.push({ signal_id: userId })
         )
         console.log(userId)
       })
