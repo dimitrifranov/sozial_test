@@ -6,19 +6,19 @@
           <img src="icon.png" alt="icon" class="h-8 w-8 border border-white" />
         </div>
         <div class="float-left h-full">
-          <h2 class="text-white ml-3">
-            fabian_01
-          </h2>
+          <nuxt-link :to="creator_link" class="text-white ml-3">
+            {{ post.creator.username }}
+          </nuxt-link>
         </div>
         <div class="float-right h-full w-8 center-items">
           <share-icon fillColor="#ffffff" class="" />
         </div>
       </div>
-      <img :src="src" :alt="title" class="h-64 w-full" />
+      <img :src="post.src" :alt="post.title" class="h-64 w-full" />
       <div class=" h-8 w-full clearfix">
         <div class="h-full float-left center-items ml-3 text-xs">
           <p class="text-white">
-            {{ title }}
+            {{ post.title }}
           </p>
         </div>
         <div class="h-full float-right center-items w-8">
@@ -43,18 +43,19 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      required: true
-    },
-    src: {
-      type: String,
+    post: {
+      type: Object,
       required: true
     }
   },
   data() {
     return {
       size: 32
+    }
+  },
+  computed: {
+    creator_link() {
+      return '/users/' + this.post.creator.id
     }
   }
 }

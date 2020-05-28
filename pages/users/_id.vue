@@ -13,7 +13,7 @@ export default {
   },
   asyncData({ $axios, route, error }) {
     return $axios
-      .get('http://localhost:8000/users/' + route.params.id)
+      .get('http://localhost:8000/users/' + route.params.id + '/')
       .then((response) => {
         return {
           user: response.data

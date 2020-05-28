@@ -6,12 +6,7 @@
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
-      <postComponent
-        v-for="(post, i) in posts"
-        :key="i"
-        :title="post.title"
-        :src="post.src"
-      />
+      <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
     </div>
   </div>
 </template>

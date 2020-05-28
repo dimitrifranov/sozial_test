@@ -21,6 +21,16 @@ export default {
   computed: {
     ...authComputed
   },
+  mounted() {
+    this.$OneSignal.push(() => {
+      // Occurs when the user's subscription changes to a new value.
+      this.$OneSignal.on('subscriptionChange', (isSubscribed) => {
+        console.log("The user's subscription state is now:", isSubscribed)
+      })
+
+      // This event can be listened to via the `on()` or `once()` listener.
+    })
+  },
   head() {
     return {
       title: '%s - sozial_test',
