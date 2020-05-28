@@ -29,6 +29,7 @@ export default {
           id: this.$auth.user.id,
           params: { signal_id: userId }
         })
+        console.log(userId)
       })
     })
   },

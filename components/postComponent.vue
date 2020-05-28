@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="bg-grey max-w-md">
+    <section class="bg-grey max-w-md pb-5">
       <div class="bg-grey-3 h-8 w-full clearfix">
         <div class="float-left h-full">
           <img src="icon.png" alt="icon" class="h-8 w-8 border border-white" />
