@@ -20,6 +20,6 @@ export default {
     return apiClient.post('/users/', credentials)
   },
   updateUser(data) {
-    return apiClient.put('/users/' + data.id + '/', data)
+    return apiClient.put('/users/' + data.pk + '/', data)
   }
 }
