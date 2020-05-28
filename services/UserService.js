@@ -18,5 +18,8 @@ export default {
   },
   registerUser(credentials) {
     return apiClient.post('/users/', credentials)
+  },
+  updateUser(id, data) {
+    return apiClient.put('/users/' + id + '/', data)
   }
 }

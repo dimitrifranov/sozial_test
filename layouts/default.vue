@@ -22,13 +22,13 @@ export default {
     ...authComputed
   },
   mounted() {
-    this.$OneSignal.push(() => {
-      // Occurs when the user's subscription changes to a new value.
-      this.$OneSignal.on('subscriptionChange', (isSubscribed) => {
-        console.log("The user's subscription state is now:", isSubscribed)
+    window.OneSignal = window.OneSignal || []
+    window.OneSignal.push(() => {
+      window.OneSignal.getUserId(async (userId) => {
+        await this.$store.dispatch('users/updateUser', this.$auth.user.id, {
+          signal_id: userId
+        })
       })
-
-      // This event can be listened to via the `on()` or `once()` listener.
     })
   },
   head() {
