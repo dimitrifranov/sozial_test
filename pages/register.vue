@@ -2,20 +2,24 @@
   <div class="center-items">
     <form
       class=" w-full max-w-xs h-screen center-items flex-col"
-      @submit.prevent="register"
+      @submit.prevent="registerUser"
     >
-      <BaseInput v-model="firstname" value="firstname" label="First Name:" />
-      <BaseInput v-model="lasname" value="lastname" label="Last Name:" />
-      <BaseInput v-model="username" value="username" label="Username:" />
-      <BaseInput v-model="email" value="email" label="E-mail:" />
       <BaseInput
-        v-model="password"
+        v-model="user.firstname"
+        value="firstname"
+        label="First Name:"
+      />
+      <BaseInput v-model="user.lastname" value="lastname" label="Last Name:" />
+      <BaseInput v-model="user.username" value="username" label="Username:" />
+      <BaseInput v-model="user.email" value="email" label="E-mail:" />
+      <BaseInput
+        v-model="user.password"
         value="password"
         label="Password:"
         type="password"
       />
       <BaseInput
-        v-model="password2"
+        v-model="user.password2"
         value="password2"
         label="Password again:"
         type="password"
@@ -29,15 +33,18 @@
 </template>
 
 <script>
+import UserService from '@/services/UserService.js'
 export default {
   data() {
     return {
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
-      firstname: '',
-      lasname: ''
+      user: {
+        username: '',
+        email: '',
+        password: '',
+        password2: '',
+        firstname: '',
+        lastname: ''
+      }
     }
   },
   methods: {
@@ -47,6 +54,27 @@ export default {
         email: this.email,
         password: this.password
       })
+    },
+    registerUser() {
+      UserService.registerUser(this.user).then(
+        this.$auth
+          .loginWith('local', {
+            data: {
+              username: this.user.username,
+              password: this.user.password,
+              email: this.user.email
+            }
+          })
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to register'
+            })
+          })
+      )
     }
   }
 }

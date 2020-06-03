@@ -16,8 +16,8 @@ export default {
   getUser(id) {
     return apiClient.get('/users/' + id + '/')
   },
-  registerUser(credentials) {
-    return apiClient.post('/users/', credentials)
+  registerUser(data) {
+    return apiClient.post('/users/', data)
   },
   updateUser(data) {
     return apiClient.put('/users/' + data.pk + '/', data)

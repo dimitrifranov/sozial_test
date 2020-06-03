@@ -55,7 +55,9 @@
           logout
         </button>
         <button>options</button>
-        <button>ehre</button>
+        <button @click="unsubscribe">
+          unsubscribe
+        </button>
       </ul>
     </transition>
   </div>
@@ -92,7 +94,8 @@ export default {
     logout() {
       this.$auth.logout()
       this.opened = false
-    }
+    },
+    unsubscribe() {}
   }
 }
 </script>
