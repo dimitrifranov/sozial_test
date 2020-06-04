@@ -55,8 +55,8 @@
           logout
         </button>
         <button>options</button>
-        <button @click="unsubscribe">
-          unsubscribe
+        <button @click="subscribe">
+          subscribe
         </button>
       </ul>
     </transition>
@@ -95,7 +95,11 @@ export default {
       this.$auth.logout()
       this.opened = false
     },
-    unsubscribe() {}
+    subscribe() {
+      this.$OneSignal.push(() => {
+        this.$OneSignal.showSlidedownPrompt()
+      })
+    }
   }
 }
 </script>
