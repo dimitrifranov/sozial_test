@@ -55,7 +55,7 @@
           logout
         </button>
         <button>options</button>
-        <button @click="subscribe">
+        <button @click="subscribe()">
           subscribe
         </button>
       </ul>
