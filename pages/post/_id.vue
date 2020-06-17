@@ -1,6 +1,15 @@
 <template>
-  <div class="center-items h-screen">
+  <div class="flex flex-col items-center h-screen">
     <postComponent :post="post" />
+    <form
+      class=" w-full max-w-xs center-items flex-col"
+      @submit.prevent="postComment"
+    >
+      <BaseInput v-model="comment" :value="comment" :label="comment_label" />
+      <BaseButton type="submit">
+        Comment
+      </BaseButton>
+    </form>
   </div>
 </template>
 
@@ -22,9 +31,20 @@ export default {
       .catch((e) => {
         error({
           statusCode: 503,
-          message: 'Unable to get this Users'
+          message: 'Unable to get this Post'
         })
       })
+  },
+  data() {
+    return {
+      comment: '',
+      comment_label: 'Kommentieren'
+    }
+  },
+  methods: {
+    postComment() {
+      // this.$sore
+    }
   }
 }
 </script>

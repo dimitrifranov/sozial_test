@@ -10,13 +10,20 @@ const apiClient = axios.create({
 })
 
 export default {
-  getPosts(group) {
-    return apiClient.get('/groups/' + group + '/posts/')
+  getPosts(group, next) {
+    if (next) return apiClient.get(next)
+    else return apiClient.get('/groups/' + group + '/posts/')
   },
   getPost(group, post) {
     return apiClient.get('/groups/' + group + '/posts/' + post)
   },
   postPost(group, params) {
     return apiClient.post('/groups/' + group + '/posts/', params)
+  },
+  likePost(params) {
+    return apiClient.post(
+      '/groups/' + params.group + '/posts/' + params.post + '/likes/',
+      params.data
+    )
   }
 }

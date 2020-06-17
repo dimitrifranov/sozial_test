@@ -7,14 +7,17 @@
         </div>
         <div class="float-left h-full">
           <nuxt-link :to="creator_link" class="text-white ml-3">
-            {{ post.creator.username }}
+            {{ post.creator_name }}
           </nuxt-link>
         </div>
-        <div class="float-right h-full w-8 center-items">
-          <share-icon fillColor="#ffffff" class="" />
+        <div
+          v-if="webShareApiSupported"
+          class="float-right h-full w-8 center-items"
+        >
+          <share-icon fillColor="#ffffff" class="" @click="shareViaWebShare" />
         </div>
       </div>
-      <img :src="post.src" :alt="post.title" class="h-64 w-full" />
+      <img :src="post.src" :alt="post.title" class="w-screen" />
       <div class=" h-8 w-full clearfix">
         <div class="h-full float-left center-items ml-3 text-xs">
           <p class="text-white">
@@ -26,11 +29,12 @@
         </div>
         <div class="h-full float-right center-items w-8">
           <p class="text-s text-white font-light">
-            121
+            {{ likes }}
+            {{ liked }}
           </p>
         </div>
         <div class="h-full float-right center-items w-8">
-          <chevron-up fillColor="#ffffff" :size="size" />
+          <chevron-up fillColor="#ffffff" :size="size" @click="likePost" />
         </div>
         <div class="h-full float-right center-items w-8">
           <comment-outline fillColor="#ffffff" />
@@ -50,12 +54,53 @@ export default {
   },
   data() {
     return {
-      size: 32
+      size: 32,
+      just_liked: false,
+      state_likes: 0
     }
   },
   computed: {
     creator_link() {
-      return '/users/' + this.post.creator.id
+      return '/users/' + this.post.creator
+    },
+    liked() {
+      if (this.post.likes.length < this.state_likes) return true
+      else if (this.post.likes[0])
+        return (
+          !!this.post.likes.find((like) => like.liker === this.$auth.user.pk) ||
+          this.just_liked
+        )
+      else return false
+    },
+    likes() {
+      return this.post.likes.length > this.state_likes
+        ? this.post.likes.length
+        : this.state_likes
+    },
+    webShareApiSupported() {
+      return navigator.share
+    }
+  },
+  methods: {
+    likePost() {
+      this.just_liked = true
+      this.state_likes = this.likes
+      this.state_likes++
+      this.$store.dispatch('posts/likePost', {
+        group: this.post.group,
+        post: this.post.id,
+        data: {
+          liker: this.$auth.user.pk,
+          post: this.post.id
+        }
+      })
+    },
+    shareViaWebShare() {
+      navigator.share({
+        title: 'Title to be shared',
+        text: 'Text to be shared',
+        url: 'URL to be shared'
+      })
     }
   }
 }

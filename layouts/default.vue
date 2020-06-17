@@ -29,13 +29,15 @@ export default {
     window.OneSignal.push(() => {
       window.OneSignal.getUserId(async (userId) => {
         // this.user.signal_id = userId
-        await this.$store.dispatch('users/updateUser', {
-          pk: this.user.pk,
-          username: this.user.username,
-          password: this.user.password,
-          signal_id: userId
-        })
-        console.log(userId)
+        if (this.$auth.loggedIn) {
+          await this.$store.dispatch('users/updateUser', {
+            pk: this.user.pk,
+            username: this.user.username,
+            password: this.user.password,
+            signal_id: userId
+          })
+          console.log(userId)
+        }
       })
     })
   },
