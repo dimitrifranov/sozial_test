@@ -81,7 +81,11 @@ export default {
         : this.state_likes
     },
     webShareApiSupported() {
-      return navigator.share
+      try {
+        return navigator.share
+      } catch (error) {
+        return false
+      }
     },
     post_link() {
       return '/post/' + this.post.id
