@@ -68,7 +68,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseUrl: 'http://localhost:8000/'
+    baseUrl: 'https://social-tests-api.herokuapp.com/'
   },
   /*
    ** Build configuration
@@ -97,13 +97,16 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: 'http://localhost:8000/auth/login/',
+            url: 'https://social-tests-api.herokuapp.com/auth/login/',
             method: 'post',
             propertyName: 'key'
           },
-          logout: { url: 'http://localhost:8000/auth/logout/', method: 'post' },
+          logout: {
+            url: 'https://social-tests-api.herokuapp.com/auth/logout/',
+            method: 'post'
+          },
           user: {
-            url: 'http://localhost:8000/auth/user/',
+            url: 'https://social-tests-api.herokuapp.com/auth/user/',
             method: 'get',
             propertyName: false
           }

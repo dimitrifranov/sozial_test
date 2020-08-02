@@ -63,7 +63,7 @@ export default {
       return '/users/' + this.post.creator
     },
     fillColor() {
-      if (this.liked) return '#ffffff'
+      if (!this.liked) return '#ffffff'
       else return '#000'
     },
     liked() {
