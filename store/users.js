@@ -1,10 +1,14 @@
 import UserService from '@/services/UserService.js'
 export const state = () => ({
-  user: {}
+  user: {},
+  notifications: []
 })
 export const mutations = {
   SET_USER(state, user) {
     state.user = user
+  },
+  SET_NOTIFICATIONS(state, notifications) {
+    state.notifications = notifications
   }
 }
 export const actions = {
@@ -16,6 +20,11 @@ export const actions = {
   updateUser({ commit }, id, data) {
     return UserService.updateUser(id, data).then((response) => {
       commit('SET_USER', response.data)
+    })
+  },
+  getNotifications({ commit }, user) {
+    return UserService.getNotifications({ user }).then((response) => {
+      commit('SET_NOTIFICATIONS', response.data.results)
     })
   }
 }

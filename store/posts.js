@@ -13,6 +13,11 @@ export const mutations = {
   ADD_LIKE(state, response) {
     const post = state.posts.find((obj) => obj.id === response.post)
     post.likes.push(response)
+  },
+  // todo should not work yet!!
+  ADD_COMMENT(state, response) {
+    const post = state.posts.find((obj) => obj.id === response.post)
+    post.comments.push(response)
   }
 }
 export const actions = {
@@ -25,6 +30,11 @@ export const actions = {
   likePost({ commit }, params) {
     return PostService.likePost(params).then((response) => {
       commit('ADD_LIKE', response.data)
+    })
+  },
+  commentPost({ commit }, params) {
+    return PostService.commentPost(params).then((response) => {
+      commit('ADD_COMMENT', response.data)
     })
   }
 }

@@ -3,6 +3,7 @@
     <section class="bg-grey max-w-md pb-5">
       <div class="bg-grey-3 h-8 w-full clearfix">
         <div class="float-left h-full">
+          <!--todo   make image nuxt-link to post_link-->
           <img src="icon.png" alt="icon" class="h-8 w-8 border border-white" />
         </div>
         <div class="float-left h-full">
@@ -34,11 +35,11 @@
           </p>
         </div>
         <div class="h-full float-right center-items w-8">
-          <chevron-up fillColor="#ffffff" :size="size" @click="likePost" />
+          <chevron-up :fillColor="fillColor" :size="size" @click="likePost" />
         </div>
-        <div class="h-full float-right center-items w-8">
+        <nuxt-link :to="post_link" class="h-full float-right center-items w-8">
           <comment-outline fillColor="#ffffff" />
-        </div>
+        </nuxt-link>
       </div>
     </section>
   </div>
@@ -63,6 +64,10 @@ export default {
     creator_link() {
       return '/users/' + this.post.creator
     },
+    fillColor() {
+      if (this.liked) return '#ffffff'
+      else return '#000'
+    },
     liked() {
       if (this.post.likes.length < this.state_likes) return true
       else if (this.post.likes[0])
@@ -79,6 +84,9 @@ export default {
     },
     webShareApiSupported() {
       return navigator.share
+    },
+    post_link() {
+      return '/post/' + this.post.id
     }
   },
   methods: {

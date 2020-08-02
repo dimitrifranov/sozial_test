@@ -1,49 +1,35 @@
 <template>
-  <div class="flex flex-col items-center h-screen">
+  <div class="flex flex-col items-center h-screen pt-16">
     <postComponent :post="post" />
-    <form
-      class=" w-full max-w-xs center-items flex-col"
-      @submit.prevent="postComment"
-    >
-      <BaseInput v-model="comment" :value="comment" :label="comment_label" />
-      <BaseButton type="submit">
-        Comment
-      </BaseButton>
-    </form>
+    <comments :comments="comments" :post="post.id" />
   </div>
 </template>
 
 <script>
 import postComponent from '@/components/postComponent.vue'
+import comments from '@/components/comments.vue'
 
 export default {
   components: {
-    postComponent
+    postComponent,
+    comments
   },
-  asyncData({ $axios, route, error }) {
-    return $axios
-      .get('http://localhost:8000/groups/1/posts/' + route.params.id + '/')
-      .then((response) => {
-        return {
-          post: response.data
-        }
-      })
-      .catch((e) => {
-        error({
-          statusCode: 503,
-          message: 'Unable to get this Post'
-        })
-      })
+  async asyncData({ $axios, route, error }) {
+    const post = await $axios.get(
+      'http://localhost:8000/groups/1/posts/' + route.params.id + '/'
+    )
+    const comments = await $axios.get(
+      'http://localhost:8000/groups/1/posts/' + route.params.id + '/comments/'
+    )
+    return {
+      post: post.data,
+      comments: comments.data.results
+    }
   },
   data() {
     return {
       comment: '',
       comment_label: 'Kommentieren'
-    }
-  },
-  methods: {
-    postComment() {
-      // this.$sore
     }
   }
 }

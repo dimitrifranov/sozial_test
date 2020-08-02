@@ -21,5 +21,8 @@ export default {
   },
   updateUser(data) {
     return apiClient.put('/users/' + data.pk + '/', data)
+  },
+  getNotifications(data) {
+    return apiClient.get('/notifications/', data)
   }
 }

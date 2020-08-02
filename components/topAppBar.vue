@@ -54,7 +54,9 @@
         <button @click="logout()">
           logout
         </button>
-        <button>options</button>
+        <button @click="settings()">
+          options
+        </button>
         <button @click="subscribe()">
           subscribe
         </button>
@@ -99,6 +101,9 @@ export default {
       this.$OneSignal.push(() => {
         this.$OneSignal.showSlidedownPrompt()
       })
+    },
+    settings() {
+      this.$router.push('settings')
     }
   }
 }

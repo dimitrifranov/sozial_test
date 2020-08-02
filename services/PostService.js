@@ -25,5 +25,11 @@ export default {
       '/groups/' + params.group + '/posts/' + params.post + '/likes/',
       params.data
     )
+  },
+  commentPost(params) {
+    return apiClient.post(
+      '/groups/' + params.group + '/posts/' + params.post + '/comments/',
+      params.data
+    )
   }
 }
