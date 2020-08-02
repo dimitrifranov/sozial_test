@@ -16,10 +16,14 @@ export default {
   },
   async asyncData({ $axios, route, error }) {
     const post = await $axios.get(
-      'http://localhost:8000/groups/1/posts/' + route.params.id + '/'
+      'https://social-tests-api.herokuapp.com/groups/1/posts/' +
+        route.params.id +
+        '/'
     )
     const comments = await $axios.get(
-      'http://localhost:8000/groups/1/posts/' + route.params.id + '/comments/'
+      'https://social-tests-api.herokuapp.com/groups/1/posts/' +
+        route.params.id +
+        '/comments/'
     )
     return {
       post: post.data,
