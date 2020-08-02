@@ -108,11 +108,13 @@ export default {
       }
     },
     shareViaWebShare() {
-      navigator.share({
-        title: this.post.title,
-        text: 'Schau dir den tollen Post an',
-        url: 'https://social-tests.herokuapp.com/post/' + this.post.id + '/'
-      })
+      try {
+        navigator.share({
+          title: this.post.title,
+          text: 'Schau dir den tollen Post an',
+          url: 'https://social-tests.herokuapp.com/post/' + this.post.id + '/'
+        })
+      } catch (error) {}
     }
   }
 }
