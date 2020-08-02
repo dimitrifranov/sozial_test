@@ -23,6 +23,7 @@ export default {
     return apiClient.put('/users/' + data.pk + '/', data)
   },
   getNotifications(data) {
-    return apiClient.get('/notifications/', data)
+    // console.log(data)
+    return apiClient.get('/notifications/', { params: { data } })
   }
 }

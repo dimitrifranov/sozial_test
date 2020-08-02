@@ -25,13 +25,11 @@
             {{ post.title }}
           </p>
         </div>
-        <div class="h-full float-right center-items w-8">
-          <chevron-down fillColor="#ffffff" :size="size" />
-        </div>
+
         <div class="h-full float-right center-items w-8">
           <p class="text-s text-white font-light">
             {{ likes }}
-            {{ liked }}
+            <!-- {{ liked }} -->
           </p>
         </div>
         <div class="h-full float-right center-items w-8">
@@ -91,17 +89,19 @@ export default {
   },
   methods: {
     likePost() {
-      this.just_liked = true
-      this.state_likes = this.likes
-      this.state_likes++
-      this.$store.dispatch('posts/likePost', {
-        group: this.post.group,
-        post: this.post.id,
-        data: {
-          liker: this.$auth.user.pk,
-          post: this.post.id
-        }
-      })
+      if (!this.liked) {
+        this.just_liked = true
+        this.state_likes = this.likes
+        this.state_likes++
+        this.$store.dispatch('posts/likePost', {
+          group: this.post.group,
+          post: this.post.id,
+          data: {
+            liker: this.$auth.user.pk,
+            post: this.post.id
+          }
+        })
+      }
     },
     shareViaWebShare() {
       navigator.share({

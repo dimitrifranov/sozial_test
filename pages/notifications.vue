@@ -7,7 +7,10 @@
       infinite-scroll-distance="10"
     >
       <div v-for="(notification, i) in notifications" :key="i">
-        {{ notification }}
+        <section class="text-white font-light">
+          {{ notification.content }}
+          {{ notification.time }}
+        </section>
       </div>
     </div>
   </div>
@@ -28,6 +31,9 @@ export default {
       return this.loading
       // || this.posts.length === 0
     },
+    // date() {
+    //   return this.notification.time.getDate()
+    // },
     ...mapState({
       notifications: (state) => state.users.notifications
     })
