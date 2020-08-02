@@ -105,9 +105,9 @@ export default {
     },
     shareViaWebShare() {
       navigator.share({
-        title: 'Title to be shared',
-        text: 'Text to be shared',
-        url: 'URL to be shared'
+        title: this.post.title,
+        text: 'Schau dir den tollen Post an',
+        url: 'https://social-tests.herokuapp.com/posts/' + this.post.id + '/'
       })
     }
   }
