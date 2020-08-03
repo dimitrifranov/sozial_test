@@ -2,7 +2,7 @@
   <div>
     <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg">
       <nuxt-link to="/users/me" class="center-items float-left  h-full w-12">
-        <img src="/profile.jpg" alt="icon" class="w-8 h-8" />
+        <img :src="profilepicture" alt="icon" class="w-8 h-8" />
       </nuxt-link>
       <div class="float-left  h-full ml-8 flex items-center">
         <h1 class="text-2xl text-white">
@@ -83,6 +83,12 @@ export default {
   // destroyed() {
   //   window.removeEventListener('scroll', this.close)
   // },
+  computed: {
+    profilepicture() {
+      if (this.$auth.user.profile_picture) return this.user.profile_picture
+      else return '/icon.png'
+    }
+  },
 
   methods: {
     toggle() {

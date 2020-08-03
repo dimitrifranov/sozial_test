@@ -36,7 +36,7 @@ export default {
             password: this.user.password,
             signal_id: userId
           })
-          console.log(userId)
+          // console.log(userId)
         }
       })
     })

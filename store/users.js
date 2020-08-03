@@ -17,8 +17,8 @@ export const actions = {
       commit('SET_USER', response.data)
     })
   },
-  updateUser({ commit }, id, data) {
-    return UserService.updateUser(id, data).then((response) => {
+  updateUser({ commit }, data) {
+    return UserService.updateUser(data).then((response) => {
       commit('SET_USER', response.data)
     })
   },

@@ -67,13 +67,16 @@ export default {
       else return '#000'
     },
     liked() {
-      if (this.post.likes.length < this.state_likes) return true
-      else if (this.post.likes[0])
-        return (
-          !!this.post.likes.find((like) => like.liker === this.$auth.user.pk) ||
-          this.just_liked
-        )
-      else return false
+      if (this.$auth.loggedIn) {
+        if (this.post.likes.length < this.state_likes) return true
+        else if (this.post.likes[0]) {
+          return (
+            !!this.post.likes.find(
+              (like) => like.liker === this.$auth.user.pk
+            ) || this.just_liked
+          )
+        } else return false
+      } else return false
     },
     likes() {
       return this.post.likes.length > this.state_likes
@@ -93,7 +96,7 @@ export default {
   },
   methods: {
     likePost() {
-      if (!this.liked) {
+      if (!this.liked && this.$auth.loggedIn) {
         this.just_liked = true
         this.state_likes = this.likes
         this.state_likes++
