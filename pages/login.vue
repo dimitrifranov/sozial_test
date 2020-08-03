@@ -55,6 +55,18 @@ export default {
           })
         })
     }
+  },
+  head() {
+    return {
+      title: 'Login',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Melde dich an um Freunden zu Folgen'
+        }
+      ]
+    }
   }
 }
 </script>

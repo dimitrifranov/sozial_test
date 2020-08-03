@@ -144,6 +144,18 @@ export default {
       //   console.log(e)
       // })
     }
+  },
+  head() {
+    return {
+      title: 'Dein Profil bearbeiten',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Hier kannst du dein Profil bearbeiten'
+        }
+      ]
+    }
   }
 }
 </script>

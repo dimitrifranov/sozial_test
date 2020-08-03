@@ -15,6 +15,18 @@ export default {
     user() {
       return this.$auth.user
     }
+  },
+  head() {
+    return {
+      title: 'Dein Profil',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Das ist dein persönliches Profil'
+        }
+      ]
+    }
   }
 }
 </script>

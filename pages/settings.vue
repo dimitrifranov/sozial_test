@@ -22,6 +22,18 @@ export default {
     changed() {
       this.toggle = !this.toggle
     }
+  },
+  head() {
+    return {
+      title: 'Einstellungen',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Personalisiere deine Einstellungen nach deinen Wünschen'
+        }
+      ]
+    }
   }
 }
 </script>

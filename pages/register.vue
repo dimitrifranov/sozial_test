@@ -76,6 +76,18 @@ export default {
           })
       )
     }
+  },
+  head() {
+    return {
+      title: 'Registrieren',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Registriere dich um mehr tolle Features nutzen zu können'
+        }
+      ]
+    }
   }
 }
 </script>

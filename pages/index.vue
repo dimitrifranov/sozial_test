@@ -45,7 +45,14 @@ export default {
   },
   head() {
     return {
-      title: 'Home Page'
+      title: 'Dein Feed',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Hier siehst du die neusten Posts'
+        }
+      ]
     }
   }
 }

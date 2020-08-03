@@ -35,6 +35,18 @@ export default {
       comment: '',
       comment_label: 'Kommentieren'
     }
+  },
+  head() {
+    return {
+      title: this.post.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Einer von vielen Posts'
+        }
+      ]
+    }
   }
 }
 </script>

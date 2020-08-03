@@ -46,6 +46,18 @@ export default {
         .dispatch('users/getNotifications', this.$auth.user.pk)
         .then((this.loading = false))
     }
+  },
+  head() {
+    return {
+      title: 'Benachrichtigungen',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Alle deine neusten Benachrichtigungen'
+        }
+      ]
+    }
   }
 }
 </script>

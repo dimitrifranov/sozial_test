@@ -123,6 +123,18 @@ export default {
 
       postingService.postPost(this.group, formData).then(this.$router.push('/'))
     }
+  },
+  head() {
+    return {
+      title: 'Einen Beitrag Posten',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Poste hier deinen eigenen Beitrag'
+        }
+      ]
+    }
   }
 }
 </script>

@@ -27,6 +27,18 @@ export default {
           message: 'Unable to get this Users'
         })
       })
+  },
+  head() {
+    return {
+      title: this.user.username,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Das Profil von ' + this.user.username
+        }
+      ]
+    }
   }
   // computed: {
   //   ...mapState({

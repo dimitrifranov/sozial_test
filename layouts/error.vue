@@ -35,7 +35,14 @@ export default {
   },
   head() {
     return {
-      title: this.message // <--- Set the SEO title
+      title: 'ERROR',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.message
+        }
+      ]
     }
   }
 }
