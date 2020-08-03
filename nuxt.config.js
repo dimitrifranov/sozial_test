@@ -1,6 +1,7 @@
 require('dotenv').config()
 export default {
   mode: 'universal',
+  debug: true,
   /*
    ** Headers of the page
    */
