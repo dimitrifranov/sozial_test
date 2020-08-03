@@ -7,7 +7,7 @@
       <h1 class="text-white font-light mb-6">
         New Post:
       </h1>
-      <v-select options="['Ehre', 'degno']" />
+      <v-select :options="['Ehre', 'degno']" />
       <BaseInput v-model="title" value="title" label="Title:" />
       <cropper
         v-show="file"
