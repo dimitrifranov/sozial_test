@@ -43,7 +43,8 @@ export default {
   },
   head() {
     return {
-      title: '%s - sozial_test',
+      title: 'Website',
+      titleTemplate: '%s - sozial_test',
       meta: [
         {
           hid: 'description',
