@@ -105,7 +105,7 @@ export default {
     },
     subscribe() {
       this.$OneSignal.push(() => {
-        this.$OneSignal.showSlidedownPrompt()
+        this.$OneSignal.showNativePrompt()
       })
     },
     settings() {

@@ -5,7 +5,7 @@
         {{ title }}
       </h3>
       <label class="switch">
-        <input type="checkbox" />
+        <input type="checkbox" @change="$emit('changed')" />
         <span class="slider" />
       </label>
     </section>

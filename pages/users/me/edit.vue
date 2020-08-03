@@ -56,6 +56,7 @@
 <script>
 import UserFormService from '@/services/UserFormService.js'
 export default {
+  middleware: 'auth',
   data() {
     return {
       user: {

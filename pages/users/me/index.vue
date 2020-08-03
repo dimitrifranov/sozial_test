@@ -7,10 +7,10 @@
 <script>
 import profile from '@/components/profile.vue'
 export default {
+  middleware: 'auth',
   components: {
     profile
   },
-  middleware: 'auth',
   computed: {
     user() {
       return this.$auth.user
