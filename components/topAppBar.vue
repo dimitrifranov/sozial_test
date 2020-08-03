@@ -85,7 +85,7 @@ export default {
   // },
   computed: {
     profilepicture() {
-      if (this.$auth.user.profile_picture) return this.user.profile_picture
+      if (this.$auth.loggedIn) return this.$auth.user.profile_picture
       else return '/icon.png'
     }
   },
