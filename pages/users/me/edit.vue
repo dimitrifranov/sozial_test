@@ -124,7 +124,7 @@ export default {
       delete this.user.password2
       const formData = new FormData()
       if (this.file)
-        formData.append('profile_picture', this.dataURItoBlob(this.file), this.user.pk + '_profile_pic.png')
+        formData.append('profile_picture', this.dataURItoBlob(this.file), this.$auth.user.pk + '_profile_pic.png')
       if (this.user.username) formData.append('username', this.user.username)
       else formData.append('username', this.$auth.user.username)
       if (this.user.email) formData.append('email', this.user.email)
@@ -134,7 +134,7 @@ export default {
 
       await UserFormService.updateUser(this.$auth.user.pk, formData)
 
-      await this.$store.dispatch('users/updateUser', this.user)
+      //await this.$store.dispatch('users/updateUser', this.user)
       //   console.log(this.$store.state.users.user)
       this.$auth.setUser(this.$store.state.users.user)
       // .then(console.log('2'))
