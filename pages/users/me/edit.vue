@@ -136,7 +136,7 @@ export default {
 
       //await this.$store.dispatch('users/updateUser', this.user)
       //   console.log(this.$store.state.users.user)
-      this.$auth.setUser(this.$store.state.users.user)
+      await this.$auth.setUser(this.$store.state.users.user)
       // .then(console.log('2'))
       this.$router.push('/users/me')
       // .then(console.log('3'))
