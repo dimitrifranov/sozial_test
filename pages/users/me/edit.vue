@@ -124,7 +124,7 @@ export default {
       delete this.user.password2
       const formData = new FormData()
       if (this.file)
-        formData.append('profile_picture', this.dataURItoBlob(this.file))
+        formData.append('profile_picture', this.dataURItoBlob(this.file), this.user.pk + '_profile_pic.png')
       if (this.user.username) formData.append('username', this.user.username)
       else formData.append('username', this.$auth.user.username)
       if (this.user.email) formData.append('email', this.user.email)
