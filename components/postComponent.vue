@@ -4,7 +4,11 @@
       <div class="bg-grey-3 h-8 w-full clearfix">
         <div class="float-left h-full">
           <!--todo   make image nuxt-link to post_link-->
-          <img :src="post.profile_pic" alt="icon" class="h-8 w-8 border border-white" />
+          <img
+            :src="post.profile_pic"
+            alt="icon"
+            class="h-8 w-8 border border-white"
+          />
         </div>
         <div class="float-left h-full">
           <nuxt-link :to="creator_link" class="text-white ml-3">

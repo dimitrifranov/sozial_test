@@ -25,5 +25,8 @@ export default {
   getNotifications(data) {
     // console.log(data)
     return apiClient.get('/notifications/', { params: { data } })
+  },
+  followUser(data) {
+    return apiClient.post('/follow/', data)
   }
 }

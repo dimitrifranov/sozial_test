@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import Compressor from 'compressorjs'
 import postingService from '@/services/postingService.js'
 export default {
   middleware: 'auth',
@@ -115,32 +116,52 @@ export default {
     // },
     postData() {
       this.crop()
-      const formData = new FormData()
-      formData.append('src', this.dataURItoBlob(this.file))
-      formData.append('title', this.title)
-      formData.append('group', this.group)
-      formData.append('creator', this.$auth.user.pk)
+      const title = this.title
+      const group = this.group
+      const user = this.$auth.user.pk
+      const router = this.$router
+      // eslint-disable-next-line no-new
+      new Compressor(this.dataURItoBlob(this.file), {
+        quality: 0.6,
+        strict: true,
+        maxWidth: 1000,
+        maxHeight: 1000,
+        convertSize: 0,
+        success(result) {
+          const formData = new FormData()
+          formData.append('src', result, result.name)
+          // console.log(formData.entries())
+          formData.append('title', title)
+          formData.append('group', group)
+          formData.append('creator', user)
 
-      postingService.postPost(this.group, formData).then(this.$router.push('/'))
-    }
-  },
-  head() {
-    return {
-      title: 'Einen Beitrag Posten',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Poste hier deinen eigenen Beitrag'
+          postingService.postPost(group, formData).then(router.push('/'))
         }
-      ]
+      })
+      // console.log(formData.entries())
+      // formData.append('title', this.title)
+      // formData.append('group', this.group)
+      // formData.append('creator', this.$auth.user.pk)
+      // // console.log(formData.entries())
+      // postingService.postPost(this.group, formData).then(this.$router.push('/'))
+    },
+    head() {
+      return {
+        title: 'Einen Beitrag Posten',
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: 'Poste hier deinen eigenen Beitrag'
+          }
+        ]
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-/* @import 'vue-select/src/scss/vue-select.scss'; */
 .btn {
   @apply font-light bg-transparent text-white py-2 px-4 mt-2 border border-white transition-colors duration-200;
 }

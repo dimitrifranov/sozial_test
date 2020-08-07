@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import Compressor from 'compressorjs'
 import UserFormService from '@/services/UserFormService.js'
 export default {
   middleware: 'auth',
@@ -120,29 +121,59 @@ export default {
       return new Blob([ab], { type: mimeString })
     },
     async updateUser() {
-      this.crop()
       delete this.user.password2
-      const formData = new FormData()
-      if (this.file)
-        formData.append('profile_picture', this.dataURItoBlob(this.file), this.$auth.user.pk + '_profile_pic.png')
-      if (this.user.username) formData.append('username', this.user.username)
-      else formData.append('username', this.$auth.user.username)
-      if (this.user.email) formData.append('email', this.user.email)
-      if (this.user.bio) formData.append('bio', this.user.bio)
-      if (this.user.password) formData.append('password', this.user.password)
-      else formData.append('password', this.$auth.user.password)
+      const context = this
 
-      await UserFormService.updateUser(this.$auth.user.pk, formData)
+      if (this.file) {
+        this.crop()
+        // eslint-disable-next-line no-new
+        await new Compressor(this.dataURItoBlob(this.file), {
+          quality: 0.6,
+          strict: true,
+          maxWidth: 500,
+          maxHeight: 500,
+          convertSize: 0,
+          async success(result) {
+            const formData = new FormData()
+            formData.append(
+              'profile_picture',
+              result,
+              context.$auth.user.username + '.jpg'
+            )
+            if (context.user.username)
+              formData.append('username', context.user.username)
+            else formData.append('username', context.$auth.user.username)
+            if (context.user.email) formData.append('email', context.user.email)
+            if (context.user.bio) formData.append('bio', context.user.bio)
+            if (context.user.password)
+              formData.append('password', context.user.password)
+            else formData.append('password', context.$auth.user.password)
 
-      //await this.$store.dispatch('users/updateUser', this.user)
-      //   console.log(this.$store.state.users.user)
-      await this.$auth.setUser(this.$store.state.users.user)
-      // .then(console.log('2'))
-      this.$router.push('/users/me')
-      // .then(console.log('3'))
-      // .catch((e) => {
-      //   console.log(e)
-      // })
+            const response = await UserFormService.updateUser(
+              context.$auth.user.pk,
+              formData
+            )
+            await context.$auth.setUser(response.data)
+            context.$router.push('/users/me')
+          }
+        })
+      } else {
+        const formData = new FormData()
+        if (this.user.username) formData.append('username', this.user.username)
+        else formData.append('username', this.$auth.user.username)
+        if (this.user.email) formData.append('email', this.user.email)
+        if (this.user.bio) formData.append('bio', this.user.bio)
+        if (this.user.password) formData.append('password', this.user.password)
+        else formData.append('password', this.$auth.user.password)
+
+        const response = await UserFormService.updateUser(
+          this.$auth.user.pk,
+          formData
+        )
+
+        await this.$auth.setUser(response.data)
+        this.$router.push('/users/me')
+      }
     }
   },
   head() {
