@@ -30,12 +30,6 @@ export default {
     }
   },
   methods: {
-    login() {
-      this.$store.dispatch('registration/loginUser', {
-        username: this.username,
-        password: this.password
-      })
-    },
     loginUser() {
       this.$auth
         .loginWith('local', {

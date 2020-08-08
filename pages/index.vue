@@ -41,6 +41,12 @@ export default {
       this.$store
         .dispatch('posts/fetchPosts', this.group)
         .then((this.loading = false))
+        .catch((e) => {
+          this.error({
+            statusCode: 503,
+            message: 'Unable to get posts'
+          })
+        })
     }
   },
   head() {

@@ -45,6 +45,12 @@ export default {
       this.$store
         .dispatch('users/getNotifications', this.$auth.user.pk)
         .then((this.loading = false))
+        .catch((e) => {
+          this.error({
+            statusCode: 503,
+            message: 'Unable to get notifications'
+          })
+        })
     }
   },
   head() {

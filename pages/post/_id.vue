@@ -20,11 +20,13 @@ export default {
         route.params.id +
         '/'
     )
+
     const comments = await $axios.get(
       'https://social-tests-api.herokuapp.com/groups/1/posts/' +
         route.params.id +
         '/comments/'
     )
+
     return {
       post: post.data,
       comments: comments.data.results

@@ -104,24 +104,36 @@ export default {
         this.just_liked = true
         this.state_likes = this.likes
         this.state_likes++
-        this.$store.dispatch('posts/likePost', {
-          group: this.post.group,
-          post: this.post.id,
-          data: {
-            liker: this.$auth.user.pk,
-            post: this.post.id
-          }
-        })
+        this.$store
+          .dispatch('posts/likePost', {
+            group: this.post.group,
+            post: this.post.id,
+            data: {
+              liker: this.$auth.user.pk,
+              post: this.post.id
+            }
+          })
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to like Post'
+            })
+          })
       }
     },
     shareViaWebShare() {
       try {
         navigator.share({
           title: this.post.title,
-          text: 'Schau dir den tollen Post an',
+          text: '',
           url: 'https://social-tests.herokuapp.com/post/' + this.post.id + '/'
         })
-      } catch (error) {}
+      } catch (e) {
+        this.error({
+          statusCode: 500,
+          message: 'Unable to share post'
+        })
+      }
     }
   }
 }

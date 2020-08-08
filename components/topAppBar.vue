@@ -27,12 +27,13 @@
           register
         </nuxt-link>
       </div>
-      <button
+      <nuxt-link
         v-show="this.$auth.loggedIn"
+        to="/search"
         class="float-right bg-grey-3 h-full w-12 center-items"
       >
         <magnify-icon fillColor="#ffffff" />
-      </button>
+      </nuxt-link>
       <div
         v-show="!this.$auth.loggedIn"
         class="float-right bg-grey-2 h-full w-12 center-items flex-col text-xs font-light mr-2"

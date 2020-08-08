@@ -71,9 +71,16 @@ export default {
           post: this.post,
           reply_to: null
         }
-      }).then((response) => {
-        this.comments.push(response.data)
       })
+        .then((response) => {
+          this.comments.push(response.data)
+        })
+        .catch((e) => {
+          this.error({
+            statusCode: 503,
+            message: 'Unable to post comment'
+          })
+        })
     }
   }
 }

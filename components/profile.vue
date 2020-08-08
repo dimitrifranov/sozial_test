@@ -118,15 +118,15 @@ export default {
     }
   },
   methods: {
-    set_triangle() {
-      this.windowWidth = window.innerWidth
-      const triangle = document.getElementById('triangle')
-      console.log('bottom:' + triangle.style.borderBottom)
-      triangle.style.borderLeft = this.triangle_width + ' solid transparent'
-      triangle.style.borderRight = this.triangle_width + ' solid transparent'
-      triangle.style.borderBottom = this.triangle_width + ' solid transparent'
-      console.log('bottom:' + triangle.style.borderBottom)
-    },
+    // set_triangle() {
+    //   this.windowWidth = window.innerWidth
+    //   const triangle = document.getElementById('triangle')
+    //   console.log('bottom:' + triangle.style.borderBottom)
+    //   triangle.style.borderLeft = this.triangle_width + ' solid transparent'
+    //   triangle.style.borderRight = this.triangle_width + ' solid transparent'
+    //   triangle.style.borderBottom = this.triangle_width + ' solid transparent'
+    //   console.log('bottom:' + triangle.style.borderBottom)
+    // },
     action() {
       if (this.myprofile) this.$router.push('me/edit')
       else if (this.following) this.unfollow()
@@ -136,12 +136,19 @@ export default {
       UserService.followUser({
         user_to: this.user.pk,
         user_from: this.$auth.user.pk
-      }).then(
-        this.user.follower.push({
-          user_to: this.user.pk,
-          user_from: this.$auth.user.pk
+      })
+        .then(
+          this.user.follower.push({
+            user_to: this.user.pk,
+            user_from: this.$auth.user.pk
+          })
+        )
+        .catch((e) => {
+          this.error({
+            statusCode: 503,
+            message: 'Unable to follow user'
+          })
         })
-      )
       // .then(console.log(this.user.follower))
     },
     unfollow() {
