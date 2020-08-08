@@ -89,8 +89,30 @@ export default {
       short_name: 'Sozial.io',
       start_url: '..',
       display: 'standalone',
+      lang: 'German',
       background_color: '#121212',
-      description: 'Das beste Soziale Netzwerk.'
+      description: 'Das beste Soziale Netzwerk.',
+      icons: [
+        {
+          src: '/android-chrome-192x192.png',
+          sizes: '192x192',
+          type: 'image/png'
+        },
+        {
+          src: '/android-chrome-512x512.png',
+          sizes: '512x512',
+          type: 'image/png'
+        }
+      ],
+      shortcuts: [
+        {
+          name: 'Einen Beitrag Posten',
+          short_name: 'Posten',
+          description: 'Teile deine Bilder mit Freunden',
+          url: '/post/',
+          icons: [{ src: '/icon.png', sizes: '192x192' }]
+        }
+      ]
     }
   },
   auth: {

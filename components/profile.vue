@@ -29,20 +29,18 @@
             </div>
             <div class="center-items ">
               <button
-                class="triangle2 absolute bottom-0 z-40"
+                class="triangle absolute bottom-0 z-30"
+                :style="{
+                  borderLeft: triangle_width + ' solid transparent',
+                  borderRight: triangle_width + ' solid transparent',
+                  borderBottom: triangle_width + ' solid transparent'
+                }"
+                @click="action"
                 @mouseover="toggle"
                 @mouseleave="toggle"
-                @click="action"
               />
-              <transition name="scale" @after-enter="afterEnter">
-                <div
-                  v-show="hover"
-                  id="triangle"
-                  class="triangle absolute z-30 bottom-0"
-                />
-              </transition>
               <p
-                class="text-center align-middle transition-colors duration-150 z-30"
+                class="text-center align-middle transition-colors duration-200 z-20"
                 :class="{ 'text-grey': hover }"
               >
                 {{ button_text }}
@@ -90,7 +88,7 @@ export default {
   },
   computed: {
     button_text() {
-      if (this.myprofile) return 'Bearbeiten'
+      if (this.myprofile) return 'edit'
       else if (this.following) return 'Folgen'
       else return 'Entfolgen'
     },
@@ -114,11 +112,21 @@ export default {
     }
   },
   mounted() {
+    this.windowWidth = window.innerWidth
     window.onresize = () => {
       this.windowWidth = window.innerWidth
     }
   },
   methods: {
+    set_triangle() {
+      this.windowWidth = window.innerWidth
+      const triangle = document.getElementById('triangle')
+      console.log('bottom:' + triangle.style.borderBottom)
+      triangle.style.borderLeft = this.triangle_width + ' solid transparent'
+      triangle.style.borderRight = this.triangle_width + ' solid transparent'
+      triangle.style.borderBottom = this.triangle_width + ' solid transparent'
+      console.log('bottom:' + triangle.style.borderBottom)
+    },
     action() {
       if (this.myprofile) this.$router.push('me/edit')
       else if (this.following) this.unfollow()
@@ -151,39 +159,19 @@ export default {
 </script>
 
 <style scoped>
-.scale-enter,
-.scale-leave-to {
-  border-bottom: 0px solid white;
-}
-
-.scale-enter-to,
-.scale-leave {
-  border-bottom: 74.6px solid white;
-}
-
-.scale-enter-active,
-.scale-leave-active {
-  transition: border-bottom 0.25s ease-out;
-}
-
 .profile-info {
   height: 18vw;
 }
 
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 74.6px solid transparent;
-  border-right: 74.6px solid transparent;
-  /* border-bottom: 74.6px solid white; */
-  margin-bottom: 3px;
+.triangle:hover {
+  border-color: transparent transparent white transparent;
 }
-.triangle2 {
+
+.triangle {
+  transition-property: border-color;
+  transition-duration: 200ms;
   width: 0;
   height: 0;
-  border-left: 74.6px solid transparent;
-  border-right: 74.6px solid transparent;
-  border-bottom: 74.6px solid transparent;
   margin-bottom: 3px;
 }
 
