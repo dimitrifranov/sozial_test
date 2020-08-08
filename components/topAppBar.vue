@@ -60,6 +60,7 @@
         <button @click="subscribe()">
           Benachrichtigungen erlauben
         </button>
+        <div class="onesignal-customlink-container" />
       </ul>
     </transition>
   </div>
