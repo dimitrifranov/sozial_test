@@ -3,27 +3,34 @@
     <div class="center-items w-screen flex-col h-screen">
       <form
         class=" w-full max-w-xs  center-items flex-col"
-        @submit.prevent="loadMore"
+        @submit.prevent="search"
       >
         <BaseInput v-model="search_text" value="search_test" label="Suchen:" />
         <BaseButton type="submit">
           Search
         </BaseButton>
       </form>
-      <section v-for="(result, i) in results" :key="i" class="text-white">
-        {{ result.title }}
-      </section>
+      <div
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="autoLoadDisabled"
+        infinite-scroll-distance="10"
+      >
+        <userPeek v-for="(result, i) in results" :key="i" :user="result" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import userPeek from '@/components/userPeek.vue'
 export default {
+  components: {
+    userPeek
+  },
   data() {
     return {
       search_text: '',
-      page: 1,
       loading: false,
       group: 1
     }
@@ -37,7 +44,13 @@ export default {
       results: (state) => state.search.results
     })
   },
+
   methods: {
+    search($state) {
+      this.$store.dispatch('search/deletePosts').then(() => {
+        this.loadMore()
+      })
+    },
     loadMore($state) {
       this.loading = true
       this.$store
