@@ -4,24 +4,24 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="registerUser"
     >
+      <BaseInput v-model="user.firstname" value="firstname" label="Vorname:" />
+      <BaseInput v-model="user.lastname" value="lastname" label="Nachname:" />
       <BaseInput
-        v-model="user.firstname"
-        value="firstname"
-        label="First Name:"
+        v-model="user.username"
+        value="username"
+        label="Benutzername:"
       />
-      <BaseInput v-model="user.lastname" value="lastname" label="Last Name:" />
-      <BaseInput v-model="user.username" value="username" label="Username:" />
       <BaseInput v-model="user.email" value="email" label="E-mail:" />
       <BaseInput
         v-model="user.password"
         value="password"
-        label="Password:"
+        label="Passwort:"
         type="password"
       />
       <BaseInput
         v-model="user.password2"
         value="password2"
-        label="Password again:"
+        label="Passwort nochmal:"
         type="password"
       />
 

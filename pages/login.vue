@@ -4,12 +4,12 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="loginUser"
     >
-      <BaseInput v-model="username" value="username" label="Username:" />
+      <BaseInput v-model="username" value="username" label="Benutzername:" />
       <BaseInput v-model="email" value="email" label="E-mail:" />
       <BaseInput
         v-model="password"
         value="password"
-        label="Password:"
+        label="Passwort:"
         type="password"
       />
 

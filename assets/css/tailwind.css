@@ -11,3 +11,8 @@ html {
 .center-items {
   @apply flex justify-center items-center;
 }
+
+button:focus,
+input:focus {
+  @apply outline-none;
+}

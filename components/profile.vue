@@ -28,15 +28,25 @@
               </p>
             </div>
             <div class="center-items ">
-              <transition name="scale">
-                <div v-show="hover" class="triangle absolute z-20" />
-              </transition>
               <button
-                class="text-center align-middle hover:opacity-25"
-                @click="hover = !hover"
+                class="triangle2 absolute bottom-0 z-40"
+                @mouseover="toggle"
+                @mouseleave="toggle"
+                @click="action"
+              />
+              <transition name="scale" @after-enter="afterEnter">
+                <div
+                  v-show="hover"
+                  id="triangle"
+                  class="triangle absolute z-30 bottom-0"
+                />
+              </transition>
+              <p
+                class="text-center align-middle transition-colors duration-150 z-30"
+                :class="{ 'text-grey': hover }"
               >
                 {{ button_text }}
-              </button>
+              </p>
             </div>
             <div class="center-items">
               <p class="text-center align-middle">
@@ -74,15 +84,15 @@ export default {
   },
   data() {
     return {
-      windowWidth: window.innerWidth,
+      windowWidth: 0,
       hover: false
     }
   },
   computed: {
     button_text() {
-      if (this.myprofile) return 'edit'
-      else if (this.following) return 'unfollow'
-      else return 'follow'
+      if (this.myprofile) return 'Bearbeiten'
+      else if (this.following) return 'Folgen'
+      else return 'Entfolgen'
     },
     following() {
       return this.user.follower.find(
@@ -128,24 +138,32 @@ export default {
     },
     unfollow() {
       console.log('unfollow')
+    },
+    toggle() {
+      this.hover = !this.hover
     }
+    // afterEnter() {
+    //   const triangle = document.getElementById('triangle')
+    //   triangle.style.borderBottomWidth = '74.6px'
+    // }
   }
 }
 </script>
 
 <style scoped>
-scale-enter,
+.scale-enter,
 .scale-leave-to {
-  @apply transform scale-y-0 origin-bottom;
+  border-bottom: 0px solid white;
 }
 
-.scale-enter-to {
-  @apply transform scale-y-100 origin-bottom;
+.scale-enter-to,
+.scale-leave {
+  border-bottom: 74.6px solid white;
 }
 
 .scale-enter-active,
 .scale-leave-active {
-  @apply transition-transform duration-200 ease-out;
+  transition: border-bottom 0.25s ease-out;
 }
 
 .profile-info {
@@ -157,8 +175,16 @@ scale-enter,
   height: 0;
   border-left: 74.6px solid transparent;
   border-right: 74.6px solid transparent;
-
-  border-bottom: 74.6px solid white;
+  /* border-bottom: 74.6px solid white; */
+  margin-bottom: 3px;
+}
+.triangle2 {
+  width: 0;
+  height: 0;
+  border-left: 74.6px solid transparent;
+  border-right: 74.6px solid transparent;
+  border-bottom: 74.6px solid transparent;
+  margin-bottom: 3px;
 }
 
 @media only screen and (min-width: 445px) {

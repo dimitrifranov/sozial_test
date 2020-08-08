@@ -52,13 +52,13 @@
         class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
       >
         <button @click="logout()">
-          logout
+          Abmelden
         </button>
         <button @click="settings()">
-          options
+          Einstellungen
         </button>
         <button @click="subscribe()">
-          subscribe
+          Benachrichtigungen erlauben
         </button>
       </ul>
     </transition>
@@ -86,7 +86,7 @@ export default {
   computed: {
     profilepicture() {
       if (this.$auth.loggedIn) return this.$auth.user.profile_picture
-      else return '/icon.png'
+      else return '/share.png'
     }
   },
 

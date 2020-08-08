@@ -121,6 +121,7 @@ export default {
   oneSignal: {
     init: {
       appId: '56c16a44-f980-41c2-8a74-b4591cc6ab35',
+      safari_web_id: 'web.onesignal.auto.48d9c6a2-4943-4221-b17b-a4e235bf1c7d',
       allowLocalhostAsSecureOrigin: true,
       welcomeNotification: {
         disable: false
