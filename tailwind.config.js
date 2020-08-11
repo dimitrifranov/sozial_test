@@ -20,7 +20,8 @@ module.exports = {
         white: '#ffffff',
         white1: '#b3ffff',
         white2: '#80ffff',
-        white3: '#1fffff'
+        white3: '#1fffff',
+        error: '#cf6679'
       },
       fontSize: {
         '7xl': '5rem',
@@ -29,6 +30,11 @@ module.exports = {
         '10xl': '8rem',
         '11xl': '9rem'
       }
+    },
+    textColor: {
+      error: '#cf6679',
+      white: '#ffffff',
+      grey: '#121212'
     }
   },
   variants: {},

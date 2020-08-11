@@ -4,14 +4,51 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="loginUser"
     >
-      <BaseInput v-model="username" value="username" label="Benutzername:" />
-      <BaseInput v-model="email" value="email" label="E-mail:" />
       <BaseInput
-        v-model="password"
+        v-model.trim="login.username"
+        value="username"
+        label="Benutzername:"
+        @blur="$v.login.username.$touch()"
+      />
+      <p
+        v-if="!$v.login.username.required && $v.login.username.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Bitte Benutzernamen angeben
+      </p>
+      <BaseInput
+        v-model.trim="login.email"
+        :class="{ error: $v.login.username.$error }"
+        value="email"
+        label="E-mail: "
+        @blur="$v.login.email.$touch()"
+      />
+      <p
+        v-if="!$v.login.email.required && $v.login.email.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Bitte E-mail angeben
+      </p>
+      <p
+        v-if="!$v.login.email.email && $v.login.email.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Keine korrekte E-mail
+      </p>
+      <BaseInput
+        v-model.trim="login.password"
+        :class="{ error: $v.login.username.$error }"
         value="password"
         label="Passwort:"
         type="password"
+        @blur="$v.login.password.$touch()"
       />
+      <p
+        v-if="!$v.login.password.required && $v.login.password.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Bitte Passwort angeben
+      </p>
 
       <BaseButton type="submit">
         Login
@@ -21,33 +58,53 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, email } from 'vuelidate/lib/validators'
+
 export default {
+  mixins: [validationMixin],
+
   data() {
     return {
-      username: '',
-      password: '',
-      email: ''
+      login: { username: '', password: '', email: '' }
+    }
+  },
+  validations: {
+    login: {
+      username: {
+        required
+      },
+      password: {
+        required
+      },
+      email: {
+        required,
+        email
+      }
     }
   },
   methods: {
     loginUser() {
-      this.$auth
-        .loginWith('local', {
-          data: {
-            username: this.username,
-            password: this.password,
-            email: this.email
-          }
-        })
-        .then(() => {
-          this.$router.push('/')
-        })
-        .catch((e) => {
-          this.error({
-            statusCode: 503,
-            message: 'Unable to login'
+      this.$v.$touch()
+      if (!this.$v.$invaild) {
+        this.$auth
+          .loginWith('local', {
+            data: {
+              username: this.login.username,
+              password: this.login.password,
+              email: this.login.email
+            }
           })
-        })
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to login'
+            })
+          })
+      }
     }
   },
   head() {
@@ -65,4 +122,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.error {
+  @apply border-error;
+}
+</style>

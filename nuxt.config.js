@@ -40,7 +40,9 @@ export default {
     { src: '@/plugins/vue-material-icons', mode: 'client' },
     { src: '@/plugins/vue-advanced-cropper', mode: 'client' },
     '@plugins/global.js',
-    { src: '~plugins/vue-infinite-scroll.js', ssr: false }
+    { src: '~plugins/vue-infinite-scroll.js', ssr: false },
+    { src: '@/plugins/vue-select', mode: 'client' },
+    { src: '@/plugins/vuelidate', mode: 'client' }
   ],
   /*
    ** Nuxt.js dev-modules

@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import { authComputed } from '../store/helpers.js'
-
 import topAppBar from '@/components/topAppBar.vue'
 import bottomNav from '@/components/bottomNav.vue'
 export default {
@@ -21,8 +19,7 @@ export default {
   computed: {
     user() {
       return this.$auth.user
-    },
-    ...authComputed
+    }
   },
   mounted() {
     window.OneSignal = window.OneSignal || []
