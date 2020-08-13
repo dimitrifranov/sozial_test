@@ -7,10 +7,10 @@
       infinite-scroll-distance="10"
     >
       <div v-for="(notification, i) in notifications" :key="i">
-        <section class="text-white font-light">
-          {{ notification.content }}
-          {{ notification.time }}
-        </section>
+        <notification
+          class="text-white font-light"
+          :notification="notification"
+        />
       </div>
     </div>
   </div>
@@ -18,8 +18,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import notification from '@/components/notification.vue'
 export default {
   middleware: 'auth',
+  components: {
+    notification
+  },
   data() {
     return {
       page: 1,
