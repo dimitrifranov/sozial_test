@@ -28,5 +28,8 @@ export default {
   },
   followUser(data) {
     return apiClient.post('/follow/', data)
+  },
+  unfollowUser(id) {
+    return apiClient.delete('/follow/' + id + '/')
   }
 }

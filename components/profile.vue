@@ -7,7 +7,10 @@
         </BaseButton>
       </nuxt-link> -->
 
-      <h1 class="text-2xl text-white text-center font-light pt-20">
+      <h1
+        class="text-2xl text-white text-center font-light pt-20"
+        @click="action"
+      >
         {{ user.username }}
         {{ triangle_width }}
       </h1>
@@ -89,8 +92,8 @@ export default {
   computed: {
     button_text() {
       if (this.myprofile) return 'edit'
-      else if (this.following) return 'Folgen'
-      else return 'Entfolgen'
+      else if (this.following) return 'Entfolgen'
+      else return 'Folgen'
     },
     following() {
       return this.user.follower.find(
@@ -137,12 +140,9 @@ export default {
         user_to: this.user.pk,
         user_from: this.$auth.user.pk
       })
-        .then(
-          this.user.follower.push({
-            user_to: this.user.pk,
-            user_from: this.$auth.user.pk
-          })
-        )
+        .then((res) => {
+          this.user.follower.push(res.data)
+        })
         .catch((e) => {
           this.error({
             statusCode: 503,
@@ -152,7 +152,14 @@ export default {
       // .then(console.log(this.user.follower))
     },
     unfollow() {
-      console.log('unfollow')
+      UserService.unfollowUser(
+        this.user.follower.find((obj) => obj.user_from === this.$auth.user.pk)
+          .id
+      ).then(() => {
+        this.user.follower = this.user.follower.filter(
+          (follower) => follower.user_from !== this.$auth.user.pk
+        )
+      })
     },
     toggle() {
       this.hover = !this.hover
