@@ -5,9 +5,9 @@
         class=" w-full max-w-xs  center-items flex-col"
         @submit.prevent="search"
       >
-        <BaseInput v-model="search_text" value="search_test" label="Suchen:" />
+        <BaseInput v-model="search_text" value="search_test" label="Suchen: " />
         <BaseButton type="submit">
-          Search
+          Suchen
         </BaseButton>
       </form>
       <div
@@ -31,8 +31,7 @@ export default {
   data() {
     return {
       search_text: '',
-      loading: false,
-      group: 1
+      loading: false
     }
   },
   computed: {
@@ -47,15 +46,14 @@ export default {
 
   methods: {
     search($state) {
-      this.$store.dispatch('search/deletePosts').then(() => {
+      this.$store.dispatch('search/deleteUsers').then(() => {
         this.loadMore()
       })
     },
     loadMore($state) {
       this.loading = true
       this.$store
-        .dispatch('search/searchPosts', {
-          group: this.group,
+        .dispatch('search/searchUsers', {
           text: this.search_text
         })
         .then((this.loading = false))

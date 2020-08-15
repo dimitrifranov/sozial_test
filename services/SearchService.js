@@ -10,11 +10,8 @@ const apiClient = axios.create({
 })
 
 export default {
-  getPosts(data, next) {
+  getUsers(data, next) {
     if (next) return apiClient.get(next)
-    else
-      return apiClient.get(
-        '/groups/' + data.group + '/posts/?search=' + data.text
-      )
+    else return apiClient.get('/users/?search=' + data.text)
   }
 }

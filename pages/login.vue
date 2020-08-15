@@ -53,6 +53,9 @@
       <BaseButton type="submit">
         Login
       </BaseButton>
+      <p v-if="login.error" class="text-xs text-error font-light -mt-2 mb-4">
+        {{ login.error }}
+      </p>
     </form>
   </div>
 </template>
@@ -66,7 +69,7 @@ export default {
 
   data() {
     return {
-      login: { username: '', password: '', email: '' }
+      login: { username: '', password: '', email: '', error: '' }
     }
   },
   validations: {
@@ -86,7 +89,7 @@ export default {
   methods: {
     loginUser() {
       this.$v.$touch()
-      if (!this.$v.$invaild) {
+      if (!this.$v.$invalid) {
         this.$auth
           .loginWith('local', {
             data: {
@@ -99,10 +102,7 @@ export default {
             this.$router.push('/')
           })
           .catch((e) => {
-            this.error({
-              statusCode: 503,
-              message: 'Unable to login'
-            })
+            this.login.error = 'Falsche Anmeldedaten'
           })
       }
     }

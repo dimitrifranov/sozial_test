@@ -1,18 +1,8 @@
 <template>
   <div class="center-items">
     <div class="h-screen max-w-md">
-      <!-- <nuxt-link v-if="myprofile" to="/users/me/edit">
-        <BaseButton v-if="myprofile" class="pt-16 float-right ">
-          edit
-        </BaseButton>
-      </nuxt-link> -->
-
-      <h1
-        class="text-2xl text-white text-center font-light pt-20"
-        @click="action"
-      >
+      <h1 class="text-2xl text-white text-center font-light pt-20">
         {{ user.username }}
-        {{ triangle_width }}
       </h1>
 
       <div class="w-full relative pt-3">
@@ -32,18 +22,15 @@
             </div>
             <div class="center-items ">
               <button
-                class="triangle absolute bottom-0 z-30"
-                :style="{
-                  borderLeft: triangle_width + ' solid transparent',
-                  borderRight: triangle_width + ' solid transparent',
-                  borderBottom: triangle_width + ' solid transparent'
-                }"
+                :class="{ triangle_hover: hover }"
+                class="triangle absolute bottom-0 z-20"
+                :style="triangleStyle"
                 @click="action"
                 @mouseover="toggle"
                 @mouseleave="toggle"
               />
               <p
-                class="text-center align-middle transition-colors duration-200 z-20"
+                class="text-center align-middle transition-colors duration-200 z-30 pointer-events-none"
                 :class="{ 'text-grey': hover }"
               >
                 {{ button_text }}
@@ -90,6 +77,21 @@ export default {
     }
   },
   computed: {
+    triangleStyle() {
+      if (!this.hover) {
+        return {
+          borderLeft: this.triangle_width + 'px solid transparent',
+          borderRight: this.triangle_width + 'px solid transparent',
+          borderBottom: this.triangle_width + 'px solid transparent'
+        }
+      } else {
+        return {
+          borderLeft: this.triangle_width + 'px solid transparent',
+          borderRight: this.triangle_width + 'px solid transparent',
+          borderBottom: this.triangle_width + 'px solid white'
+        }
+      }
+    },
     button_text() {
       if (this.myprofile) return 'edit'
       else if (this.following) return 'Entfolgen'
@@ -121,15 +123,6 @@ export default {
     }
   },
   methods: {
-    // set_triangle() {
-    //   this.windowWidth = window.innerWidth
-    //   const triangle = document.getElementById('triangle')
-    //   console.log('bottom:' + triangle.style.borderBottom)
-    //   triangle.style.borderLeft = this.triangle_width + ' solid transparent'
-    //   triangle.style.borderRight = this.triangle_width + ' solid transparent'
-    //   triangle.style.borderBottom = this.triangle_width + ' solid transparent'
-    //   console.log('bottom:' + triangle.style.borderBottom)
-    // },
     action() {
       if (this.myprofile) this.$router.push('me/edit')
       else if (this.following) this.unfollow()
@@ -149,7 +142,6 @@ export default {
             message: 'Unable to follow user'
           })
         })
-      // .then(console.log(this.user.follower))
     },
     unfollow() {
       UserService.unfollowUser(
@@ -177,7 +169,7 @@ export default {
   height: 18vw;
 }
 
-.triangle:hover {
+.triangle_hover {
   border-color: transparent transparent white transparent;
 }
 

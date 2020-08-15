@@ -15,15 +15,15 @@ export const mutations = {
   }
 }
 export const actions = {
-  searchPosts({ commit, state }, data) {
+  searchUsers({ commit, state }, data) {
     if (state.results.length === 0 || state.next) {
-      return SearchService.getPosts(data, state.next).then((response) => {
+      return SearchService.getUsers(data, state.next).then((response) => {
         commit('SET_NEXT', response.data.next)
         commit('SET_RESULTS', response.data)
       })
     }
   },
-  deletePosts({ commit }) {
+  deleteUsers({ commit }) {
     commit('DEL_RESULTS')
   }
 }

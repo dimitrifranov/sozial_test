@@ -2,9 +2,12 @@
   <div class="center-items h-screen">
     <form
       class=" w-full max-w-xs h-screen center-items flex-col"
-      @submit.prevent="loginUser"
+      @submit.prevent="updateUser"
     >
-      <BaseToggle :title="title" @changed="changed" />
+      <BaseToggle v-model="toggle" :title="title" />
+      <BaseButton type="submit">
+        Speichern
+      </BaseButton>
     </form>
   </div>
 </template>
@@ -19,9 +22,7 @@ export default {
     }
   },
   methods: {
-    changed() {
-      this.toggle = !this.toggle
-    }
+    updateUser() {}
   },
   head() {
     return {

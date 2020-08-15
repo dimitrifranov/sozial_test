@@ -88,7 +88,7 @@ export default {
   computed: {
     profilepicture() {
       if (this.$auth.loggedIn) return this.$auth.user.profile_picture
-      else return '/share.png'
+      else return '/android-chrome-192x192.png'
     }
   },
 

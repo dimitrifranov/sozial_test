@@ -5,7 +5,11 @@
         {{ title }}
       </h3>
       <label class="switch">
-        <input type="checkbox" @change="$emit('changed')" />
+        <input
+          type="checkbox"
+          :checked="checked"
+          @change="$emit('change', $event.target.checked)"
+        />
         <span class="slider" />
       </label>
     </section>
@@ -14,11 +18,12 @@
 
 <script>
 export default {
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
   props: {
-    title: {
-      type: String,
-      required: true
-    }
+    checked: Boolean
   }
 }
 </script>

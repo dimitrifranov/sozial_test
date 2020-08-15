@@ -1,11 +1,14 @@
 <template>
   <div>
     <nuxt-link :to="user_link" class="text-white flex w-40 justify-start mb-4">
-      <img :src="user.profile_pic" class="h-8 w-8 border border-white mr-4" />
+      <img
+        :src="user.profile_picture"
+        class="h-8 w-8 border border-white mr-4"
+      />
       <div>
-        <p>{{ user.creator_name }}</p>
+        <p>{{ user.username }}</p>
         <p class="text-xs font-light">
-          {{ user.title }}
+          {{ user.bio }}
         </p>
       </div>
     </nuxt-link>
@@ -22,7 +25,7 @@ export default {
   },
   computed: {
     user_link() {
-      return '/post/' + this.user.id
+      return '/users/' + this.user.pk
     }
   }
 }
