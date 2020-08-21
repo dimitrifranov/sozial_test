@@ -22,7 +22,6 @@
             </div>
             <div class="center-items ">
               <button
-                :class="{ triangle_hover: hover }"
                 class="triangle absolute bottom-0 z-20"
                 :style="triangleStyle"
                 @click="action"
@@ -46,27 +45,28 @@
         </div>
       </div>
       <div class="grid grid-cols-3 gap-1 pb-16">
-        <img
-          v-for="(post, i) in user.posts"
-          :key="i"
-          :src="post.src"
-          alt="post"
-        />
+        <postPreview v-for="(post, i) in posts" :key="i" :post="post">
+          >
+        </postPreview>
       </div>
     </div>
-    <!-- <script>
-      var width = this.document.getElementById('pic').style.width
-      console.log(width)
-    </script> -->
   </div>
 </template>
 
 <script>
 import UserService from '@/services/UserService.js'
+import postPreview from '@/components/postPreview.vue'
 export default {
+  components: {
+    postPreview
+  },
   props: {
     user: {
       type: Object,
+      required: true
+    },
+    posts: {
+      type: Array,
       required: true
     }
   },
@@ -132,16 +132,9 @@ export default {
       UserService.followUser({
         user_to: this.user.pk,
         user_from: this.$auth.user.pk
+      }).then((res) => {
+        this.user.follower.push(res.data)
       })
-        .then((res) => {
-          this.user.follower.push(res.data)
-        })
-        .catch((e) => {
-          this.error({
-            statusCode: 503,
-            message: 'Unable to follow user'
-          })
-        })
     },
     unfollow() {
       UserService.unfollowUser(
@@ -156,10 +149,6 @@ export default {
     toggle() {
       this.hover = !this.hover
     }
-    // afterEnter() {
-    //   const triangle = document.getElementById('triangle')
-    //   triangle.style.borderBottomWidth = '74.6px'
-    // }
   }
 }
 </script>
@@ -167,10 +156,6 @@ export default {
 <style scoped>
 .profile-info {
   height: 18vw;
-}
-
-.triangle_hover {
-  border-color: transparent transparent white transparent;
 }
 
 .triangle {

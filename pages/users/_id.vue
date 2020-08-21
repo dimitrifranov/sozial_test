@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile :user="user" />
+    <profile :user="user" :posts="posts" />
   </div>
 </template>
 
@@ -12,15 +12,35 @@ export default {
     profile
   },
   asyncData({ $axios, route, error }) {
-    return $axios
-      .get(
-        'https://social-tests-api.herokuapp.com/users/' + route.params.id + '/'
-      )
-      .then((response) => {
+    const userRequest = $axios({
+      url:
+        'https://social-tests-api.herokuapp.com/users/' + route.params.id + '/',
+      withCredentials: false,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    const userPostsRequest = $axios({
+      url:
+        'https://social-tests-api.herokuapp.com/users/' +
+        route.params.id +
+        '/posts/',
+      withCredentials: false,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+
+    return Promise.all([userRequest, userPostsRequest])
+      .then((results) => {
         return {
-          user: response.data
+          user: results[0].data,
+          posts: results[1].data.results
         }
       })
+
       .catch((e) => {
         error({
           statusCode: 503,

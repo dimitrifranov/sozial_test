@@ -7,7 +7,7 @@
       <section class="flex items-end">
         <BaseInput v-model="comment" :value="comment" :label="comment_label" />
         <BaseButton type="submit" class="ml-3">
-          Comment
+          Kommentieren
         </BaseButton>
       </section>
       <div v-for="(every_comment, id) in comments" :key="id" class="w-screen">
