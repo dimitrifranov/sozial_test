@@ -44,7 +44,12 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-1 pb-16">
+      <div
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="autoLoadDisabled"
+        infinite-scroll-distance="10"
+        class="grid grid-cols-3 gap-1 pb-16"
+      >
         <postPreview v-for="(post, i) in posts" :key="i" :post="post">
           >
         </postPreview>
@@ -65,18 +70,29 @@ export default {
       type: Object,
       required: true
     },
-    posts: {
-      type: Array,
+    postId: {
+      type: Number,
       required: true
     }
   },
   data() {
     return {
       windowWidth: 0,
-      hover: false
+      hover: false,
+      loading: false,
+      start: true,
+      next: null,
+      posts: {}
     }
   },
   computed: {
+    finish() {
+      return !this.start && !this.next
+    },
+    autoLoadDisabled() {
+      return this.loading || this.finish
+      // || this.posts.length === 0
+    },
     triangleStyle() {
       if (!this.hover) {
         return {
@@ -104,7 +120,7 @@ export default {
     },
     profilepicture() {
       if (this.user.profile_picture) return this.user.profile_picture
-      else return '/icon.png'
+      else return '/user.png'
     },
     myprofile() {
       if (this.$auth.loggedIn && this.$auth.user.pk === this.user.pk)
@@ -123,6 +139,22 @@ export default {
     }
   },
   methods: {
+    loadMore($state) {
+      this.loading = true
+      this.start = false
+      UserService.getPosts(this.postId, this.next)
+        .then((response) => {
+          this.next = response.data.next
+          this.posts = response.data.results
+        })
+        .then((this.loading = false))
+        .catch((e) => {
+          this.error({
+            statusCode: 503,
+            message: 'Unable to get posts'
+          })
+        })
+    },
     action() {
       if (this.myprofile) this.$router.push('me/edit')
       else if (this.following) this.unfollow()

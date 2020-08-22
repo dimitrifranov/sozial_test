@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile :user="user" :posts="posts" />
+    <profile :user="user" :postId="user.pk" />
   </div>
 </template>
 
@@ -60,11 +60,6 @@ export default {
       ]
     }
   }
-  // computed: {
-  //   ...mapState({
-  //     user: (state) => state.users.user
-  //   })
-  // }
 }
 </script>
 

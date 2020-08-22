@@ -37,23 +37,6 @@ export default {
       required: true
     }
   },
-  // asyncData({ $axios, route, error }) {
-  //   return $axios
-  //     .get(
-  //       'http://localhost:8000/groups/1/posts/' + route.params.id + '/comments/'
-  //     )
-  //     .then((response) => {
-  //       return {
-  //         comments: response.data
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       error({
-  //         statusCode: 503,
-  //         message: 'Unable to get comments'
-  //       })
-  //     })
-  // },
   data() {
     return {
       comment: '',

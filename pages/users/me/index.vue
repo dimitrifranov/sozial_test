@@ -1,6 +1,6 @@
 <template>
   <div>
-    <profile :user="user" />
+    <profile :user="user" :postId="user.pk" />
   </div>
 </template>
 

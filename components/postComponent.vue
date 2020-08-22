@@ -63,6 +63,10 @@ export default {
     }
   },
   computed: {
+    profilepicture() {
+      if (this.post.profile_pic) return this.post.profile_pic
+      else return '/user.png'
+    },
     creator_link() {
       return '/users/' + this.post.creator
     },

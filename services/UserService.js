@@ -31,5 +31,9 @@ export default {
   },
   unfollowUser(id) {
     return apiClient.delete('/follow/' + id + '/')
+  },
+  getPosts(id, next) {
+    if (next) return apiClient.get(next)
+    else return apiClient.get('/users/' + id + '/posts/')
   }
 }
