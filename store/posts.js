@@ -1,7 +1,8 @@
 import PostService from '@/services/PostService.js'
 export const state = () => ({
   posts: [],
-  next: null
+  next: null,
+  start: true
 })
 export const mutations = {
   SET_POSTS(state, response) {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   SET_NEXT(state, next) {
     state.next = next
+  },
+  SET_START(state, start) {
+    state.start = start
   },
   ADD_LIKE(state, response) {
     const post = state.posts.find((obj) => obj.id === response.post)
@@ -22,6 +26,7 @@ export const mutations = {
 }
 export const actions = {
   fetchPosts({ commit, state }, group) {
+    commit('SET_START', false)
     return PostService.getPosts(group, state.next).then((response) => {
       commit('SET_NEXT', response.data.next)
       commit('SET_POSTS', response.data)

@@ -8,6 +8,9 @@
     >
       <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
     </div>
+    <p class="text-white text-2xl pb-16 text-center">
+      Das waren alle Beiträge in dieser Gruppe
+    </p>
   </div>
 </template>
 
@@ -27,11 +30,16 @@ export default {
   },
   computed: {
     autoLoadDisabled() {
-      return this.loading
+      return this.loading || this.finish
       // || this.posts.length === 0
     },
+    finish() {
+      return !this.start && !this.next
+    },
     ...mapState({
-      posts: (state) => state.posts.posts
+      posts: (state) => state.posts.posts,
+      next: (state) => state.posts.next,
+      start: (state) => state.posts.start
     })
   },
 

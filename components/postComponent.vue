@@ -5,7 +5,7 @@
         <div class="float-left h-full">
           <!--todo   make image nuxt-link to post_link-->
           <img
-            :src="post.profile_pic"
+            :src="profilepicture"
             alt="icon"
             class="h-8 w-8 border border-white"
           />
