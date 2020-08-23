@@ -36,8 +36,11 @@
             <!-- {{ liked }} -->
           </p>
         </div>
-        <div class="h-full float-right center-items w-8">
-          <chevron-up :fillColor="fillColor" :size="size" @click="likePost" />
+        <div
+          class="h-full float-right center-items w-8 cursor-pointer"
+          @click="likePost"
+        >
+          <chevron-up :fillColor="fillColor" :size="size" />
         </div>
         <nuxt-link :to="post_link" class="h-full float-right center-items w-8">
           <comment-outline fillColor="#ffffff" />

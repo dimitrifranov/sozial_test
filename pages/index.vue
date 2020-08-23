@@ -8,9 +8,6 @@
     >
       <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
     </div>
-    <p class="text-white text-2xl pb-16 text-center">
-      Das waren alle Beiträge in dieser Gruppe
-    </p>
   </div>
 </template>
 

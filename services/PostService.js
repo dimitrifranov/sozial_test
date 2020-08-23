@@ -12,7 +12,7 @@ const apiClient = axios.create({
 export default {
   getPosts(group, next) {
     if (next) return apiClient.get(next)
-    else return apiClient.get('/groups/' + group + '/posts/')
+    else return apiClient.get('/groups/' + group + '/posts/?ordering=-pub_date')
   },
   getPost(group, post) {
     return apiClient.get('/groups/' + group + '/posts/' + post)
