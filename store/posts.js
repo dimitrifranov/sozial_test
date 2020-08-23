@@ -1,4 +1,5 @@
 import PostService from '@/services/PostService.js'
+import postingService from '@/services/postingService.js'
 export const state = () => ({
   posts: [],
   next: null,
@@ -7,6 +8,9 @@ export const state = () => ({
 export const mutations = {
   SET_POSTS(state, response) {
     state.posts.push(...response.results)
+  },
+  ADD_POST(state, post) {
+    state.posts.unshift(post)
   },
   SET_NEXT(state, next) {
     state.next = next
@@ -41,5 +45,12 @@ export const actions = {
     return PostService.commentPost(params).then((response) => {
       commit('ADD_COMMENT', response.data)
     })
+  },
+  postPost({ commit }, params) {
+    return postingService
+      .postPost(params.group, params.data)
+      .then((response) => {
+        commit('ADD_POST', response.data)
+      })
   }
 }

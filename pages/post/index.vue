@@ -48,7 +48,6 @@
 
 <script>
 import Compressor from 'compressorjs'
-import postingService from '@/services/postingService.js'
 export default {
   middleware: 'auth',
   data() {
@@ -120,6 +119,7 @@ export default {
       const group = this.group
       const user = this.$auth.user.pk
       const router = this.$router
+      const store = this.$store
       // eslint-disable-next-line no-new
       new Compressor(this.dataURItoBlob(this.file), {
         quality: 0.6,
@@ -134,8 +134,9 @@ export default {
           formData.append('title', title)
           formData.append('group', group)
           formData.append('creator', user)
-
-          postingService.postPost(group, formData).then(router.push('/'))
+          store
+            .dispatch('posts/postPost', { group, data: formData })
+            .then(router.push('/'))
         }
       })
       // console.log(formData.entries())
