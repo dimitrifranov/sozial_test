@@ -82,7 +82,7 @@ export default {
       loading: false,
       start: true,
       next: null,
-      posts: {}
+      posts: []
     }
   },
   computed: {
@@ -145,7 +145,7 @@ export default {
       UserService.getPosts(this.postId, this.next)
         .then((response) => {
           this.next = response.data.next
-          this.posts = response.data.results
+          this.posts.push(...response.data.results)
         })
         .then((this.loading = false))
         .catch((e) => {

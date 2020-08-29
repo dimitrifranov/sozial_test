@@ -7,8 +7,12 @@
       <h1 class="text-white font-light mb-6">
         Neuer Beitrag:
       </h1>
-      <v-select :options="['Ehre', 'degno']" />
+      <!-- <v-select :options="['Ehre', 'degno']" /> -->
       <BaseInput v-model="title" value="title" label="Titel:" />
+      <BaseButton @clicked="show = true">
+        Gruppe wählen
+      </BaseButton>
+      <groupSearch v-if="show" @close="setGroup($event)" />
       <cropper
         v-show="file"
         ref="cropper"
@@ -48,8 +52,12 @@
 
 <script>
 import Compressor from 'compressorjs'
+import groupSearch from '@/components/groupSearch.vue'
 export default {
   middleware: 'auth',
+  components: {
+    groupSearch
+  },
   data() {
     return {
       coordinates: {
@@ -60,13 +68,15 @@ export default {
       },
       group: 1,
       file: null,
-      title: ''
+      title: '',
+      show: false
     }
   },
   methods: {
-    // change({ coordinates, canvas }) {
-    //   console.log(coordinates, canvas)
-    // },
+    setGroup(id) {
+      this.show = false
+      this.group = id
+    },
     crop() {
       const { coordinates, canvas } = this.$refs.cropper.getResult()
       this.coordinates = coordinates

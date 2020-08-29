@@ -1,9 +1,15 @@
 <template>
   <div>
-    <div class="center-items w-screen flex-col h-screen">
-      <div class=" w-full max-w-xs  center-items flex-col">
+    <div
+      class="center-items w-full flex-col h-full bg-grey2 absolute top-0 left-0"
+    >
+      <BaseButton class="absolute right-0 top-0 mr-3" @clicked="$emit('close')">
+        X
+      </BaseButton>
+      <div class=" w-full max-w-xs center-items flex-col">
         <BaseInput
           v-model="search_text"
+          inputClass="sticky"
           value="search_test"
           label="Suchen: "
           @input="search"
@@ -14,7 +20,12 @@
         infinite-scroll-disabled="autoLoadDisabled"
         infinite-scroll-distance="10"
       >
-        <userPeek v-for="(result, i) in results" :key="i" :user="result" />
+        <groupPeek
+          v-for="(result, i) in results"
+          :key="i"
+          :group="result"
+          @clicked="groupChosen($event)"
+        />
       </div>
     </div>
   </div>
@@ -22,10 +33,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import userPeek from '@/components/userPeek.vue'
+import groupPeek from '@/components/groupPeek.vue'
 export default {
   components: {
-    userPeek
+    groupPeek
   },
   data() {
     return {
@@ -52,28 +63,13 @@ export default {
     loadMore($state) {
       this.loading = true
       this.$store
-        .dispatch('search/searchUsers', {
+        .dispatch('search/searchGroups', {
           text: this.search_text
         })
         .then((this.loading = false))
-      // .catch((e) => {
-      //   this.error({
-      //     statusCode: 503,
-      //     message: 'Unable to get results'
-      //   })
-      // })
-    }
-  },
-  head() {
-    return {
-      title: 'Suchen',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Durchsuche Sozial.io'
-        }
-      ]
+    },
+    groupChosen(id) {
+      this.$emit('close', id)
     }
   }
 }

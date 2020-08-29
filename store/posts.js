@@ -9,6 +9,9 @@ export const mutations = {
   SET_POSTS(state, response) {
     state.posts.push(...response.results)
   },
+  DEL_POSTS(state) {
+    state.posts = []
+  },
   ADD_POST(state, post) {
     state.posts.unshift(post)
   },
@@ -29,6 +32,11 @@ export const mutations = {
   }
 }
 export const actions = {
+  deletePosts({ commit, state }, group) {
+    commit('SET_START', true)
+    commit('SET_NEXT', null)
+    commit('DEL_POSTS')
+  },
   fetchPosts({ commit, state }, group) {
     commit('SET_START', false)
     return PostService.getPosts(group, state.next).then((response) => {

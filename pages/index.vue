@@ -1,8 +1,12 @@
 <template>
   <div>
+    <BaseButton class="pt-16" @clicked="show = true">
+      Gruppe wählen
+    </BaseButton>
+    <groupSearch v-if="show" @close="setGroup($event)" />
     <div
       v-infinite-scroll="loadMore"
-      class="w-screen flex flex-col items-center pt-16"
+      class="w-screen flex flex-col items-center"
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
@@ -13,16 +17,19 @@
 
 <script>
 import { mapState } from 'vuex'
+import groupSearch from '@/components/groupSearch.vue'
 import postComponent from '@/components/postComponent.vue'
 export default {
   components: {
-    postComponent
+    postComponent,
+    groupSearch
   },
   data() {
     return {
       page: 1,
       loading: false,
-      group: 1
+      group: 1,
+      show: false
     }
   },
   computed: {
@@ -41,6 +48,13 @@ export default {
   },
 
   methods: {
+    setGroup(id) {
+      this.show = false
+      this.group = id
+      this.$store
+        .dispatch('posts/deletePosts', this.group)
+        .then(this.loadMore())
+    },
     loadMore($state) {
       this.loading = true
       this.$store

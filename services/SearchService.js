@@ -13,5 +13,9 @@ export default {
   getUsers(data, next) {
     if (next) return apiClient.get(next)
     else return apiClient.get('/users/?search=' + data.text)
+  },
+  getGroups(data, next) {
+    if (next) return apiClient.get(next)
+    else return apiClient.get('/groups/?search=' + data.text)
   }
 }

@@ -23,7 +23,15 @@ export const actions = {
       })
     }
   },
-  deleteUsers({ commit }) {
+  deleteResults({ commit }) {
     commit('DEL_RESULTS')
+  },
+  searchGroups({ commit, state }, data) {
+    if (state.results.length === 0 || state.next) {
+      return SearchService.getGroups(data, state.next).then((response) => {
+        commit('SET_NEXT', response.data.next)
+        commit('SET_RESULTS', response.data)
+      })
+    }
   }
 }
