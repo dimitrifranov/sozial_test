@@ -1,15 +1,15 @@
 <template>
   <div>
-    <BaseButton class="pt-16" @clicked="show = true">
-      Gruppe wählen
-    </BaseButton>
-    <groupSearch v-if="show" @close="setGroup($event)" />
     <div
       v-infinite-scroll="loadMore"
-      class="w-screen flex flex-col items-center"
+      class="w-screen flex flex-col items-center pt-16"
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
+      <BaseButton @clicked="show = true">
+        Gruppe wählen
+      </BaseButton>
+      <groupSearch v-if="show" @close="setGroup($event)" />
       <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
     </div>
   </div>

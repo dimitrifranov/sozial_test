@@ -12,5 +12,8 @@ const apiClient = axios.create({
 export default {
   postPost(group, params) {
     return apiClient.post('/groups/' + group + '/posts/', params)
+  },
+  postGroup(params) {
+    return apiClient.post('/groups/', params)
   }
 }

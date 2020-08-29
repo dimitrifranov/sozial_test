@@ -4,7 +4,7 @@
       class="text-white flex w-40 justify-start mb-4"
       @click="$emit('clicked', group.id)"
     >
-      <img :src="group.picture" class="h-8 w-8 border border-white mr-4" />
+      <img :src="group.pic" class="h-8 w-8 border border-white mr-4" />
       <div>
         <p>{{ group.name }}</p>
         <p class="text-xs font-light">
