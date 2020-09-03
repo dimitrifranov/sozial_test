@@ -165,6 +165,13 @@ export default {
         if (this.user.bio) formData.append('bio', this.user.bio)
         if (this.user.password) formData.append('password', this.user.password)
         else formData.append('password', this.$auth.user.password)
+        formData.append(
+          'follow_post_notifs',
+          this.$auth.user.follow_post_notifs
+        )
+        formData.append('new_follow_notifs', this.$auth.user.new_follow_notifs)
+        formData.append('like_notifs', this.$auth.user.like_notifs)
+        formData.append('comments_notifs', this.$auth.user.comments_notifs)
 
         const response = await UserFormService.updateUser(
           this.$auth.user.pk,

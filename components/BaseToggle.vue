@@ -1,7 +1,7 @@
 <template>
   <div class="container mb-4">
     <section class="flex justify-center items-center">
-      <h3 class="block text-white font-light text-s mr-4">
+      <h3 class="block text-white font-light text-s mr-4 w-56 ">
         {{ title }}
       </h3>
       <label class="switch">
@@ -23,7 +23,8 @@ export default {
     event: 'change'
   },
   props: {
-    checked: Boolean
+    checked: Boolean,
+    title: String
   }
 }
 </script>

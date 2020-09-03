@@ -125,7 +125,11 @@ export default {
         password: '',
         password2: '',
         first_name: '',
-        last_name: ''
+        last_name: '',
+        follow_post_notifs: true,
+        new_follow_notifs: true,
+        like_notifs: true,
+        comments_notifs: true
       }
     }
   },

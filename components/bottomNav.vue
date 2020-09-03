@@ -16,18 +16,20 @@
         <ul
           v-show="opened"
           v-click-outside="close"
-          class=" max-w-xs z-10 bg-grey3 text-white bottom-0 fixed flex flex-row h-20 S flex-grow"
+          class="z-10 bg-grey3 text-white bottom-0 fixed flex flex-row h-20 S flex-grow"
         >
-          <BaseButton buttonClass="h-full">
-            <nuxt-link to="/post/">
-              Neuer Post
-            </nuxt-link>
-          </BaseButton>
-          <BaseButton buttonClass="h-full">
-            <nuxt-link to="/groups/new/">
-              Neue Gruppe
-            </nuxt-link>
-          </BaseButton>
+          <nuxt-link
+            class="center-items font-light bg-transparent h-full w-24 hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent transition-colors duration-200"
+            to="/post/"
+          >
+            <p>Post</p>
+          </nuxt-link>
+          <nuxt-link
+            class="center-items font-light bg-transparent h-full w-24 hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent transition-colors duration-200"
+            to="/groups/new/"
+          >
+            <p>Gruppe</p>
+          </nuxt-link>
         </ul>
       </transition>
     </nav>
