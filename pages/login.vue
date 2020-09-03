@@ -17,25 +17,6 @@
         Bitte Benutzernamen angeben
       </p>
       <BaseInput
-        v-model.trim="login.email"
-        :class="{ error: $v.login.username.$error }"
-        value="email"
-        label="E-mail: "
-        @blur="$v.login.email.$touch()"
-      />
-      <p
-        v-if="!$v.login.email.required && $v.login.email.$error"
-        class="text-xs text-error font-light -mt-4 mb-4 w-full"
-      >
-        Bitte E-mail angeben
-      </p>
-      <p
-        v-if="!$v.login.email.email && $v.login.email.$error"
-        class="text-xs text-error font-light -mt-4 mb-4 w-full"
-      >
-        Keine korrekte E-mail
-      </p>
-      <BaseInput
         v-model.trim="login.password"
         :class="{ error: $v.login.username.$error }"
         value="password"
@@ -62,14 +43,14 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { required, email } from 'vuelidate/lib/validators'
+import { required } from 'vuelidate/lib/validators'
 
 export default {
   mixins: [validationMixin],
 
   data() {
     return {
-      login: { username: '', password: '', email: '', error: '' }
+      login: { username: '', password: '', error: '' }
     }
   },
   validations: {
@@ -79,10 +60,6 @@ export default {
       },
       password: {
         required
-      },
-      email: {
-        required,
-        email
       }
     }
   },
@@ -94,8 +71,7 @@ export default {
           .loginWith('local', {
             data: {
               username: this.login.username,
-              password: this.login.password,
-              email: this.login.email
+              password: this.login.password
             }
           })
           .then(() => {

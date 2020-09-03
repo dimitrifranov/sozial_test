@@ -18,5 +18,11 @@ export default {
   },
   registerUser(credentials) {
     return apiClient.post('/users/', credentials)
+  },
+  joinGroup(data) {
+    return apiClient.post('/memberships/', data)
+  },
+  leaveGroup(id) {
+    return apiClient.delete('/memberships/' + id + '/')
   }
 }

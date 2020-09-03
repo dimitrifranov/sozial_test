@@ -22,7 +22,12 @@
           <share-icon fillColor="#ffffff" class="" @click="shareViaWebShare" />
         </div>
       </div>
-      <img :src="post.src" :alt="post.title" class="w-screen" />
+      <img
+        :src="post.src"
+        :alt="post.title"
+        class="w-screen"
+        @click="$router.push(post_link)"
+      />
       <div class=" h-8 w-full clearfix">
         <div class="h-full float-left center-items ml-3 text-xs">
           <p class="text-white">

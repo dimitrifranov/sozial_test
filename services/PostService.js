@@ -14,6 +14,10 @@ export default {
     if (next) return apiClient.get(next)
     else return apiClient.get('/groups/' + group + '/posts/?ordering=-pub_date')
   },
+  getFeed(user, next) {
+    if (next) return apiClient.get(next)
+    else return apiClient.get('/feed/', { params: { user } })
+  },
   getPost(group, post) {
     return apiClient.get('/groups/' + group + '/posts/' + post)
   },

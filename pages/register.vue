@@ -5,25 +5,25 @@
       @submit.prevent="registerUser"
     >
       <BaseInput
-        v-model.trim="user.firstname"
-        value="firstname"
+        v-model.trim="user.first_name"
+        value="first_name"
         label="Vorname:"
-        @blur="$v.user.firstname.$touch()"
+        @blur="$v.user.first_name.$touch()"
       />
       <p
-        v-if="!$v.user.firstname.required && $v.user.firstname.$error"
+        v-if="!$v.user.first_name.required && $v.user.first_name.$error"
         class="text-xs text-error font-light -mt-4 mb-4 w-full"
       >
         Bitte Vorname angeben
       </p>
       <BaseInput
-        v-model.trim="user.lastname"
-        value="lastname"
+        v-model.trim="user.last_name"
+        value="last_name"
         label="Nachname:"
-        @blur="$v.user.lastname.$touch()"
+        @blur="$v.user.last_name.$touch()"
       />
       <p
-        v-if="!$v.user.lastname.required && $v.user.lastname.$error"
+        v-if="!$v.user.last_name.required && $v.user.last_name.$error"
         class="text-xs text-error font-light -mt-4 mb-4 w-full"
       >
         Bitte Nachname angeben
@@ -124,8 +124,8 @@ export default {
         email: '',
         password: '',
         password2: '',
-        firstname: '',
-        lastname: ''
+        first_name: '',
+        last_name: ''
       }
     }
   },
@@ -143,10 +143,10 @@ export default {
         required,
         email
       },
-      firstname: {
+      first_name: {
         required
       },
-      lastname: {
+      last_name: {
         required
       },
       password2: {

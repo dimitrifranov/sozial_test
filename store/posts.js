@@ -32,7 +32,7 @@ export const mutations = {
   }
 }
 export const actions = {
-  deletePosts({ commit, state }, group) {
+  deletePosts({ commit }) {
     commit('SET_START', true)
     commit('SET_NEXT', null)
     commit('DEL_POSTS')
@@ -40,6 +40,13 @@ export const actions = {
   fetchPosts({ commit, state }, group) {
     commit('SET_START', false)
     return PostService.getPosts(group, state.next).then((response) => {
+      commit('SET_NEXT', response.data.next)
+      commit('SET_POSTS', response.data)
+    })
+  },
+  fetchFeed({ commit, state }, user) {
+    commit('SET_START', false)
+    return PostService.getFeed(user, state.next).then((response) => {
       commit('SET_NEXT', response.data.next)
       commit('SET_POSTS', response.data)
     })

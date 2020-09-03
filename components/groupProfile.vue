@@ -2,7 +2,7 @@
   <div class="center-items">
     <div class="h-screen max-w-md">
       <h1 class="text-2xl text-white text-center font-light pt-20">
-        {{ user.username }}
+        {{ group.name }}
       </h1>
 
       <div class="w-full relative pt-3">
@@ -17,7 +17,7 @@
           <div class="text-white w-full grid grid-cols-3 profile-info z-20 ">
             <div class="center-items">
               <p class="text-center align-middle">
-                {{ user.bio }}
+                {{ group.description }}
               </p>
             </div>
             <div class="center-items ">
@@ -37,8 +37,7 @@
             </div>
             <div class="center-items">
               <p class="text-center align-middle">
-                {{ user.following.length }} <br />
-                {{ user.follower.length }}
+                {{ group.group_members.length }}
               </p>
             </div>
           </div>
@@ -57,19 +56,16 @@
 </template>
 
 <script>
-import UserService from '@/services/UserService.js'
+import PostService from '@/services/PostService.js'
+import GroupService from '@/services/GroupService.js'
 import postPreview from '@/components/postPreview.vue'
 export default {
   components: {
     postPreview
   },
   props: {
-    user: {
+    group: {
       type: Object,
-      required: true
-    },
-    postId: {
-      type: Number,
       required: true
     }
   },
@@ -108,20 +104,23 @@ export default {
     },
     button_text() {
       if (this.myprofile) return 'edit'
-      else if (this.following) return 'Entfolgen'
-      else return 'Folgen'
+      else if (this.member) return 'Austreten'
+      else return 'Beitreten'
     },
-    following() {
-      return this.user.follower.find(
-        (obj) => obj.user_from === this.$auth.user.pk
+    member() {
+      return this.group.group_members.find(
+        (obj) => obj.user === this.$auth.user.pk
       )
     },
     profilepicture() {
-      if (this.user.profile_picture) return this.user.profile_picture
+      if (this.group.pic) return this.group.pic
       else return '/user.png'
     },
     myprofile() {
-      if (this.$auth.loggedIn && this.$auth.user.pk === this.user.pk)
+      if (
+        this.$auth.loggedIn &&
+        this.$auth.user.username === this.group.creator_name
+      )
         return true
       else return false
     },
@@ -140,7 +139,7 @@ export default {
     loadMore($state) {
       this.loading = true
       this.start = false
-      UserService.getPosts(this.postId, this.next)
+      PostService.getPosts(this.group.id, this.next)
         .then((response) => {
           this.next = response.data.next
           this.posts.push(...response.data.results)
@@ -149,30 +148,30 @@ export default {
         .catch((e) => {
           this.error({
             statusCode: 503,
-            message: 'Unable to get posts'
+            message: 'Unable to get group'
           })
         })
     },
     action() {
       if (this.myprofile) this.$router.push('me/edit')
-      else if (this.following) this.unfollow()
-      else this.follow()
+      else if (this.member) this.leaveGroup()
+      else this.joinGroup()
     },
-    follow() {
-      UserService.followUser({
-        user_to: this.user.pk,
-        user_from: this.$auth.user.pk
+    joinGroup() {
+      GroupService.joinGroup({
+        group: this.group.id,
+        user: this.$auth.user.pk
       }).then((res) => {
-        this.user.follower.push(res.data)
+        this.group.group_members.push(res.data)
       })
     },
-    unfollow() {
-      UserService.unfollowUser(
-        this.user.follower.find((obj) => obj.user_from === this.$auth.user.pk)
+    leaveGroup() {
+      GroupService.leaveGroup(
+        this.group.group_members.find((obj) => obj.user === this.$auth.user.pk)
           .id
       ).then(() => {
-        this.user.follower = this.user.follower.filter(
-          (follower) => follower.user_from !== this.$auth.user.pk
+        this.group.group_members = this.group.group_members.filter(
+          (members) => members.user !== this.$auth.user.pk
         )
       })
     },

@@ -3,7 +3,10 @@
     <div
       class="center-items w-full flex-col h-full bg-grey2 absolute top-0 left-0"
     >
-      <BaseButton class="absolute right-0 top-0 mr-3" @clicked="$emit('close')">
+      <BaseButton
+        class="absolute right-0 top-0 mr-3"
+        @clicked="groupChosen(null)"
+      >
         X
       </BaseButton>
       <div class=" w-full max-w-xs center-items flex-col">
@@ -19,6 +22,7 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="autoLoadDisabled"
         infinite-scroll-distance="10"
+        infinite-scroll-immediate-check="false"
       >
         <groupPeek
           v-for="(result, i) in results"
@@ -56,6 +60,7 @@ export default {
 
   methods: {
     search($state) {
+      this.loading = true
       this.$store.dispatch('search/deleteResults').then(() => {
         this.loadMore()
       })
@@ -69,7 +74,9 @@ export default {
         .then((this.loading = false))
     },
     groupChosen(id) {
-      this.$emit('close', id)
+      this.$store.dispatch('search/deleteResults').then(() => {
+        this.$emit('close', id)
+      })
     }
   }
 }

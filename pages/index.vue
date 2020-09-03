@@ -2,10 +2,13 @@
   <div>
     <div
       v-infinite-scroll="loadMore"
-      class="w-screen flex flex-col items-center pt-16"
+      class="w-screen flex flex-col items-center pt-16 pb-16"
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
+      <BaseButton @clicked="showFeed">
+        Feed
+      </BaseButton>
       <BaseButton @clicked="show = true">
         Gruppe wählen
       </BaseButton>
@@ -29,7 +32,8 @@ export default {
       page: 1,
       loading: false,
       group: 1,
-      show: false
+      show: false,
+      feed: false
     }
   },
   computed: {
@@ -50,22 +54,38 @@ export default {
   methods: {
     setGroup(id) {
       this.show = false
-      this.group = id
-      this.$store
-        .dispatch('posts/deletePosts', this.group)
-        .then(this.loadMore())
+      if (id) {
+        this.group = id
+        this.$store.dispatch('posts/deletePosts').then(this.loadMore())
+      }
+    },
+    showFeed() {
+      this.feed = !this.feed
+      this.$store.dispatch('posts/deletePosts').then(this.loadMore())
     },
     loadMore($state) {
       this.loading = true
-      this.$store
-        .dispatch('posts/fetchPosts', this.group)
-        .then((this.loading = false))
-        .catch((e) => {
-          this.error({
-            statusCode: 503,
-            message: 'Unable to get posts'
+      if (!this.feed) {
+        this.$store
+          .dispatch('posts/fetchPosts', this.group)
+          .then((this.loading = false))
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to get posts'
+            })
           })
-        })
+      } else {
+        this.$store
+          .dispatch('posts/fetchFeed', this.$auth.user.pk)
+          .then((this.loading = false))
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to get posts'
+            })
+          })
+      }
     }
   },
   head() {
