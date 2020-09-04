@@ -4,25 +4,25 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="updateUser"
     >
-      <BaseToggle
+      <baseToggle
         v-model="data.follow_post_notifs"
         title="Erfahre wenn Accounts denen du folgst etwas Posten"
       />
-      <BaseToggle
+      <baseToggle
         v-model="data.new_follow_notifs"
         title="Erfahre wenn dir jemand neues folgt"
       />
-      <BaseToggle
+      <baseToggle
         v-model="data.like_notifs"
         title="Erfahre wenn jemand einen deiner Posts gefällt"
       />
-      <BaseToggle
+      <baseToggle
         v-model="data.comments_notifs"
         title="Erfahre wenn jemand unter einem deiner Posts kommentiert"
       />
-      <BaseButton type="submit">
+      <baseButton type="submit">
         Speichern
-      </BaseButton>
+      </baseButton>
     </form>
   </div>
 </template>

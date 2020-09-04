@@ -24,7 +24,10 @@ export default {
   },
   props: {
     checked: Boolean,
-    title: String
+    title: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>
@@ -80,7 +83,7 @@ input:checked + .slider:before {
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border: 1px solid white;
-  opacity: 25%;
+  opacity: 0.25;
 }
 
 .slider:before {
@@ -97,7 +100,7 @@ input:checked + .slider:before {
 
 input:checked + .slider {
   background-color: #292b2c;
-  opacity: 100%;
+  opacity: 1;
 }
 
 input:checked + .slider:before {
