@@ -21,6 +21,10 @@ export default {
     group: {
       type: Object,
       required: true
+    },
+    link: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

@@ -7,10 +7,10 @@
       <h1 class="text-white font-light mb-6">
         Neuer Beitrag:
       </h1>
-      <BaseInput v-model="title" value="title" label="Titel:" />
-      <BaseButton @clicked="show = true">
+      <baseInput v-model="title" value="title" label="Titel:" />
+      <baseButton @clicked="show = true">
         Gruppe wählen
-      </BaseButton>
+      </baseButton>
       <groupSearch v-if="show" @close="setGroup($event)" />
       <cropper
         v-show="file"
@@ -38,9 +38,9 @@
         @change="uploadImage($event)"
       />
 
-      <BaseButton type="submit">
+      <baseButton type="submit">
         Post
-      </BaseButton>
+      </baseButton>
     </form>
   </div>
 </template>

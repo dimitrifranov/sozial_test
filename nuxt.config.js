@@ -93,18 +93,18 @@ export default {
       lang: 'German',
       background_color: '#121212',
       description: 'Das beste Soziale Netzwerk.',
-      icons: [
-        {
-          src: '/android-chrome-192x192.png',
-          sizes: '192x192',
-          type: 'image/png'
-        },
-        {
-          src: '/android-chrome-512x512.png',
-          sizes: '512x512',
-          type: 'image/png'
-        }
-      ],
+      // icons: [
+      //   {
+      //     src: '/android-chrome-192x192.png',
+      //     sizes: '192x192',
+      //     type: 'image/png'
+      //   },
+      //   {
+      //     src: '/android-chrome-512x512.png',
+      //     sizes: '512x512',
+      //     type: 'image/png'
+      //   }
+      // ],
       shortcuts: [
         {
           name: 'Einen Beitrag Posten',

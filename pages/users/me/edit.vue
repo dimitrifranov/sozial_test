@@ -4,16 +4,16 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="updateUser"
     >
-      <BaseInput v-model="user.username" value="username" label="Username:" />
-      <BaseInput v-model="user.email" value="email" label="E-mail:" />
-      <BaseInput v-model="user.bio" value="bio" label="Bio:" />
-      <BaseInput
+      <baseInput v-model="user.username" value="username" label="Username:" />
+      <baseInput v-model="user.email" value="email" label="E-mail:" />
+      <baseInput v-model="user.bio" value="bio" label="Bio:" />
+      <baseInput
         v-model="user.password"
         value="password"
         label="Password:"
         type="password"
       />
-      <BaseInput
+      <baseInput
         v-model="user.password2"
         value="password2"
         label="Password again:"
@@ -46,9 +46,9 @@
         @change="uploadImage($event)"
       />
 
-      <BaseButton type="submit">
+      <baseButton type="submit">
         Update
-      </BaseButton>
+      </baseButton>
     </form>
   </div>
 </template>

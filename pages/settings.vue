@@ -48,6 +48,7 @@ export default {
     updateUser() {
       UserService.updateUser(this.data).then((response) => {
         this.$auth.setUser(response.data)
+        this.$router.push('/')
       })
     }
   },

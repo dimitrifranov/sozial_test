@@ -4,7 +4,7 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="loginUser"
     >
-      <BaseInput
+      <baseInput
         v-model.trim="login.username"
         value="username"
         label="Benutzername:"
@@ -16,7 +16,7 @@
       >
         Bitte Benutzernamen angeben
       </p>
-      <BaseInput
+      <baseInput
         v-model.trim="login.password"
         :class="{ error: $v.login.username.$error }"
         value="password"
@@ -31,9 +31,9 @@
         Bitte Passwort angeben
       </p>
 
-      <BaseButton type="submit">
+      <baseButton type="submit">
         Login
-      </BaseButton>
+      </baseButton>
       <p v-if="login.error" class="text-xs text-error font-light -mt-2 mb-4">
         {{ login.error }}
       </p>

@@ -7,8 +7,8 @@
       <h1 class="text-white font-light mb-6">
         Neue Gruppe:
       </h1>
-      <BaseInput v-model="name" value="name" label="Name:" />
-      <BaseInput
+      <baseInput v-model="name" value="name" label="Name:" />
+      <baseInput
         v-model="description"
         value="description"
         label="Beschreibung:"
@@ -39,9 +39,9 @@
         @change="uploadImage($event)"
       />
 
-      <BaseButton type="submit">
+      <baseButton type="submit">
         Erstellen
-      </BaseButton>
+      </baseButton>
     </form>
   </div>
 </template>

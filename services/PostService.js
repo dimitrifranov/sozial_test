@@ -10,9 +10,12 @@ const apiClient = axios.create({
 })
 
 export default {
-  getPosts(group, next) {
+  getPosts(group, user, next) {
     if (next) return apiClient.get(next)
-    else return apiClient.get('/groups/' + group + '/posts/?ordering=-pub_date')
+    else
+      return apiClient.get('/groups/' + group + '/posts/?ordering=-pub_date', {
+        params: { user }
+      })
   },
   getFeed(user, next) {
     if (next) return apiClient.get(next)

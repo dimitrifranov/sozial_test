@@ -3,14 +3,14 @@
     <div
       class="center-items w-full flex-col h-full bg-grey2 absolute top-0 left-0"
     >
-      <BaseButton
+      <baseButton
         class="absolute right-0 top-0 mr-3"
         @clicked="groupChosen(null)"
       >
         X
-      </BaseButton>
+      </baseButton>
       <div class=" w-full max-w-xs center-items flex-col">
-        <BaseInput
+        <baseInput
           v-model="search_text"
           inputClass="sticky"
           value="search_test"

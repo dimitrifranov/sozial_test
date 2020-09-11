@@ -11,44 +11,21 @@ export default {
   components: {
     groupProfile
   },
-  asyncData({ $axios, route, error }) {
-    const groupRequest = $axios({
-      url:
-        'https://social-tests-api.herokuapp.com/groups/' +
-        route.params.id +
-        '/',
-      withCredentials: false,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    const groupPostsRequest = $axios({
-      url:
-        'https://social-tests-api.herokuapp.com/groups/' +
-        route.params.id +
-        '/posts/',
-      withCredentials: false,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-
-    return Promise.all([groupRequest, groupPostsRequest])
-      .then((results) => {
-        return {
-          group: results[0].data,
-          posts: results[1].data.results
-        }
-      })
-
+  async asyncData({ $axios, route, error }) {
+    const groupRequest = await $axios
+      .get(
+        'https://social-tests-api.herokuapp.com/groups/' + route.params.id + '/'
+      )
       .catch((e) => {
         error({
           statusCode: 503,
           message: 'Unable to get this Group'
         })
       })
+
+    return {
+      group: groupRequest.data
+    }
   },
   head() {
     return {

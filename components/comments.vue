@@ -5,10 +5,10 @@
       @submit.prevent="postComment"
     >
       <section class="flex items-end">
-        <BaseInput v-model="comment" :value="comment" :label="comment_label" />
-        <BaseButton type="submit" class="ml-3">
+        <baseInput v-model="comment" :value="comment" :label="comment_label" />
+        <baseButton type="submit" class="ml-3">
           Kommentieren
-        </BaseButton>
+        </baseButton>
       </section>
       <div v-for="(every_comment, id) in comments" :key="id" class="w-screen">
         <div class="flex flex-col mb-2 self-end relative left-0 ml-3">

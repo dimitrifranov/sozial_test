@@ -4,7 +4,7 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="registerUser"
     >
-      <BaseInput
+      <baseInput
         v-model.trim="user.first_name"
         value="first_name"
         label="Vorname:"
@@ -16,7 +16,7 @@
       >
         Bitte Vorname angeben
       </p>
-      <BaseInput
+      <baseInput
         v-model.trim="user.last_name"
         value="last_name"
         label="Nachname:"
@@ -28,7 +28,7 @@
       >
         Bitte Nachname angeben
       </p>
-      <BaseInput
+      <baseInput
         v-model.trim="user.username"
         value="username"
         label="Benutzername:"
@@ -46,7 +46,7 @@
       >
         Der Benutzername sollte mindestens 4 Zeichen lang sein
       </p>
-      <BaseInput
+      <baseInput
         v-model.trim="user.email"
         value="email"
         label="E-mail:"
@@ -83,7 +83,7 @@
       >
         Das Passwort sollte mindestens 4 Zeichen lang sein
       </p>
-      <BaseInput
+      <baseInput
         v-model.trim="user.password2"
         value="password2"
         label="Passwort nochmal:"
@@ -103,9 +103,9 @@
         Die Passwörter stimmen nicht überein
       </p>
 
-      <BaseButton type="submit">
+      <baseButton type="submit">
         Register
-      </BaseButton>
+      </baseButton>
     </form>
   </div>
 </template>
