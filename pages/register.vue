@@ -106,6 +106,12 @@
       <baseButton type="submit">
         Register
       </baseButton>
+      <nuxt-link
+        to="/login"
+        class="text-white text-opacity-75 hover:underline text-xs font-light"
+      >
+        Ich habe schon einen Account
+      </nuxt-link>
     </form>
   </div>
 </template>

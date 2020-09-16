@@ -14,6 +14,12 @@
           <nuxt-link :to="creator_link" class="text-white ml-3">
             {{ post.creator_name }}
           </nuxt-link>
+          <nuxt-link
+            :to="group_link"
+            class="text-white font-light text-opacity-50 ml-2 text-xs"
+          >
+            @ {{ post.group_name }}
+          </nuxt-link>
         </div>
         <div
           v-if="webShareApiSupported"
@@ -77,6 +83,9 @@ export default {
     },
     creator_link() {
       return '/users/' + this.post.creator
+    },
+    group_link() {
+      return '/groups/' + this.post.group
     },
     fillColor() {
       if (!this.liked) return '#ffffff'

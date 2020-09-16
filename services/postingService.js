@@ -15,5 +15,8 @@ export default {
   },
   postGroup(params) {
     return apiClient.post('/groups/', params)
+  },
+  updateGroup(id, params) {
+    return apiClient.put('/groups/' + id + '/', params)
   }
 }

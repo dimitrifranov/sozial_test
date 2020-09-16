@@ -37,6 +37,12 @@
       <p v-if="login.error" class="text-xs text-error font-light -mt-2 mb-4">
         {{ login.error }}
       </p>
+      <nuxt-link
+        to="/register"
+        class="text-white text-opacity-75 hover:underline text-xs font-light"
+      >
+        Ich habe noch keinen Account
+      </nuxt-link>
     </form>
   </div>
 </template>

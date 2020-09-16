@@ -112,9 +112,11 @@ export default {
       else return 'Folgen'
     },
     following() {
-      return this.user.follower.find(
-        (obj) => obj.user_from === this.$auth.user.pk
-      )
+      if (this.$auth.loggedIn) {
+        return this.user.follower.find(
+          (obj) => obj.user_from === this.$auth.user.pk
+        )
+      } else return false
     },
     profilepicture() {
       if (this.user.profile_picture) return this.user.profile_picture
@@ -159,6 +161,7 @@ export default {
       else this.follow()
     },
     follow() {
+      if (!this.$auth.loggedIn) this.$router.push('/login')
       UserService.followUser({
         user_to: this.user.pk,
         user_from: this.$auth.user.pk

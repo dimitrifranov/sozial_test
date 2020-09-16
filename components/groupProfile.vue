@@ -4,6 +4,13 @@
       <h1 class="text-2xl text-white text-center font-light pt-20">
         {{ group.name }}
       </h1>
+      <nuxt-link class="center-items w-full" :to="creator_link">
+        <h2
+          class="text-l text-white text-opacity-75 text-center font-light hover:underline"
+        >
+          erstellt von {{ group.creator_name }}
+        </h2>
+      </nuxt-link>
 
       <div class="w-full relative pt-3">
         <img
@@ -107,7 +114,11 @@ export default {
       else if (this.member) return 'Austreten'
       else return 'Beitreten'
     },
+    creator_link() {
+      return '/users/' + this.group.creator
+    },
     member() {
+      if (!this.$auth.loggedIn) return false
       return this.group.group_members.find(
         (obj) => obj.user === this.$auth.user.pk
       )
@@ -153,11 +164,12 @@ export default {
         })
     },
     action() {
-      if (this.myprofile) this.$router.push('me/edit')
+      if (this.myprofile) this.$router.push(this.group.id + '/edit')
       else if (this.member) this.leaveGroup()
       else this.joinGroup()
     },
     joinGroup() {
+      if (!this.$auth.loggedIn) this.$router.push('/login')
       GroupService.joinGroup({
         group: this.group.id,
         user: this.$auth.user.pk
