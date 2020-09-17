@@ -16,3 +16,12 @@ button:focus,
 input:focus {
   @apply outline-none;
 }
+
+input,
+textarea,
+button,
+select,
+nuxt-link,
+a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
