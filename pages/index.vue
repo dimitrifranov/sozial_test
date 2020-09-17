@@ -6,12 +6,12 @@
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
-      <BaseButton @clicked="showFeed">
+      <baseButton @clicked="showFeed">
         Feed
-      </BaseButton>
-      <BaseButton @clicked="show = true">
+      </baseButton>
+      <baseButton @clicked="show = true">
         Gruppe wählen
-      </BaseButton>
+      </baseButton>
       <groupSearch v-if="show" @close="setGroup($event)" />
       <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
     </div>

@@ -28,7 +28,10 @@ module.exports = {
         '8xl': '6rem',
         '9xl': '7rem',
         '10xl': '8rem',
-        '11xl': '9rem'
+        '11xl': '9rem',
+        '2xs': '0.675rem',
+        '3xs': '0.5rem',
+        '4xs': '0.375rem'
       }
     },
     textColor: {

@@ -12,6 +12,12 @@ export const mutations = {
   DEL_POSTS(state) {
     state.posts = []
   },
+  DEL_POST(state, post) {
+    const postObj = state.posts.find((obj) => obj.id === post)
+    const index = state.posts.indexOf(postObj)
+    if (index === 0) state.posts.shift()
+    else state.posts = state.posts.splice(index - 1, 1)
+  },
   ADD_POST(state, post) {
     state.posts.unshift(post)
   },
@@ -67,5 +73,10 @@ export const actions = {
       .then((response) => {
         commit('ADD_POST', response.data)
       })
+  },
+  deletePost({ commit }, params) {
+    return PostService.deletePost(params).then(() => {
+      commit('DEL_POST', params.post)
+    })
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="bg-grey max-w-md pb-5">
-      <div class="bg-grey-3 h-8 w-full clearfix">
+      <div class="bg-grey-3 h-8 w-full clearfix relative">
         <div class="float-left h-full">
           <!--todo   make image nuxt-link to post_link-->
           <img
@@ -10,15 +10,15 @@
             class="h-8 w-8 border border-white"
           />
         </div>
-        <div class="float-left h-full">
+        <div class="float-left h-full flex flex-col">
           <nuxt-link :to="creator_link" class="text-white ml-3">
             {{ post.creator_name }}
           </nuxt-link>
           <nuxt-link
             :to="group_link"
-            class="text-white font-light text-opacity-50 ml-2 text-xs"
+            class="text-white font-light text-opacity-50 ml-3 -mt-2 text-2xs"
           >
-            @ {{ post.group_name }}
+            @{{ post.group_name }}
           </nuxt-link>
         </div>
         <div
@@ -27,6 +27,24 @@
         >
           <share-icon fillColor="#ffffff" class="" @click="shareViaWebShare" />
         </div>
+        <div
+          v-if="my_post"
+          class="float-right h-full w-8 center-items"
+          @click="toggle"
+        >
+          <dots-vertical-icon fillColor="#ffffff" />
+        </div>
+        <transition name="scale">
+          <ul
+            v-show="opened"
+            v-click-outside="close"
+            class="w-1/3 max-w-xs z-10 bg-grey3 text-white absolute right-0 flex flex-col"
+          >
+            <button @click="delete_post">
+              Delete
+            </button>
+          </ul>
+        </transition>
       </div>
       <img
         :src="post.src"
@@ -62,7 +80,11 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside'
 export default {
+  directives: {
+    ClickOutside
+  },
   props: {
     post: {
       type: Object,
@@ -73,7 +95,8 @@ export default {
     return {
       size: 32,
       just_liked: false,
-      state_likes: 0
+      state_likes: 0,
+      opened: false
     }
   },
   computed: {
@@ -88,8 +111,11 @@ export default {
       return '/groups/' + this.post.group
     },
     fillColor() {
-      if (!this.liked) return '#ffffff'
-      else return '#000'
+      if (!this.liked) return '#0099cc'
+      else return '#00000'
+    },
+    my_post() {
+      return this.$auth.user.pk === this.post.creator
     },
     liked() {
       if (this.$auth.loggedIn) {
@@ -142,6 +168,14 @@ export default {
           })
       }
     },
+    toggle() {
+      setTimeout(() => {
+        this.opened = !this.opened
+      }, 1)
+    },
+    close() {
+      this.opened = false
+    },
     shareViaWebShare() {
       try {
         navigator.share({
@@ -155,9 +189,29 @@ export default {
           message: 'Unable to share post'
         })
       }
+    },
+    delete_post() {
+      this.$store.dispatch('posts/deletePost', {
+        group: this.post.group,
+        post: this.post.id
+      })
     }
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.scale-enter,
+.scale-leave-to {
+  @apply transform scale-0 origin-top-right;
+}
+
+.scale-enter-to {
+  @apply transform scale-100 origin-top-right;
+}
+
+.scale-enter-active,
+.scale-leave-active {
+  @apply transition-transform duration-200 ease-out;
+}
+</style>

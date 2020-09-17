@@ -38,5 +38,10 @@ export default {
       '/groups/' + params.group + '/posts/' + params.post + '/comments/',
       params.data
     )
+  },
+  deletePost(params) {
+    return apiClient.delete(
+      '/groups/' + params.group + '/posts/' + params.post + '/'
+    )
   }
 }
