@@ -28,18 +28,33 @@
                 @mouseover="toggle"
                 @mouseleave="toggle"
               />
-              <p
+              <div
                 class="text-center align-middle transition-colors duration-200 z-30 pointer-events-none"
                 :class="{ 'text-grey': hover }"
               >
-                {{ button_text }}
-              </p>
+                <cog-outline-icon
+                  v-if="myprofile"
+                  title="Settings"
+                  :size="48"
+                />
+                <p v-else class="text-xs mt-2 font-light">
+                  {{ button_text }}
+                </p>
+              </div>
             </div>
-            <div class="center-items">
-              <p class="text-center align-middle">
-                {{ user.following.length }} <br />
-                {{ user.follower.length }}
-              </p>
+            <div class="center-items flex flex-col items-baseline">
+              <div class="flex items-baseline">
+                <p class="text-2xs pr-1">
+                  folgt:
+                </p>
+                <p>{{ user.following.length }}</p>
+              </div>
+              <div class="flex items-baseline">
+                <p class="text-2xs pr-1">
+                  folgen:
+                </p>
+                <p>{{ user.follower.length }}</p>
+              </div>
             </div>
           </div>
         </div>

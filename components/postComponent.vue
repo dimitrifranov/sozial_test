@@ -111,8 +111,8 @@ export default {
       return '/groups/' + this.post.group
     },
     fillColor() {
-      if (!this.liked) return '#0099cc'
-      else return '#00000'
+      if (this.liked) return '#0099cc'
+      else return '#FFFFF'
     },
     my_post() {
       return this.$auth.user.pk === this.post.creator

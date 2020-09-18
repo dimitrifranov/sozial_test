@@ -35,17 +35,27 @@
                 @mouseover="toggle"
                 @mouseleave="toggle"
               />
-              <p
+              <div
                 class="text-center align-middle transition-colors duration-200 z-30 pointer-events-none"
                 :class="{ 'text-grey': hover }"
               >
-                {{ button_text }}
-              </p>
+                <cog-outline-icon
+                  v-if="myprofile"
+                  title="Settings"
+                  :size="48"
+                />
+                <p v-else class="text-xs mt-2 font-light">
+                  {{ button_text }}
+                </p>
+              </div>
             </div>
             <div class="center-items">
-              <p class="text-center align-middle">
-                {{ group.group_members.length }}
-              </p>
+              <div class="flex items-baseline">
+                <p class="text-2xs pr-1">
+                  Members:
+                </p>
+                <p>{{ group.group_members.length }}</p>
+              </div>
             </div>
           </div>
         </div>
