@@ -42,7 +42,7 @@
                 <cog-outline-icon
                   v-if="myprofile"
                   title="Settings"
-                  :size="48"
+                  :size="24"
                 />
                 <p v-else class="text-xs mt-2 font-light">
                   {{ button_text }}
