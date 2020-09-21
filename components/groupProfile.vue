@@ -43,6 +43,7 @@
                   v-if="myprofile"
                   title="Settings"
                   :size="24"
+                  class="mt-1"
                 />
                 <p v-else class="text-xs mt-2 font-light">
                   {{ button_text }}
@@ -50,11 +51,13 @@
               </div>
             </div>
             <div class="center-items">
-              <div class="flex items-baseline">
-                <p class="text-2xs pr-1">
-                  Members:
+              <div class="flex flex-col items-center">
+                <p class="text-2xs font-light">
+                  Members
                 </p>
-                <p>{{ group.group_members.length }}</p>
+                <p class="-mt-1 text-lg">
+                  {{ group.group_members.length }}
+                </p>
               </div>
             </div>
           </div>

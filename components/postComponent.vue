@@ -112,7 +112,7 @@ export default {
     },
     fillColor() {
       if (this.liked) return '#0099cc'
-      else return '#FFFFF'
+      else return '#ffffff'
     },
     my_post() {
       return this.$auth.user.pk === this.post.creator

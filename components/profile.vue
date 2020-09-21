@@ -35,25 +35,30 @@
                 <cog-outline-icon
                   v-if="myprofile"
                   title="Settings"
-                  :size="36"
+                  :size="24"
+                  class="mt-1"
                 />
                 <p v-else class="text-xs mt-2 font-light">
                   {{ button_text }}
                 </p>
               </div>
             </div>
-            <div class="center-items flex flex-col items-baseline">
-              <div class="flex items-baseline">
-                <p class="text-2xs pr-1">
-                  folgt:
+            <div class="center-items flex flex-row items-baseline">
+              <div class="flex flex-col items-center">
+                <p class="text-2xs font-light">
+                  folgt
                 </p>
-                <p>{{ user.following.length }}</p>
+                <p class="-mt-1 text-lg">
+                  {{ user.following.length }}
+                </p>
               </div>
-              <div class="flex items-baseline">
-                <p class="text-2xs pr-1">
-                  folgen:
+              <div class="flex flex-col items-center pl-2">
+                <p class="text-2xs  font-light">
+                  folgen
                 </p>
-                <p>{{ user.follower.length }}</p>
+                <p class="-mt-1 text-lg">
+                  {{ user.follower.length }}
+                </p>
               </div>
             </div>
           </div>

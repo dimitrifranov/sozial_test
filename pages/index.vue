@@ -67,7 +67,10 @@ export default {
       this.loading = true
       if (!this.feed) {
         this.$store
-          .dispatch('posts/fetchPosts', this.group)
+          .dispatch('posts/fetchPosts', {
+            group: this.group,
+            user: this.$auth.user.pk
+          })
           .then((this.loading = false))
           .catch((e) => {
             this.error({

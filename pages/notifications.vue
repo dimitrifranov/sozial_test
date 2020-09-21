@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="center-items">
     <div
       v-infinite-scroll="loadMore"
-      class="w-screen flex flex-col items-center pt-16"
+      class="w-full max-w-xs flex flex-col items-start pt-16"
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
       <div v-for="(notification, i) in notifications" :key="i">
         <notification
-          class="text-white font-light"
+          class="text-white font-light mb-1"
           :notification="notification"
         />
       </div>

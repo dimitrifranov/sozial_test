@@ -1,12 +1,18 @@
 <template>
-  <div>
-    <p>
-      {{ notification.content }}
-    </p>
-    <p class="text-xs -mt-1">
-      {{ date }}
-    </p>
-  </div>
+  <nuxt-link :to="notification.link" class="flex justify-start">
+    <img
+      :src="notification.profile_pic"
+      class="h-8 w-8 border border-white mr-4"
+    />
+    <div>
+      <p>
+        {{ notification.content }}
+      </p>
+      <p class="text-xs -mt-1">
+        {{ date }}
+      </p>
+    </div>
+  </nuxt-link>
 </template>
 
 <script>
