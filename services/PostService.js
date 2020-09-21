@@ -35,10 +35,20 @@ export default {
       params.data
     )
   },
+  unlikePost(group, post, like) {
+    return apiClient.delete(
+      '/groups/' + group + '/posts/' + post + '/likes/' + like + '/'
+    )
+  },
   commentPost(params) {
     return apiClient.post(
       '/groups/' + params.group + '/posts/' + params.post + '/comments/',
       params.data
+    )
+  },
+  deleteComment(group, post, comment) {
+    return apiClient.delete(
+      '/groups/' + group + '/posts/' + post + '/comments/' + comment + '/'
     )
   },
   deletePost(params) {

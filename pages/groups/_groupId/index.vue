@@ -14,7 +14,9 @@ export default {
   async asyncData({ $axios, route, error }) {
     const groupRequest = await $axios
       .get(
-        'https://social-tests-api.herokuapp.com/groups/' + route.params.id + '/'
+        'https://social-tests-api.herokuapp.com/groups/' +
+          route.params.groupId +
+          '/'
       )
       .catch((e) => {
         error({

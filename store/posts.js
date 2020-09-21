@@ -28,13 +28,23 @@ export const mutations = {
     state.start = start
   },
   ADD_LIKE(state, response) {
-    const post = state.posts.find((obj) => obj.id === response.post)
-    post.likes.push(response)
+    if (state.posts.length) {
+      const post = state.posts.find((obj) => obj.id === response.post)
+      post.likes.push(response)
+    }
   },
-  // todo should not work yet!!
   ADD_COMMENT(state, response) {
     const post = state.posts.find((obj) => obj.id === response.post)
     post.comments.push(response)
+  },
+  DEL_LIKE(state, data) {
+    if (state.posts.length) {
+      const post = state.posts.find((obj) => obj.id === data.post)
+      const likes = post.likes.filter((obj) => {
+        return obj.id !== data.like
+      })
+      console.log(likes.length)
+    }
   }
 }
 export const actions = {
@@ -63,6 +73,13 @@ export const actions = {
     return PostService.likePost(params).then((response) => {
       commit('ADD_LIKE', response.data)
     })
+  },
+  unlikePost({ commit, state }, params) {
+    return PostService.unlikePost(params.group, params.post, params.like).then(
+      () => {
+        commit('DEL_LIKE', params)
+      }
+    )
   },
   commentPost({ commit }, params) {
     return PostService.commentPost(params).then((response) => {

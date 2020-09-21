@@ -15,11 +15,11 @@ export default {
     comments
   },
   async asyncData({ $axios, route, error, $auth }) {
-    const re = /(?<=\/groups\/)\d/
-    const group = re.exec(route.fullPath)[0]
+    // const re = /(?<=\/groups\/)\d/
+    // const group = re.exec(route.fullPath)[0]
     const post = await $axios.get(
       'https://social-tests-api.herokuapp.com/groups/' +
-        group +
+        route.params.groupId +
         '/posts/' +
         route.params.id +
         '/',

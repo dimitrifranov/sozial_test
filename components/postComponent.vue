@@ -3,7 +3,6 @@
     <section class="bg-grey max-w-md pb-5">
       <div class="bg-grey-3 h-8 w-full clearfix relative">
         <div class="float-left h-full">
-          <!--todo   make image nuxt-link to post_link-->
           <img
             :src="profilepicture"
             alt="icon"
@@ -62,7 +61,6 @@
         <div class="h-full float-right center-items w-8">
           <p class="text-s text-white font-light">
             {{ likes }}
-            <!-- {{ liked }} -->
           </p>
         </div>
         <div
@@ -151,21 +149,24 @@ export default {
         this.just_liked = true
         this.state_likes = this.likes
         this.state_likes++
-        this.$store
-          .dispatch('posts/likePost', {
-            group: this.post.group,
-            post: this.post.id,
-            data: {
-              liker: this.$auth.user.pk,
-              post: this.post.id
-            }
-          })
-          .catch((e) => {
-            this.error({
-              statusCode: 503,
-              message: 'Unable to like Post'
-            })
-          })
+        this.$store.dispatch('posts/likePost', {
+          group: this.post.group,
+          post: this.post.id,
+          data: {
+            liker: this.$auth.user.pk,
+            post: this.post.id
+          }
+        })
+      } else if (this.$auth.loggedIn) {
+        const like = this.post.likes.find(
+          (obj) => obj.liker === this.$auth.user.pk
+        )
+        console.log(like)
+        this.$store.dispatch('posts/unlikePost', {
+          group: this.post.group,
+          post: this.post.id,
+          like: like.id
+        })
       }
     },
     toggle() {

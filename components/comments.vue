@@ -10,14 +10,22 @@
           Kommentieren
         </baseButton>
       </section>
-      <div v-for="(every_comment, id) in comments" :key="id" class="w-screen">
-        <div class="flex flex-col mb-2 self-end relative left-0 ml-3">
-          <h3 class="text-white text-xs">
-            {{ every_comment.creator_name }}
-          </h3>
-          <p class="text-white text-xs font-light">
-            {{ every_comment.comment_content }}
-          </p>
+      <div
+        v-for="(every_comment, id) in comments"
+        :key="id"
+        class="w-full max-w-xs"
+      >
+        <div class="flex flex-row">
+          <img
+            :src="every_comment.profile_pic"
+            class="h-8 w-8 border border-white mr-4"
+          />
+          <div class="flex flex-col mb-3 h-8">
+            <commentUser :comment="every_comment" />
+            <p class="text-white text-xs">
+              {{ every_comment.comment_content }}
+            </p>
+          </div>
         </div>
       </div>
     </form>
@@ -26,7 +34,11 @@
 
 <script>
 import PostService from '@/services/PostService.js'
+import commentUser from '@/components/commentUser.vue'
 export default {
+  components: {
+    commentUser
+  },
   props: {
     post: {
       type: Number,
