@@ -163,7 +163,7 @@ export default {
     loadMore($state) {
       this.loading = true
       this.start = false
-      PostService.getPosts(this.group.id, this.next)
+      PostService.getPosts(this.group.id, this.$auth.user.pk, this.next)
         .then((response) => {
           this.next = response.data.next
           this.posts.push(...response.data.results)

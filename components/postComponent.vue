@@ -142,7 +142,7 @@ export default {
       }
     },
     post_link() {
-      return '/post/' + this.post.id
+      return 'groups/' + this.post.group + '/post/' + this.post.id
     }
   },
   methods: {

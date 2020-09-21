@@ -14,11 +14,16 @@ export default {
     postComponent,
     comments
   },
-  async asyncData({ $axios, route, error }) {
+  async asyncData({ $axios, route, error, $auth }) {
+    const re = /(?<=\/groups\/)\d/
+    const group = re.exec(route.fullPath)[0]
     const post = await $axios.get(
-      'https://social-tests-api.herokuapp.com/groups/1/posts/' +
+      'https://social-tests-api.herokuapp.com/groups/' +
+        group +
+        '/posts/' +
         route.params.id +
-        '/'
+        '/',
+      { params: { user: $auth.user.pk } }
     )
 
     const comments = await $axios.get(

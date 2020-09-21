@@ -53,7 +53,7 @@
                 </p>
               </div>
               <div class="flex flex-col items-center pl-2">
-                <p class="text-2xs  font-light">
+                <p class="text-2xs font-light">
                   folgen
                 </p>
                 <p class="-mt-1 text-lg">
