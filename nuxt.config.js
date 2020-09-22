@@ -1,5 +1,6 @@
 export default {
   mode: 'universal',
+  // todo CHANGE
   debug: true,
   /*
    ** Headers of the page
@@ -8,7 +9,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        rel: 'stylesheet',
+        rel: 'preload',
+        as: 'style',
+        onload: "this.onload=null;this.rel='stylesheet'",
         href:
           'https://fonts.googleapis.com/css2?family=Montserrat&family=Rubik:wght@300;400;500;700;900&display=swap'
       }
@@ -74,23 +77,9 @@ export default {
     manifest: {
       name: 'Sozial.io - social in school',
       short_name: 'Sozial.io',
-      // start_url: '..',
-      // display: 'standalone',
       lang: 'de',
       background_color: '#121212',
       description: 'Das beste Soziale Netzwerk.',
-      // icons: [
-      //   {
-      //     src: '/android-chrome-192x192.png',
-      //     sizes: '192x192',
-      //     type: 'image/png'
-      //   },
-      //   {
-      //     src: '/android-chrome-512x512.png',
-      //     sizes: '512x512',
-      //     type: 'image/png'
-      //   }
-      // ],
       meta: {
         mobileAppIOS: true,
         theme_color: '#FFFFFF',

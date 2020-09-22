@@ -113,7 +113,8 @@ export default {
       else return '#ffffff'
     },
     my_post() {
-      return this.$auth.user.pk === this.post.creator
+      if (this.$auth.loggedIn) return this.$auth.user.pk === this.post.creator
+      else return false
     },
     liked() {
       if (this.$auth.loggedIn) {
@@ -140,7 +141,7 @@ export default {
       }
     },
     post_link() {
-      return 'groups/' + this.post.group + '/post/' + this.post.id
+      return '/groups/' + this.post.group + '/post/' + this.post.id
     }
   },
   methods: {
@@ -167,6 +168,8 @@ export default {
           post: this.post.id,
           like: like.id
         })
+      } else {
+        this.$router.push('/register')
       }
     },
     toggle() {

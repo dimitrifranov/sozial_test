@@ -12,7 +12,7 @@
         </h2>
       </nuxt-link>
 
-      <div class="w-full relative pt-3">
+      <div class="w-screen max-w-md relative pt-3">
         <img
           id="pic"
           src="/Group 8.svg"
@@ -20,7 +20,7 @@
           class="block z-10 absolute"
         />
         <div class="w-full center-items flex-col relative ">
-          <img :src="profilepicture" width="33%" />
+          <img :src="profilepicture" :width="profile_width" />
           <div class="text-white w-full grid grid-cols-3 profile-info z-20 ">
             <div class="center-items">
               <p class="text-center align-middle">
@@ -50,7 +50,7 @@
                 </p>
               </div>
             </div>
-            <div class="center-items">
+            <div class="center-items flex flex-row items-baseline">
               <div class="flex flex-col items-center">
                 <p class="text-2xs font-light">
                   Members
@@ -59,6 +59,10 @@
                   {{ group.group_members.length }}
                 </p>
               </div>
+              <button class="text-xs hover:underline ml-1" @click="invite">
+                Freunde<br />
+                einladen
+              </button>
             </div>
           </div>
         </div>
@@ -102,6 +106,13 @@ export default {
   computed: {
     finish() {
       return !this.start && !this.next
+    },
+    webShareApiSupported() {
+      try {
+        return navigator.share
+      } catch (error) {
+        return false
+      }
     },
     autoLoadDisabled() {
       return this.loading || this.finish
@@ -151,6 +162,9 @@ export default {
     triangle_width() {
       if (this.windowWidth > 448) return 448 / 6
       else return this.windowWidth / 6
+    },
+    profile_width() {
+      return this.triangle_width * 2 + 'px'
     }
   },
   mounted() {
@@ -199,6 +213,34 @@ export default {
           (members) => members.user !== this.$auth.user.pk
         )
       })
+    },
+    async invite() {
+      const url =
+        'https://social-tests.herokuapp.com/groups/' +
+        this.group.id +
+        '?secret=' +
+        this.group.secret
+      if (this.webShareApiSupported) {
+        try {
+          navigator.share({
+            title: 'Einladung',
+            text:
+              this.$auth.user.username +
+              ' lädt dich ein seiner Gruppe: ' +
+              this.group.name +
+              ' beizutreten',
+            url
+          })
+        } catch (e) {
+          this.error({
+            statusCode: 500,
+            message: 'Unable to share post'
+          })
+        }
+      } else {
+        await navigator.clipboard.writeText(url)
+        alert('Copied the text: ' + url)
+      }
     },
     toggle() {
       this.hover = !this.hover

@@ -127,14 +127,14 @@ export default {
       const store = this.$store
       // eslint-disable-next-line no-new
       new Compressor(this.dataURItoBlob(this.file), {
-        quality: 0.6,
+        quality: 0.4,
         strict: true,
-        maxWidth: 1000,
-        maxHeight: 1000,
+        maxWidth: 500,
+        maxHeight: 500,
         convertSize: 0,
         success(result) {
           const formData = new FormData()
-          formData.append('src', result, result.name)
+          formData.append('src', result, result.name + '.jp2')
           // console.log(formData.entries())
           formData.append('title', title)
           formData.append('group', group)

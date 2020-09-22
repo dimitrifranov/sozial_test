@@ -5,15 +5,16 @@
         {{ user.username }}
       </h1>
 
-      <div class="w-full relative pt-3">
+      <div class="w-screen max-w-md relative pt-3">
         <img
           id="pic"
           src="/Group 8.svg"
           width="100%"
+          height="auto"
           class="block z-10 absolute"
         />
         <div class="w-full center-items flex-col relative ">
-          <img :src="profilepicture" width="33%" />
+          <img :src="profilepicture" :width="profile_width" />
           <div class="text-white w-full grid grid-cols-3 profile-info z-20 ">
             <div class="center-items">
               <p class="text-center align-middle">
@@ -150,6 +151,9 @@ export default {
     triangle_width() {
       if (this.windowWidth > 448) return 448 / 6
       else return this.windowWidth / 6
+    },
+    profile_width() {
+      return this.triangle_width * 2 + 'px'
     }
   },
   mounted() {

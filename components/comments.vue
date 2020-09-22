@@ -57,25 +57,28 @@ export default {
   },
   methods: {
     postComment() {
-      PostService.commentPost({
-        group: 1,
-        post: this.post,
-        data: {
-          comment_content: this.comment,
-          creator: this.$auth.user.pk,
+      if (!this.$auth.loggedIn) this.$router.push('/register')
+      else {
+        PostService.commentPost({
+          group: 1,
           post: this.post,
-          reply_to: null
-        }
-      })
-        .then((response) => {
-          this.comments.push(response.data)
+          data: {
+            comment_content: this.comment,
+            creator: this.$auth.user.pk,
+            post: this.post,
+            reply_to: null
+          }
         })
-        .catch((e) => {
-          this.error({
-            statusCode: 503,
-            message: 'Unable to post comment'
+          .then((response) => {
+            this.comments.push(response.data)
           })
-        })
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to post comment'
+            })
+          })
+      }
     }
   }
 }

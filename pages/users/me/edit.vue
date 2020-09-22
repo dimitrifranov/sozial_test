@@ -128,17 +128,17 @@ export default {
         this.crop()
         // eslint-disable-next-line no-new
         await new Compressor(this.dataURItoBlob(this.file), {
-          quality: 0.6,
+          quality: 0.2,
           strict: true,
-          maxWidth: 500,
-          maxHeight: 500,
+          maxWidth: 150,
+          maxHeight: 150,
           convertSize: 0,
           async success(result) {
             const formData = new FormData()
             formData.append(
               'profile_picture',
               result,
-              context.$auth.user.username + '.jpg'
+              context.$auth.user.username + '.jp2'
             )
             if (context.user.username)
               formData.append('username', context.user.username)

@@ -69,6 +69,13 @@ export const actions = {
       commit('SET_POSTS', response.data)
     })
   },
+  publicPosts({ commit, state }) {
+    commit('SET_START', false)
+    return PostService.publicPosts(state.next).then((response) => {
+      commit('SET_NEXT', response.data.next)
+      commit('SET_POSTS', response.data)
+    })
+  },
   likePost({ commit }, params) {
     return PostService.likePost(params).then((response) => {
       commit('ADD_LIKE', response.data)

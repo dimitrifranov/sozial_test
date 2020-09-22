@@ -166,28 +166,22 @@ export default {
     }
   },
   methods: {
-    registerUser() {
+    async registerUser() {
       this.$v.$touch()
       if (!this.$v.$invaild) {
-        UserService.registerUser(this.user).then(
-          this.$auth
-            .loginWith('local', {
-              data: {
-                username: this.user.username,
-                password: this.user.password,
-                email: this.user.email
-              }
-            })
-            .then(() => {
-              this.$router.push('/')
-            })
-            .catch((e) => {
-              this.error({
-                statusCode: 503,
-                message: 'Unable to register'
-              })
-            })
-        )
+        await UserService.registerUser(this.user)
+        await this.$auth
+          .loginWith('local', {
+            data: {
+              username: this.user.username,
+              password: this.user.password,
+              email: this.user.email
+            }
+          })
+          .catch((e) => {
+            this.user.error = 'Benutzer existiert bereits'
+          })
+        this.$router.push('/')
       }
     }
   },

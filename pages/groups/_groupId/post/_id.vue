@@ -17,17 +17,29 @@ export default {
   async asyncData({ $axios, route, error, $auth }) {
     // const re = /(?<=\/groups\/)\d/
     // const group = re.exec(route.fullPath)[0]
-    const post = await $axios.get(
-      'https://social-tests-api.herokuapp.com/groups/' +
+    let post = null
+    const apiClient = $axios.create({
+      baseURL: `https://social-tests-api.herokuapp.com/`,
+      withCredentials: false,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    if ($auth.loggedIn) {
+      post = await apiClient.get(
+        '/groups/' + route.params.groupId + '/posts/' + route.params.id + '/',
+        { params: { user: $auth.user.pk } }
+      )
+    } else {
+      post = await apiClient.get(
+        '/groups/' + route.params.groupId + '/posts/' + route.params.id + '/'
+      )
+    }
+    const comments = await apiClient.get(
+      '/groups/' +
         route.params.groupId +
         '/posts/' +
-        route.params.id +
-        '/',
-      { params: { user: $auth.user.pk } }
-    )
-
-    const comments = await $axios.get(
-      'https://social-tests-api.herokuapp.com/groups/1/posts/' +
         route.params.id +
         '/comments/'
     )

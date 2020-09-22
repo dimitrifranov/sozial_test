@@ -116,14 +116,14 @@ export default {
         this.crop()
         // eslint-disable-next-line no-new
         await new Compressor(this.dataURItoBlob(this.file), {
-          quality: 0.6,
+          quality: 0.2,
           strict: true,
-          maxWidth: 500,
-          maxHeight: 500,
+          maxWidth: 150,
+          maxHeight: 150,
           convertSize: 0,
           async success(result) {
             const formData = new FormData()
-            formData.append('pic', result, 'group_' + groupId + '.jpg')
+            formData.append('pic', result, 'group_' + groupId + '.jp2')
             if (context.change_to.name)
               formData.append('name', context.change_to.name)
             if (context.change_to.description)

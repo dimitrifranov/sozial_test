@@ -21,6 +21,10 @@ export default {
     if (next) return apiClient.get(next)
     else return apiClient.get('/feed/', { params: { user } })
   },
+  publicPosts(next) {
+    if (next) return apiClient.get(next)
+    else return apiClient.get('/public_posts/')
+  },
   getPost(data) {
     return apiClient.get('/groups/' + data.group + '/posts/' + data.post, {
       params: { user: data.user }

@@ -6,10 +6,10 @@
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
-      <baseButton @clicked="showFeed">
+      <baseButton v-if="$auth.loggedIn" @clicked="showFeed">
         Feed
       </baseButton>
-      <baseButton @clicked="show = true">
+      <baseButton v-if="$auth.loggedIn" @clicked="show = true">
         Gruppe wählen
       </baseButton>
       <groupSearch v-if="show" @close="setGroup($event)" />
@@ -65,7 +65,17 @@ export default {
     },
     loadMore($state) {
       this.loading = true
-      if (!this.feed) {
+      if (!this.$auth.loggedIn) {
+        this.$store
+          .dispatch('posts/publicPosts')
+          .then((this.loading = false))
+          .catch((e) => {
+            this.error({
+              statusCode: 503,
+              message: 'Unable to get posts'
+            })
+          })
+      } else if (!this.feed) {
         this.$store
           .dispatch('posts/fetchPosts', {
             group: this.group,
