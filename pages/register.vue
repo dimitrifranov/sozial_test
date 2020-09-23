@@ -1,7 +1,7 @@
 <template>
   <div class="center-items">
     <form
-      class=" w-full max-w-xs h-screen center-items flex-col"
+      class=" w-full max-w-xs h-screen center-items flex-col pt-16 pb-16"
       @submit.prevent="registerUser"
     >
       <baseInput
@@ -117,8 +117,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
+import GroupService from '@/services/GroupService.js'
 import UserService from '@/services/UserService.js'
 export default {
   mixins: [validationMixin],
@@ -138,6 +140,11 @@ export default {
         comments_notifs: true
       }
     }
+  },
+  computed: {
+    ...mapState({
+      joining: (state) => state.groups.joining
+    })
   },
   validations: {
     user: {
@@ -174,13 +181,23 @@ export default {
           .loginWith('local', {
             data: {
               username: this.user.username,
-              password: this.user.password,
-              email: this.user.email
+              password: this.user.password
             }
           })
           .catch((e) => {
             this.user.error = 'Benutzer existiert bereits'
           })
+        if (this.joining.group) {
+          await GroupService.joinGroup({
+            group: this.joining.group,
+            user: this.$auth.user.pk,
+            secret: this.joining.secret
+          }).then((res) => {
+            const group = this.joining.group
+            this.$router.dispatch('groups/delJoining')
+            if (res.data.id) this.$router.push('/groups/' + group)
+          })
+        }
         this.$router.push('/')
       }
     }

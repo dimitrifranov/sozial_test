@@ -1,7 +1,7 @@
 <template>
   <div class="center-items h-screen">
     <form
-      class=" w-full max-w-xs h-screen center-items flex-col"
+      class=" w-full max-w-xs h-screen center-items flex-col pt-16 pb-16"
       @submit.prevent="updateUser"
     >
       <baseToggle

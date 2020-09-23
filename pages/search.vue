@@ -25,6 +25,7 @@
             :key="i"
             :group="result"
             :link="true"
+            @clicked="pushToGroup"
           />
         </div>
       </div>
@@ -70,6 +71,9 @@ export default {
       this.$store.dispatch('search/deleteResults').then(() => {
         this.loadMore()
       })
+    },
+    pushToGroup(group) {
+      this.$router.push('/groups/' + group)
     },
     loadMore($state) {
       this.loading = true

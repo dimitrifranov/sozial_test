@@ -1,20 +1,47 @@
 <template>
-  <div>
-    <div
+  <div
+    v-touch:swipe.left="swipeLeft"
+    v-touch:swipe.right="swipeRight"
+    class="w-screen h-screen"
+  >
+    <section class="flex mt-12 justify-around fixed h-8 w-screen bg-grey">
+      <button
+        class="text-white"
+        :class="{ underline: isActive('feed') }"
+        @click="setActive('feed')"
+      >
+        Feed
+      </button>
+      <button
+        class="text-white"
+        :class="{ underline: isActive('groups') }"
+        @click="setActive('groups')"
+      >
+        Groups
+      </button>
+      <button
+        class="text-white"
+        :class="{ underline: isActive('all') }"
+        @click="setActive('all')"
+      >
+        all
+      </button>
+    </section>
+    <section
       v-infinite-scroll="loadMore"
-      class="w-screen flex flex-col items-center pt-16 pb-16"
+      class="w-screen flex flex-col items-center pb-16 pt-32"
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
-      <baseButton v-if="$auth.loggedIn" @clicked="showFeed">
-        Feed
-      </baseButton>
-      <baseButton v-if="$auth.loggedIn" @clicked="show = true">
+      <baseButton
+        v-if="$auth.loggedIn && isActive('groups')"
+        @clicked="show = true"
+      >
         Gruppe wählen
       </baseButton>
       <groupSearch v-if="show" @close="setGroup($event)" />
       <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
-    </div>
+    </section>
   </div>
 </template>
 
@@ -33,7 +60,7 @@ export default {
       loading: false,
       group: 1,
       show: false,
-      feed: false
+      activeTab: 'feed'
     }
   },
   computed: {
@@ -41,6 +68,7 @@ export default {
       return this.loading || this.finish
       // || this.posts.length === 0
     },
+
     finish() {
       return !this.start && !this.next
     },
@@ -59,13 +87,28 @@ export default {
         this.$store.dispatch('posts/deletePosts').then(this.loadMore())
       }
     },
+    isActive(menuTab) {
+      return this.activeTab === menuTab
+    },
+    setActive(menuTab) {
+      this.activeTab = menuTab
+      this.$store.dispatch('posts/deletePosts').then(this.loadMore())
+    },
+    swipeRight() {
+      if (this.isActive('groups')) this.setActive('feed')
+      else if (this.isActive('all')) this.setActive('groups')
+    },
+    swipeLeft() {
+      if (this.isActive('groups')) this.setActive('all')
+      else if (this.isActive('feed')) this.setActive('groups')
+    },
     showFeed() {
       this.feed = !this.feed
       this.$store.dispatch('posts/deletePosts').then(this.loadMore())
     },
     loadMore($state) {
       this.loading = true
-      if (!this.$auth.loggedIn) {
+      if (!this.$auth.loggedIn || this.isActive('all')) {
         this.$store
           .dispatch('posts/publicPosts')
           .then((this.loading = false))
@@ -75,7 +118,7 @@ export default {
               message: 'Unable to get posts'
             })
           })
-      } else if (!this.feed) {
+      } else if (this.isActive('groups')) {
         this.$store
           .dispatch('posts/fetchPosts', {
             group: this.group,
@@ -88,7 +131,7 @@ export default {
               message: 'Unable to get posts'
             })
           })
-      } else {
+      } else if (this.isActive('feed')) {
         this.$store
           .dispatch('posts/fetchFeed', this.$auth.user.pk)
           .then((this.loading = false))

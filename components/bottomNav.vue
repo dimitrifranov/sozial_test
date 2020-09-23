@@ -21,12 +21,14 @@
           <nuxt-link
             class="center-items font-light bg-transparent h-full w-24 hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent transition-colors duration-200"
             to="/post/"
+            @click.native="close"
           >
             <p>Post</p>
           </nuxt-link>
           <nuxt-link
             class="center-items font-light bg-transparent h-full w-24 hover:bg-white text-white hover:text-grey py-2 px-4 border border-white hover:border-transparent transition-colors duration-200"
             to="/groups/new/"
+            @click.native="close"
           >
             <p>Gruppe</p>
           </nuxt-link>

@@ -59,7 +59,11 @@
                   {{ group.group_members.length }}
                 </p>
               </div>
-              <button class="text-xs hover:underline ml-1" @click="invite">
+              <button
+                v-if="myprofile"
+                class="text-xs hover:underline ml-1"
+                @click="invite"
+              >
                 Freunde<br />
                 einladen
               </button>
@@ -90,7 +94,7 @@ export default {
   props: {
     group: {
       type: Object,
-      required: true
+      default: () => {}
     }
   },
   data() {

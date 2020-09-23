@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center h-screen pt-16">
     <postComponent :post="post" />
-    <comments :comments="comments" :post="post.id" />
+    <comments :comments="comments" :post="post.id" class="pb-16" />
   </div>
 </template>
 

@@ -31,6 +31,10 @@ export default {
             pk: this.user.pk,
             username: this.user.username,
             password: this.user.password,
+            comments_notifs: this.user.comments_notifs,
+            follow_post_notifs: this.user.follow_post_notifs,
+            like_notifs: this.user.like_notifs,
+            new_follow_notifs: this.user.new_follow_notifs,
             signal_id: userId
           })
           // console.log(userId)

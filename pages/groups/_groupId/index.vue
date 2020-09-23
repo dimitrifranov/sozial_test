@@ -1,6 +1,6 @@
 <template>
   <div>
-    <groupProfile :group="group" />
+    <groupProfile v-if="!login_first" :group="group" />
   </div>
 </template>
 
@@ -14,12 +14,10 @@ export default {
   },
   async asyncData({ $axios, route, error, $auth }) {
     const secret = route.query.secret
-    // error({
-    //   statusCode: 503,
-    //   message: route.params
-    // })
-    if (!$auth.loggedIn) console.log('login')
-    else if (secret) {
+
+    if (!$auth.loggedIn && secret) {
+      return { login_first: true, group: {} }
+    } else if (secret) {
       await GroupService.joinGroup({
         group: route.params.groupId,
         user: $auth.user.pk,
@@ -40,6 +38,7 @@ export default {
             })
 
           return {
+            login_first: false,
             group: groupRequest.data
           }
         } else
@@ -63,20 +62,19 @@ export default {
       })
 
     return {
+      login_first: false,
       group: groupRequest.data
     }
   },
-  // async mounted() {
-  //   if (!this.$auth.loggedIn) this.$router.push('/login')
-  //   else {
-  //     await GroupService.joinGroup({
-  //       group: this.group.id,
-  //       user: this.$auth.user.pk
-  //     }).then((res) => {
-  //       this.group.group_members.push(res.data)
-  //     })
-  //   }
-  // },
+  mounted() {
+    if (this.login_first) {
+      this.$store.dispatch('groups/setJoining', {
+        group: this.$route.params.groupId,
+        secret: this.$route.query.secret
+      })
+      this.$router.push('/login')
+    }
+  },
   head() {
     return {
       title: this.group.name,

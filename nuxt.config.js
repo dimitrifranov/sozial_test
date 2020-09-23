@@ -14,6 +14,14 @@ export default {
         onload: "this.onload=null;this.rel='stylesheet'",
         href:
           'https://fonts.googleapis.com/css2?family=Montserrat&family=Rubik:wght@300;400;500;700;900&display=swap'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://ma-project-files.s3.amazonaws.com'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://cdn.jsdelivr.net'
       }
     ]
   },
@@ -32,7 +40,8 @@ export default {
     { src: '@/plugins/vue-material-icons', mode: 'client' },
     { src: '@/plugins/vue-advanced-cropper', mode: 'client' },
     '@plugins/global.js',
-    { src: '~plugins/vue-infinite-scroll.js', ssr: false },
+    { src: '@/plugins/vue-infinite-scroll.js', ssr: false },
+    { src: '@/plugins/vue-touch.js', ssr: false },
     { src: '@/plugins/vuelidate', mode: 'client' }
   ],
   /*
