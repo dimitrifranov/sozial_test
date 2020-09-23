@@ -5,24 +5,24 @@
     class="w-screen h-screen flex flex-col items-center"
   >
     <section
-      class="flex mt-12 justify-around fixed h-8 w-screen max-w-md bg-grey1"
+      class="flex mt-8 justify-around fixed h-12 w-screen max-w-md bg-grey1"
     >
       <button
-        class="text-white w-full"
+        class="text-white font-light w-full"
         :class="{ active: isActive('feed') }"
         @click="setActive('feed')"
       >
         Feed
       </button>
       <button
-        class="text-white w-full"
+        class="text-white font-light w-full"
         :class="{ active: isActive('groups') }"
         @click="setActive('groups')"
       >
         Gruppen
       </button>
       <button
-        class="text-white w-full"
+        class="text-white font-light w-full"
         :class="{ active: isActive('all') }"
         @click="setActive('all')"
       >
@@ -31,7 +31,7 @@
     </section>
     <section
       v-infinite-scroll="loadMore"
-      class="w-screen flex flex-col items-center pb-16 pt-32"
+      class="w-screen flex flex-col items-center pb-16 pt-24"
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >

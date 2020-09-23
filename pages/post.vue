@@ -127,10 +127,10 @@ export default {
       const store = this.$store
       // eslint-disable-next-line no-new
       new Compressor(this.dataURItoBlob(this.file), {
-        quality: 0.4,
+        quality: 0.6,
         strict: true,
-        maxWidth: 500,
-        maxHeight: 500,
+        maxWidth: 1000,
+        maxHeight: 1000,
         convertSize: 0,
         success(result) {
           const formData = new FormData()

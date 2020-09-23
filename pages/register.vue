@@ -1,7 +1,7 @@
 <template>
-  <div class="center-items">
+  <div class="justify-center h-screen flex">
     <form
-      class=" w-full max-w-xs h-screen center-items flex-col pt-16 pb-16"
+      class=" w-full max-w-xs h-screen items-center flex flex-col pt-16"
       @submit.prevent="registerUser"
     >
       <baseInput
@@ -108,7 +108,7 @@
       </baseButton>
       <nuxt-link
         to="/login"
-        class="text-white text-opacity-75 hover:underline text-xs font-light"
+        class="text-white text-opacity-75 hover:underline text-xs font-light pb-16"
       >
         Ich habe schon einen Account
       </nuxt-link>

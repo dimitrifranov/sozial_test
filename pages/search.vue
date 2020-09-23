@@ -1,11 +1,32 @@
 <template>
   <div>
-    <div class="flex items-center w-screen flex-col h-screen pt-16">
+    <div
+      v-touch:swipe.left="swipeLeft"
+      v-touch:swipe.right="swipeRight"
+      class="flex items-center w-screen flex-col h-screen"
+    >
+      <section
+        class="flex mt-8 justify-around mb-4 h-12 w-screen max-w-md bg-grey1"
+      >
+        <button
+          class="text-white font-light w-full"
+          :class="{ active: isActive('users') }"
+          @click="setActive('users')"
+        >
+          Benutzer
+        </button>
+        <button
+          class="text-white font-light w-full"
+          :class="{ active: isActive('groups') }"
+          @click="setActive('groups')"
+        >
+          Gruppen
+        </button>
+      </section>
       <div class="w-full max-w-xs  center-items flex-col">
-        <baseToggle v-model="groups" title="Nach Gruppen suchen" />
         <baseInput
           v-model="search_text"
-          value="search_test"
+          value="search_text"
           label="Suchen: "
           @input="search"
         />
@@ -13,10 +34,10 @@
       <div
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="autoLoadDisabled"
-        infinite-scroll-distance="10"
+        infinite-scroll-distance="30"
         infinite-scroll-immediate-check="false"
       >
-        <div v-if="!group_results">
+        <div v-if="!group_results" class="pb-16">
           <userPeek v-for="(result, i) in results" :key="i" :user="result" />
         </div>
         <div v-else>
@@ -46,7 +67,7 @@ export default {
     return {
       search_text: '',
       loading: false,
-      groups: false
+      activeTab: 'users'
     }
   },
   computed: {
@@ -67,6 +88,19 @@ export default {
   },
 
   methods: {
+    isActive(menuTab) {
+      return this.activeTab === menuTab
+    },
+    setActive(menuTab) {
+      this.activeTab = menuTab
+      this.$store.dispatch('posts/deletePosts').then(this.loadMore())
+    },
+    swipeRight() {
+      if (this.isActive('users')) this.setActive('groups')
+    },
+    swipeLeft() {
+      if (this.isActive('groups')) this.setActive('users')
+    },
     search($state) {
       this.$store.dispatch('search/deleteResults').then(() => {
         this.loadMore()
@@ -77,7 +111,7 @@ export default {
     },
     loadMore($state) {
       this.loading = true
-      if (this.groups) {
+      if (this.isActive('groups')) {
         this.$store
           .dispatch('search/searchGroups', {
             text: this.search_text
@@ -113,4 +147,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.active {
+  border-bottom: 1px solid white;
+}
+</style>

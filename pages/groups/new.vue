@@ -13,6 +13,7 @@
         value="description"
         label="Beschreibung:"
       />
+      <baseToggle v-model="publicGroup" title="Gruppe öffentlich machen" />
       <cropper
         v-show="file"
         ref="cropper"
@@ -61,7 +62,8 @@ export default {
       },
       file: null,
       name: '',
-      description: ''
+      description: '',
+      publicGroup: true
     }
   },
   methods: {
@@ -114,15 +116,16 @@ export default {
     postData() {
       this.crop()
       const name = this.name
+      const publicGroup = this.publicGroup
       const description = this.description
       const user = this.$auth.user.pk
       const router = this.$router
       // eslint-disable-next-line no-new
       new Compressor(this.dataURItoBlob(this.file), {
-        quality: 0.6,
+        quality: 0.2,
         strict: true,
-        maxWidth: 1000,
-        maxHeight: 1000,
+        maxWidth: 150,
+        maxHeight: 150,
         convertSize: 0,
         success(result) {
           const formData = new FormData()
@@ -131,6 +134,7 @@ export default {
           formData.append('name', name)
           formData.append('description', description)
           formData.append('creator', user)
+          formData.append('public', publicGroup)
           postingService.postGroup(formData).then(router.push('/'))
         }
       })
