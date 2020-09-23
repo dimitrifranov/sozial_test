@@ -2,29 +2,31 @@
   <div
     v-touch:swipe.left="swipeLeft"
     v-touch:swipe.right="swipeRight"
-    class="w-screen h-screen"
+    class="w-screen h-screen flex flex-col items-center"
   >
-    <section class="flex mt-12 justify-around fixed h-8 w-screen bg-grey">
+    <section
+      class="flex mt-12 justify-around fixed h-8 w-screen max-w-md bg-grey1"
+    >
       <button
-        class="text-white"
-        :class="{ underline: isActive('feed') }"
+        class="text-white w-full"
+        :class="{ active: isActive('feed') }"
         @click="setActive('feed')"
       >
         Feed
       </button>
       <button
-        class="text-white"
-        :class="{ underline: isActive('groups') }"
+        class="text-white w-full"
+        :class="{ active: isActive('groups') }"
         @click="setActive('groups')"
       >
-        Groups
+        Gruppen
       </button>
       <button
-        class="text-white"
-        :class="{ underline: isActive('all') }"
+        class="text-white w-full"
+        :class="{ active: isActive('all') }"
         @click="setActive('all')"
       >
-        all
+        Alles
       </button>
     </section>
     <section
@@ -159,4 +161,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.active {
+  border-bottom: 1px solid white;
+}
+</style>

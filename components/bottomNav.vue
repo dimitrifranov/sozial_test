@@ -3,13 +3,25 @@
     <nav
       class="w-screen h-12 clearfix bg-grey1 bottom-0 fixed flex items-stretch justify-around shadow-lg"
     >
-      <nuxt-link to="/" class="center-items flex-grow">
+      <nuxt-link
+        to="/"
+        class="center-items flex-grow"
+        :class="{ active: isActive('index') }"
+      >
         <home-outline fillColor="#ffffff" :size="size" />
       </nuxt-link>
-      <button class="center-items flex-grow" @click="toggle">
+      <button
+        class="center-items flex-grow"
+        :class="{ active: isActive('post') || isActive('groups-new') }"
+        @click="toggle"
+      >
         <plus-icon fillColor="#ffffff" :size="size" />
       </button>
-      <nuxt-link to="/notifications" class="center-items flex-grow">
+      <nuxt-link
+        to="/notifications"
+        class="center-items flex-grow"
+        :class="{ active: isActive('notifications') }"
+      >
         <bell-outline-icon fillColor="#ffffff" :size="size" />
       </nuxt-link>
       <transition name="scale">
@@ -58,6 +70,9 @@ export default {
     },
     close() {
       this.opened = false
+    },
+    isActive(route) {
+      return route === this.$route.name
     }
   }
 }
@@ -76,5 +91,9 @@ export default {
 .scale-enter-active,
 .scale-leave-active {
   @apply transition-transform duration-200 ease-out;
+}
+
+.active {
+  border-bottom: 1px solid white;
 }
 </style>

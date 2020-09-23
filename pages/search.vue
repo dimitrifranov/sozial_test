@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="center-items w-screen flex-col h-screen">
-      <div class=" w-full max-w-xs  center-items flex-col">
+    <div class="flex items-center w-screen flex-col h-screen pt-16">
+      <div class="w-full max-w-xs  center-items flex-col">
         <baseToggle v-model="groups" title="Nach Gruppen suchen" />
         <baseInput
           v-model="search_text"
