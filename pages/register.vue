@@ -194,7 +194,7 @@ export default {
             secret: this.joining.secret
           }).then((res) => {
             const group = this.joining.group
-            this.$router.dispatch('groups/delJoining')
+            this.$store.dispatch('groups/delJoining')
             if (res.data.id) this.$router.push('/groups/' + group)
           })
         }
