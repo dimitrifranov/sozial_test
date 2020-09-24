@@ -5,6 +5,7 @@
     class="w-screen h-screen flex flex-col items-center"
   >
     <section
+      v-if="$auth.loggedIn"
       class="flex mt-12 justify-around fixed h-8 w-screen max-w-md bg-grey1"
     >
       <button
@@ -35,12 +36,15 @@
       infinite-scroll-disabled="autoLoadDisabled"
       infinite-scroll-distance="10"
     >
-      <baseButton
+      <section
         v-if="$auth.loggedIn && isActive('groups')"
-        @clicked="show = true"
+        class="flex items-center justify-around w-full max-w-md"
       >
-        Gruppe wählen
-      </baseButton>
+        <h2 class="text-white font-light text-lg pb-4">@{{ groupName }}</h2>
+        <baseButton @clicked="show = true">
+          andere Gruppe wählen
+        </baseButton>
+      </section>
       <groupSearch v-if="show" @close="setGroup($event)" />
       <postComponent v-for="(post, i) in posts" :key="i" :post="post" />
     </section>
@@ -70,7 +74,10 @@ export default {
       return this.loading || this.finish
       // || this.posts.length === 0
     },
-
+    groupName() {
+      if (this.posts[0]) return this.posts[0].group_name
+      else return ''
+    },
     finish() {
       return !this.start && !this.next
     },
@@ -89,6 +96,7 @@ export default {
         this.$store.dispatch('posts/deletePosts').then(this.loadMore())
       }
     },
+
     isActive(menuTab) {
       return this.activeTab === menuTab
     },

@@ -19,11 +19,11 @@ export default {
   },
   getFeed(user, next) {
     if (next) return apiClient.get(next)
-    else return apiClient.get('/feed/', { params: { user } })
+    else return apiClient.get('/feed/?ordering=-pub_date', { params: { user } })
   },
   publicPosts(next) {
     if (next) return apiClient.get(next)
-    else return apiClient.get('/public_posts/')
+    else return apiClient.get('/public_posts/?ordering=-pub_date')
   },
   getPost(data) {
     return apiClient.get('/groups/' + data.group + '/posts/' + data.post, {

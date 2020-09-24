@@ -63,13 +63,13 @@
         v-click-outside="close"
         class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
       >
-        <button @click="logout()">
+        <button class="pb-1 hover:underline" @click="logout()">
           Abmelden
         </button>
-        <button @click="settings()">
+        <button class="pb-1 hover:underline" @click="settings()">
           Einstellungen
         </button>
-        <button @click="subscribe()">
+        <button class="pb-1 hover:underline" @click="subscribe()">
           Benachrichtigungen erlauben
         </button>
         <div class="onesignal-customlink-container" />
