@@ -14,12 +14,12 @@ export default {
     postComponent,
     comments
   },
-  async asyncData({ $axios, route, error, $auth }) {
+  async asyncData({ $axios, route, error, $auth, $config }) {
     // const re = /(?<=\/groups\/)\d/
     // const group = re.exec(route.fullPath)[0]
     let post = null
     const apiClient = $axios.create({
-      baseURL: `https://social-tests-api.herokuapp.com/`,
+      baseURL: $config.apiUrl,
       withCredentials: false,
       headers: {
         Accept: 'application/json',

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg">
+    <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg z-20">
       <nuxt-link
         v-if="home"
         to="/users/me"
@@ -57,22 +57,30 @@
         </nuxt-link>
       </div>
     </header>
+    <section
+      v-if="$nuxt.isOffline"
+      class="text-error w-full fixed pt-2 text-center z-10"
+    >
+      Keine Internetverbindung!
+    </section>
     <transition name="scale">
       <ul
         v-show="opened"
         v-click-outside="close"
-        class="w-2/3 max-w-xs z-10 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
+        class="items-center w-2/3 max-w-xs z-20 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
       >
         <button class="pb-1 hover:underline" @click="logout()">
           Abmelden
         </button>
-        <button class="pb-1 hover:underline" @click="settings()">
+        <nuxt-link class="pb-1 hover:underline" to="/settings">
           Einstellungen
-        </button>
+        </nuxt-link>
         <button class="pb-1 hover:underline" @click="subscribe()">
           Benachrichtigungen erlauben
         </button>
-        <div class="onesignal-customlink-container" />
+        <nuxt-link class="pb-1 hover:underline" to="/info">
+          Info
+        </nuxt-link>
       </ul>
     </transition>
   </div>
@@ -128,9 +136,6 @@ export default {
       this.$OneSignal.push(() => {
         this.$OneSignal.showNativePrompt()
       })
-    },
-    settings() {
-      this.$router.push('settings')
     }
   }
 }

@@ -68,7 +68,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseUrl: 'https://social-tests-api.herokuapp.com/'
+    baseUrl: process.env.API_URL
   },
   /*
    ** Build configuration
@@ -111,16 +111,16 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: 'https://social-tests-api.herokuapp.com/auth/login/',
+            url: '/auth/login/',
             method: 'post',
             propertyName: 'key'
           },
           logout: {
-            url: 'https://social-tests-api.herokuapp.com/auth/logout/',
+            url: '/auth/logout/',
             method: 'post'
           },
           user: {
-            url: 'https://social-tests-api.herokuapp.com/auth/user/',
+            url: '/auth/user/',
             method: 'get',
             propertyName: false
           }
@@ -133,19 +133,19 @@ export default {
   },
   oneSignal: {
     init: {
-      appId: '56c16a44-f980-41c2-8a74-b4591cc6ab35',
-      safari_web_id: 'web.onesignal.auto.48d9c6a2-4943-4221-b17b-a4e235bf1c7d',
-      allowLocalhostAsSecureOrigin: true,
+      appId: process.env.APP_KEY,
+      safari_web_id: process.env.SAFARI_WEB_ID,
+      allowLocalhostAsSecureOrigin: false,
       welcomeNotification: {
         disable: false
       }
     }
   },
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'https://social-tests.herokuapp.com'
+    baseUrl: process.env.BASE_URL || 'https://social-tests.herokuapp.com',
+    apiUrl: process.env.API_URL
   },
   privateRuntimeConfig: {
-    appKey: process.env.APP_KEY,
-    apiUrl: process.env.API_URL
+    appKey: process.env.APP_KEY
   }
 }

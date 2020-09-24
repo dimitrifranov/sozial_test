@@ -80,12 +80,16 @@ export default {
     async loginUser() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
-        await this.$auth.loginWith('local', {
-          data: {
-            username: this.login.username,
-            password: this.login.password
-          }
-        })
+        await this.$auth
+          .loginWith('local', {
+            data: {
+              username: this.login.username,
+              password: this.login.password
+            }
+          })
+          .catch((e) => {
+            this.login.error = 'Falsche Anmeldedaten'
+          })
 
         if (this.joining.group) {
           await GroupService.joinGroup({
@@ -98,12 +102,7 @@ export default {
             if (res.data.id) this.$router.push('/groups/' + group)
           })
         }
-        this.$router
-          .push('/')
-
-          .catch((e) => {
-            this.login.error = 'Falsche Anmeldedaten'
-          })
+        this.$router.push('/')
       }
     }
   },

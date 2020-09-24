@@ -12,7 +12,7 @@ export default {
   components: {
     groupProfile
   },
-  async asyncData({ $axios, route, error, $auth }) {
+  async asyncData({ $axios, route, error, $auth, $config }) {
     const secret = route.query.secret
 
     if (!$auth.loggedIn && secret) {
@@ -25,11 +25,7 @@ export default {
       }).then((res) => {
         if (res.data.id) {
           const groupRequest = $axios
-            .get(
-              'https://social-tests-api.herokuapp.com/groups/' +
-                route.params.groupId +
-                '/'
-            )
+            .get($config.apiUrl + '/groups/' + route.params.groupId + '/')
             .catch((e) => {
               error({
                 statusCode: 503,
@@ -49,11 +45,9 @@ export default {
       })
     }
     const groupRequest = await $axios
-      .get(
-        'https://social-tests-api.herokuapp.com/groups/' +
-          route.params.groupId +
-          '/'
-      )
+      .get($config.apiUrl + '/groups/' + route.params.groupId + '/', {
+        params: { user: $auth.user.pk }
+      })
       .catch((e) => {
         error({
           statusCode: 503,

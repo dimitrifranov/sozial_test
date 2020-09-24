@@ -1,7 +1,6 @@
 import axios from 'axios'
-
 const apiClient = axios.create({
-  baseURL: `https://social-tests-api.herokuapp.com/`,
+  baseURL: 'https://social-tests-api.herokuapp.com',
   withCredentials: false,
   headers: {
     Accept: 'application/json',

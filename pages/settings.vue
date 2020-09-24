@@ -6,15 +6,15 @@
     >
       <baseToggle
         v-model="data.follow_post_notifs"
-        title="Erfahre wenn Accounts denen du folgst etwas Posten"
+        title="Erfahre wenn Accounts, denen du folgst, etwas Posten"
       />
       <baseToggle
         v-model="data.new_follow_notifs"
-        title="Erfahre wenn dir jemand neues folgt"
+        title="Erfahre wenn dir Jemand neues folgt"
       />
       <baseToggle
         v-model="data.like_notifs"
-        title="Erfahre wenn jemand einen deiner Posts gefällt"
+        title="Erfahre wenn Jemand einen deiner Posts gefällt"
       />
       <baseToggle
         v-model="data.comments_notifs"

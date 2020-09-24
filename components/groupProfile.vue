@@ -1,16 +1,28 @@
 <template>
   <div class="center-items">
     <div class="h-screen max-w-md">
-      <h1 class="text-2xl text-white text-center font-light pt-20">
-        {{ group.name }}
-      </h1>
-      <nuxt-link class="center-items w-full" :to="creator_link">
-        <h2
-          class="text-l text-white text-opacity-75 text-center font-light hover:underline"
+      <div class="clearfix">
+        <h1 class="text-2xl text-white text-center font-light pt-20">
+          {{ group.name }}
+        </h1>
+        <nuxt-link class="center-items w-full" :to="creator_link">
+          <h2
+            class="text-l text-white text-opacity-75 text-center font-light hover:underline"
+          >
+            erstellt von {{ group.creator_name }}
+          </h2>
+        </nuxt-link>
+
+        <baseButton
+          v-if="myprofile"
+          class="text-xs hover:underline ml-1"
+          buttonClass="h-full float-right"
+          @clicked="invite"
         >
-          erstellt von {{ group.creator_name }}
-        </h2>
-      </nuxt-link>
+          Freunde<br />
+          einladen
+        </baseButton>
+      </div>
 
       <div class="w-screen max-w-md relative pt-3">
         <img
@@ -59,14 +71,15 @@
                   {{ group.group_members.length }}
                 </p>
               </div>
-              <button
+              <!-- <baseButton
                 v-if="myprofile"
                 class="text-xs hover:underline ml-1"
-                @click="invite"
+                buttonClass="h-full"
+                @clicked="invite"
               >
                 Freunde<br />
                 einladen
-              </button>
+              </baseButton> -->
             </div>
           </div>
         </div>
@@ -153,7 +166,7 @@ export default {
     },
     profilepicture() {
       if (this.group.pic) return this.group.pic
-      else return '/user.png'
+      else return '/group.png'
     },
     myprofile() {
       if (
@@ -220,7 +233,8 @@ export default {
     },
     async invite() {
       const url =
-        'https://social-tests.herokuapp.com/groups/' +
+        this.$config.baseUrl +
+        '/groups/' +
         this.group.id +
         '?secret=' +
         this.group.secret

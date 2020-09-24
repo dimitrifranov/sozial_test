@@ -185,7 +185,7 @@ export default {
         navigator.share({
           title: this.post.title,
           text: '',
-          url: 'https://social-tests.herokuapp.com/post/' + this.post.id + '/'
+          url: this.$config.baseUrl + '/post/' + this.post.id + '/'
         })
       } catch (e) {
         this.error({

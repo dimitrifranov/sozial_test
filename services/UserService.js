@@ -1,7 +1,6 @@
 import axios from 'axios'
-
 const apiClient = axios.create({
-  baseURL: `https://social-tests-api.herokuapp.com/`,
+  baseURL: 'https://social-tests-api.herokuapp.com',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
@@ -24,7 +23,9 @@ export default {
   },
   getNotifications(data) {
     // console.log(data)
-    return apiClient.get('/notifications/', { params: { data } })
+    return apiClient.get('/notifications/?ordering=-time', {
+      params: { data }
+    })
   },
   followUser(data) {
     return apiClient.post('/follow/', data)
