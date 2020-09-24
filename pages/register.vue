@@ -64,7 +64,7 @@
       >
         Keine korrekte E-mail
       </p>
-      <BaseInput
+      <baseInput
         v-model.trim="user.password"
         value="password"
         label="Passwort:"
@@ -175,7 +175,7 @@ export default {
   methods: {
     async registerUser() {
       this.$v.$touch()
-      if (!this.$v.$invaild) {
+      if (!this.$v.$invalid) {
         await UserService.registerUser(this.user)
         await this.$auth
           .loginWith('local', {

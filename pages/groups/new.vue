@@ -7,12 +7,30 @@
       <h1 class="text-white font-light mb-6">
         Neue Gruppe:
       </h1>
-      <baseInput v-model="name" value="name" label="Name:" />
+      <baseInput
+        v-model="name"
+        value="name"
+        label="Name:"
+        @blur="$v.name.$touch()"
+      />
+      <p
+        v-if="!$v.name.required && $v.name.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Bitte Name der Gruppe angeben
+      </p>
       <baseInput
         v-model="description"
         value="description"
         label="Beschreibung:"
+        @blur="$v.description.$touch()"
       />
+      <p
+        v-if="!$v.description.required && $v.description.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Bitte Beschreibung hinzufügen
+      </p>
       <baseToggle v-model="publicGroup" title="Gruppe öffentlich machen" />
       <cropper
         v-show="file"
@@ -48,10 +66,13 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
 import Compressor from 'compressorjs'
 import postingService from '@/services/postingService.js'
 export default {
   middleware: 'auth',
+  mixins: [validationMixin],
   data() {
     return {
       coordinates: {
@@ -64,6 +85,14 @@ export default {
       name: '',
       description: '',
       publicGroup: true
+    }
+  },
+  validations: {
+    name: {
+      required
+    },
+    description: {
+      required
     }
   },
   methods: {
@@ -114,30 +143,43 @@ export default {
     //   this.file = event.target.files[0]
     // },
     postData() {
-      this.crop()
-      const name = this.name
-      const publicGroup = this.publicGroup
-      const description = this.description
-      const user = this.$auth.user.pk
-      const router = this.$router
-      // eslint-disable-next-line no-new
-      new Compressor(this.dataURItoBlob(this.file), {
-        quality: 0.2,
-        strict: true,
-        maxWidth: 150,
-        maxHeight: 150,
-        convertSize: 0,
-        success(result) {
+      this.$v.$touch()
+
+      if (!this.$v.$invalid) {
+        const name = this.name
+        const publicGroup = this.publicGroup
+        const description = this.description
+        const user = this.$auth.user.pk
+        const router = this.$router
+        if (this.file) {
+          this.crop()
+          // eslint-disable-next-line no-new
+          new Compressor(this.dataURItoBlob(this.file), {
+            quality: 0.2,
+            strict: true,
+            maxWidth: 150,
+            maxHeight: 150,
+            convertSize: 0,
+            success(result) {
+              const formData = new FormData()
+              formData.append('pic', result, result.name)
+              // console.log(formData.entries())
+              formData.append('name', name)
+              formData.append('description', description)
+              formData.append('creator', user)
+              formData.append('public', publicGroup)
+              postingService.postGroup(formData).then(router.push('/'))
+            }
+          })
+        } else {
           const formData = new FormData()
-          formData.append('pic', result, result.name)
-          // console.log(formData.entries())
           formData.append('name', name)
           formData.append('description', description)
           formData.append('creator', user)
           formData.append('public', publicGroup)
           postingService.postGroup(formData).then(router.push('/'))
         }
-      })
+      }
     },
     head() {
       return {

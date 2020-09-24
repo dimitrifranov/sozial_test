@@ -95,10 +95,10 @@ export default {
       this.activeTab = menuTab
       this.$store.dispatch('posts/deletePosts').then(this.loadMore())
     },
-    swipeRight() {
+    swipeLeft() {
       if (this.isActive('users')) this.setActive('groups')
     },
-    swipeLeft() {
+    swipeRight() {
       if (this.isActive('groups')) this.setActive('users')
     },
     search($state) {
@@ -110,26 +110,28 @@ export default {
       this.$router.push('/groups/' + group)
     },
     loadMore($state) {
-      this.loading = true
-      if (this.isActive('groups')) {
-        this.$store
-          .dispatch('search/searchGroups', {
-            text: this.search_text
-          })
-          .then((this.loading = false))
-      } else {
-        this.$store
-          .dispatch('search/searchUsers', {
-            text: this.search_text
-          })
-          .then((this.loading = false))
+      if (this.search_text) {
+        this.loading = true
+        if (this.isActive('groups')) {
+          this.$store
+            .dispatch('search/searchGroups', {
+              text: this.search_text
+            })
+            .then((this.loading = false))
+        } else {
+          this.$store
+            .dispatch('search/searchUsers', {
+              text: this.search_text
+            })
+            .then((this.loading = false))
+        }
+        // .catch((e) => {
+        //   this.error({
+        //     statusCode: 503,
+        //     message: 'Unable to get results'
+        //   })
+        // })
       }
-      // .catch((e) => {
-      //   this.error({
-      //     statusCode: 503,
-      //     message: 'Unable to get results'
-      //   })
-      // })
     }
   },
   head() {

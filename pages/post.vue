@@ -7,7 +7,18 @@
       <h1 class="text-white font-light mb-6">
         Neuer Beitrag:
       </h1>
-      <baseInput v-model="title" value="title" label="Titel:" />
+      <baseInput
+        v-model="title"
+        value="title"
+        label="Titel:"
+        @blur="$v.title.$touch()"
+      />
+      <p
+        v-if="!$v.title.required && $v.title.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Bitte Titel angeben
+      </p>
       <baseButton @clicked="show = true">
         Gruppe wählen
       </baseButton>
@@ -36,8 +47,14 @@
         type="file"
         accept="image/*"
         @change="uploadImage($event)"
+        @blur="$v.file.$touch()"
       />
-
+      <p
+        v-if="!$v.file.required && $v.file.$error"
+        class="text-xs text-error mt-1 font-light mb-4"
+      >
+        Bitte Bild hinzufügen
+      </p>
       <baseButton type="submit">
         Post
       </baseButton>
@@ -46,6 +63,8 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
 import Compressor from 'compressorjs'
 import groupSearch from '@/components/groupSearch.vue'
 export default {
@@ -53,6 +72,7 @@ export default {
   components: {
     groupSearch
   },
+  mixins: [validationMixin],
   data() {
     return {
       coordinates: {
@@ -65,6 +85,14 @@ export default {
       file: null,
       title: '',
       show: false
+    }
+  },
+  validations: {
+    title: {
+      required
+    },
+    file: {
+      required
     }
   },
   methods: {
@@ -119,31 +147,34 @@ export default {
     //   this.file = event.target.files[0]
     // },
     postData() {
-      this.crop()
-      const title = this.title
-      const group = this.group
-      const user = this.$auth.user.pk
-      const router = this.$router
-      const store = this.$store
-      // eslint-disable-next-line no-new
-      new Compressor(this.dataURItoBlob(this.file), {
-        quality: 0.6,
-        strict: true,
-        maxWidth: 1000,
-        maxHeight: 1000,
-        convertSize: 0,
-        success(result) {
-          const formData = new FormData()
-          formData.append('src', result, result.name + '.jp2')
-          // console.log(formData.entries())
-          formData.append('title', title)
-          formData.append('group', group)
-          formData.append('creator', user)
-          store
-            .dispatch('posts/postPost', { group, data: formData })
-            .then(router.push('/'))
-        }
-      })
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.crop()
+        const title = this.title
+        const group = this.group
+        const user = this.$auth.user.pk
+        const router = this.$router
+        const store = this.$store
+        // eslint-disable-next-line no-new
+        new Compressor(this.dataURItoBlob(this.file), {
+          quality: 0.6,
+          strict: true,
+          maxWidth: 1000,
+          maxHeight: 1000,
+          convertSize: 0,
+          success(result) {
+            const formData = new FormData()
+            formData.append('src', result, result.name + '.jp2')
+            // console.log(formData.entries())
+            formData.append('title', title)
+            formData.append('group', group)
+            formData.append('creator', user)
+            store
+              .dispatch('posts/postPost', { group, data: formData })
+              .then(router.push('/'))
+          }
+        })
+      }
     },
     head() {
       return {

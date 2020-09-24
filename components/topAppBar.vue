@@ -1,9 +1,20 @@
 <template>
   <div>
     <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg">
-      <nuxt-link to="/users/me" class="center-items float-left  h-full w-12">
+      <nuxt-link
+        v-if="home"
+        to="/users/me"
+        class="center-items float-left  h-full w-12"
+      >
         <img :src="profilepicture" alt="icon" class="w-8 h-8" />
       </nuxt-link>
+      <button
+        v-else
+        class="center-items float-left  h-full w-12"
+        @click="$router.go(-1)"
+      >
+        <arrow-left-icon fillColor="#ffffff" />
+      </button>
       <div class="float-left  h-full ml-8 flex items-center">
         <h1 class="text-2xl text-white">
           SOZIAL.IO
@@ -92,6 +103,11 @@ export default {
           return this.$auth.user.profile_picture
         else return '/user.png'
       } else return this.$icon(144)
+    },
+    home() {
+      return (
+        this.$route.name === 'index' || this.$route.name === 'notifications'
+      )
     }
   },
 

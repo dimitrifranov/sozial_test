@@ -5,7 +5,7 @@
     class="w-screen h-screen flex flex-col items-center"
   >
     <section
-      class="flex mt-8 justify-around fixed h-12 w-screen max-w-md bg-grey1"
+      class="flex mt-12 justify-around fixed h-8 w-screen max-w-md bg-grey1"
     >
       <button
         class="text-white font-light w-full"

@@ -10,6 +10,7 @@ import Magnify from 'vue-material-design-icons/Magnify.vue'
 import DotsVertical from 'vue-material-design-icons/DotsVertical.vue'
 import BellOutline from 'vue-material-design-icons/BellOutline.vue'
 import CogOutline from 'vue-material-design-icons/CogOutline.vue'
+import ArrowLeft from 'vue-material-design-icons/ArrowLeft.vue'
 
 export default function materialIcons() {
   Vue.component('share-icon', ShareIcon)
@@ -22,4 +23,5 @@ export default function materialIcons() {
   Vue.component('dots-vertical-icon', DotsVertical)
   Vue.component('bell-outline-icon', BellOutline)
   Vue.component('cog-outline-icon', CogOutline)
+  Vue.component('arrow-left-icon', ArrowLeft)
 }
