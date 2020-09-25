@@ -131,7 +131,6 @@ export default {
             })
           })
       } else if (this.isActive('groups')) {
-        console.log(this.group)
         this.$store
           .dispatch('posts/fetchPosts', {
             group: this.group,

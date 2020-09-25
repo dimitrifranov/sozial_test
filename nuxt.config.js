@@ -1,7 +1,7 @@
 export default {
   mode: 'universal',
   // todo CHANGE
-  debug: true,
+  debug: false,
   /*
    ** Headers of the page
    */

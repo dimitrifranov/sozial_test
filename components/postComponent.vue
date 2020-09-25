@@ -167,7 +167,6 @@ export default {
         const like = this.post.likes.find(
           (obj) => obj.liker === this.$auth.user.pk
         )
-        console.log(like)
         this.$store.dispatch('posts/unlikePost', {
           group: this.post.group,
           post: this.post.id,

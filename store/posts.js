@@ -39,11 +39,10 @@ export const mutations = {
   },
   DEL_LIKE(state, data) {
     if (state.posts.length) {
-      const post = state.posts.find((obj) => obj.id === data.post)
-      const likes = post.likes.filter((obj) => {
-        return obj.id !== data.like
-      })
-      console.log(likes.length)
+      // const post = state.posts.find((obj) => obj.id === data.post)
+      // const likes = post.likes.filter((obj) => {
+      //   return obj.id !== data.like
+      // })
     }
   }
 }
