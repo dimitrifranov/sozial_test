@@ -31,6 +31,18 @@ export default {
     return {
       following
     }
+  },
+  head() {
+    return {
+      title: 'folgst',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Personen, denen du folgst'
+        }
+      ]
+    }
   }
 }
 </script>

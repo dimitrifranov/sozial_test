@@ -84,11 +84,12 @@ export default {
   // },
   pwa: {
     manifest: {
-      name: 'Sozial.io - social in school',
-      short_name: 'Sozial.io',
+      name: 'Tschau - das sichere Soziale Netzwerk',
+      short_name: 'Tschau',
       lang: 'de',
       background_color: '#121212',
-      description: 'Das beste Soziale Netzwerk.',
+      description:
+        'Tschau.app ist ein sicheres soziales Netzwerk. Erstelle Gruppen mit deinen Freunden und teile tolle Bilder.',
       meta: {
         mobileAppIOS: true,
         theme_color: '#FFFFFF',

@@ -36,6 +36,18 @@ export default {
       following,
       user
     }
+  },
+  head() {
+    return {
+      title: this.user.username + ' folgt',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Personen, denen ' + this.user.username + ' folgt'
+        }
+      ]
+    }
   }
 }
 </script>
