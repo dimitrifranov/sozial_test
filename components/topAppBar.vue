@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg z-20">
+    <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg z-30">
       <nuxt-link
         v-if="home"
         to="/users/me"
@@ -16,8 +16,14 @@
         <arrow-left-icon fillColor="#ffffff" />
       </button>
       <div class="float-left  h-full ml-8 flex items-center">
-        <h1 class="text-2xl text-white">
-          SOZIAL.IO
+        <h1 class="text-xl flex text-white">
+          <p>
+            TSCHAU
+          </p>
+          <p />
+          <p class="text-blue">
+            .app
+          </p>
         </h1>
       </div>
       <button
@@ -67,7 +73,7 @@
       <ul
         v-show="opened"
         v-click-outside="close"
-        class="items-center w-2/3 max-w-xs z-20 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
+        class="items-center w-2/3 max-w-xs z-30 bg-grey3 mt-4 mr-4 text-white right-0 fixed flex flex-col"
       >
         <button class="pb-1 hover:underline" @click="logout()">
           Abmelden
@@ -75,9 +81,9 @@
         <nuxt-link class="pb-1 hover:underline" to="/settings">
           Einstellungen
         </nuxt-link>
-        <button class="pb-1 hover:underline" @click="subscribe()">
+        <!-- <button class="pb-1 hover:underline" @click="subscribe()">
           Benachrichtigungen erlauben
-        </button>
+        </button> -->
         <nuxt-link class="pb-1 hover:underline" to="/info">
           Info
         </nuxt-link>
@@ -131,12 +137,12 @@ export default {
     logout() {
       this.$auth.logout()
       this.opened = false
-    },
-    subscribe() {
-      this.$OneSignal.push(() => {
-        this.$OneSignal.showNativePrompt()
-      })
     }
+    // subscribe() {
+    //   this.$OneSignal.push(() => {
+    //     this.$OneSignal.showNativePrompt()
+    //   })
+    // }
   }
 }
 </script>

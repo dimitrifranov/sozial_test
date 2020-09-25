@@ -1,7 +1,7 @@
 <template>
   <div class="center-items">
     <div class="h-screen max-w-md">
-      <div class="clearfix">
+      <div class="clearfix relative">
         <h1 class="text-2xl text-white text-center font-light pt-20">
           {{ group.name }}
         </h1>
@@ -16,7 +16,7 @@
         <baseButton
           v-if="myprofile"
           class="text-xs hover:underline ml-1"
-          buttonClass="h-full float-right"
+          buttonClass="absolute z-20 h-16 right-0"
           @clicked="invite"
         >
           Freunde<br />

@@ -45,22 +45,30 @@
               </div>
             </div>
             <div class="center-items flex flex-row items-baseline">
-              <div class="flex flex-col items-center">
+              <nuxt-link
+                to="following"
+                append
+                class="flex flex-col items-center"
+              >
                 <p class="text-2xs font-light">
                   folgt
                 </p>
                 <p class="-mt-1 text-lg">
                   {{ user.following.length }}
                 </p>
-              </div>
-              <div class="flex flex-col items-center pl-2">
+              </nuxt-link>
+              <nuxt-link
+                to="followers"
+                append
+                class="flex flex-col items-center pl-2"
+              >
                 <p class="text-2xs font-light">
                   folgen
                 </p>
                 <p class="-mt-1 text-lg">
                   {{ user.follower.length }}
                 </p>
-              </div>
+              </nuxt-link>
             </div>
           </div>
         </div>

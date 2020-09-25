@@ -2,7 +2,7 @@
   <div>
     <button
       class="text-white flex w-40 justify-start mb-4"
-      @click="$emit('clicked', group.id)"
+      @click="$emit('clicked', { id: group.id, name: group.name })"
     >
       <img :src="group.pic" class="h-8 w-8 border border-white mr-4" />
       <div>

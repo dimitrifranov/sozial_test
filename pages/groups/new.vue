@@ -177,7 +177,9 @@ export default {
           formData.append('description', description)
           formData.append('creator', user)
           formData.append('public', publicGroup)
-          postingService.postGroup(formData).then(router.push('/'))
+          postingService.postGroup(formData).then((res) => {
+            router.push('/groups/' + res.data.id)
+          })
         }
       }
     },

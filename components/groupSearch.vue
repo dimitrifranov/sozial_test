@@ -73,9 +73,9 @@ export default {
         })
         .then((this.loading = false))
     },
-    groupChosen(id) {
+    groupChosen(data) {
       this.$store.dispatch('search/deleteResults').then(() => {
-        this.$emit('close', id)
+        this.$emit('close', data)
       })
     }
   }

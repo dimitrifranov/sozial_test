@@ -19,9 +19,21 @@
       >
         Bitte Titel angeben
       </p>
+      <!-- <p class="text-white text-lg">@{{ group_name }}</p>
       <baseButton @clicked="show = true">
         Gruppe wählen
-      </baseButton>
+      </baseButton> -->
+      <section class="flex items-center justify-around w-full max-w-md">
+        <nuxt-link
+          :to="groupLink"
+          class="text-white font-light hover:underline text-lg pb-4"
+        >
+          @{{ group_name }}
+        </nuxt-link>
+        <baseButton @clicked="show = true">
+          andere Gruppe wählen
+        </baseButton>
+      </section>
       <groupSearch v-if="show" @close="setGroup($event)" />
       <cropper
         v-show="file"
@@ -82,6 +94,7 @@ export default {
         top: 0
       },
       group: 1,
+      group_name: 'alles',
       file: null,
       title: '',
       show: false
@@ -95,10 +108,16 @@ export default {
       required
     }
   },
+  computed: {
+    groupLink() {
+      return '/groups/' + this.group
+    }
+  },
   methods: {
-    setGroup(id) {
+    setGroup(data) {
       this.show = false
-      this.group = id
+      this.group = data.id
+      this.group_name = data.name
     },
     crop() {
       const { coordinates, canvas } = this.$refs.cropper.getResult()

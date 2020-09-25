@@ -37,7 +37,8 @@ module.exports = {
     textColor: {
       error: '#cf6679',
       white: '#ffffff',
-      grey: '#121212'
+      grey: '#121212',
+      blue: '#0099cc'
     }
   },
   variants: {},

@@ -93,6 +93,7 @@ export default {
     return {
       size: 32,
       just_liked: false,
+      just_disliked: false,
       state_likes: 0,
       opened: false
     }
@@ -117,6 +118,7 @@ export default {
       else return false
     },
     liked() {
+      if (this.just_dislikes) return false
       if (this.$auth.loggedIn) {
         if (this.post.likes.length < this.state_likes) return true
         else if (this.post.likes[0]) {
@@ -147,6 +149,7 @@ export default {
   methods: {
     likePost() {
       if (!this.liked && this.$auth.loggedIn) {
+        this.just_disliked = false
         this.just_liked = true
         this.state_likes = this.likes
         this.state_likes++
@@ -159,6 +162,8 @@ export default {
           }
         })
       } else if (this.$auth.loggedIn) {
+        this.just_disliked = true
+        this.state_likes -= 1
         const like = this.post.likes.find(
           (obj) => obj.liker === this.$auth.user.pk
         )
@@ -169,7 +174,7 @@ export default {
           like: like.id
         })
       } else {
-        this.$router.push('/register')
+        this.$router.push('/login')
       }
     },
     toggle() {

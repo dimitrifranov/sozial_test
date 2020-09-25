@@ -106,8 +106,8 @@ export default {
         this.loadMore()
       })
     },
-    pushToGroup(group) {
-      this.$router.push('/groups/' + group)
+    pushToGroup(data) {
+      this.$router.push('/groups/' + data.id)
     },
     loadMore($state) {
       if (this.search_text) {

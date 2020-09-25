@@ -10,34 +10,22 @@
           Kommentieren
         </baseButton>
       </section>
-      <div
+      <comment
         v-for="(every_comment, id) in comments"
         :key="id"
         class="w-full max-w-xs"
-      >
-        <div class="flex flex-row">
-          <img
-            :src="every_comment.profile_pic"
-            class="h-8 w-8 border border-white mr-4"
-          />
-          <div class="flex flex-col mb-3 h-8">
-            <commentUser :comment="every_comment" />
-            <p class="text-white text-xs">
-              {{ every_comment.comment_content }}
-            </p>
-          </div>
-        </div>
-      </div>
+        :comment="every_comment"
+      />
     </form>
   </div>
 </template>
 
 <script>
 import PostService from '@/services/PostService.js'
-import commentUser from '@/components/commentUser.vue'
+import comment from '@/components/comment.vue'
 export default {
   components: {
-    commentUser
+    comment
   },
   props: {
     post: {
