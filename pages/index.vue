@@ -40,7 +40,9 @@
         v-if="$auth.loggedIn && isActive('groups')"
         class="flex items-center justify-around w-full max-w-md"
       >
-        <h2 class="text-white font-light text-lg pb-4">@{{ groupName }}</h2>
+        <h2 v-if="groupName" class="text-white font-light text-lg pb-4">
+          @{{ groupName }}
+        </h2>
         <baseButton @clicked="show = true">
           andere Gruppe wählen
         </baseButton>
@@ -89,10 +91,10 @@ export default {
   },
 
   methods: {
-    setGroup(id) {
+    setGroup(group) {
       this.show = false
-      if (id) {
-        this.group = id
+      if (group) {
+        this.group = group.id
         this.$store.dispatch('posts/deletePosts').then(this.loadMore())
       }
     },
@@ -129,6 +131,7 @@ export default {
             })
           })
       } else if (this.isActive('groups')) {
+        console.log(this.group)
         this.$store
           .dispatch('posts/fetchPosts', {
             group: this.group,

@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen flex flex-col items-center pt-16">
     <h2 class="text-white text-lg pb-4">
-      Personen, denen {{ user.username }} folgst
+      Personen, denen {{ user.username }} folgt
     </h2>
     <userPeek v-for="(user, id) in following" :key="id" :user="user" />
   </div>

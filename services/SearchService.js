@@ -16,6 +16,10 @@ export default {
   },
   getGroups(data, next) {
     if (next) return apiClient.get(next)
+    else if (data.user)
+      return apiClient.get('/groups/?search=' + data.text, {
+        params: { user: data.user }
+      })
     else return apiClient.get('/groups/?search=' + data.text)
   }
 }

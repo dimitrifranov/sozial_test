@@ -55,12 +55,10 @@ export const actions = {
   },
   fetchPosts({ commit, state }, data) {
     commit('SET_START', false)
-    return PostService.getPosts(data.group, data.user, state.next).then(
-      (response) => {
-        commit('SET_NEXT', response.data.next)
-        commit('SET_POSTS', response.data)
-      }
-    )
+    return PostService.getPosts(data).then((response) => {
+      commit('SET_NEXT', response.data.next)
+      commit('SET_POSTS', response.data)
+    })
   },
   fetchFeed({ commit, state }, user) {
     commit('SET_START', false)

@@ -15,8 +15,8 @@ export const mutations = {
   }
 }
 export const actions = {
-  fetchGroups({ commit }) {
-    return GroupService.getGroups().then((response) => {
+  fetchGroups({ commit }, user) {
+    return GroupService.getGroups(user).then((response) => {
       commit('SET_GROUPS', response.data)
     })
   },

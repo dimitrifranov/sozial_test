@@ -67,11 +67,20 @@ export default {
     },
     loadMore($state) {
       this.loading = true
-      this.$store
-        .dispatch('search/searchGroups', {
-          text: this.search_text
-        })
-        .then((this.loading = false))
+      if (this.$auth.loggedIn) {
+        this.$store
+          .dispatch('search/searchGroups', {
+            text: this.search_text,
+            user: this.$auth.user.pk
+          })
+          .then((this.loading = false))
+      } else {
+        this.$store
+          .dispatch('search/searchGroups', {
+            text: this.search_text
+          })
+          .then((this.loading = false))
+      }
     },
     groupChosen(data) {
       this.$store.dispatch('search/deleteResults').then(() => {
