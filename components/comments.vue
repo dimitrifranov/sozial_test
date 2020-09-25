@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     postComment() {
-      if (!this.$auth.loggedIn) this.$router.push('/register')
+      if (!this.$auth.loggedIn) this.$router.push('/login')
       else {
         PostService.commentPost({
           group: 1,

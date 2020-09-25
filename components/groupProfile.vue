@@ -71,15 +71,6 @@
                   {{ group.group_members.length }}
                 </p>
               </div>
-              <!-- <baseButton
-                v-if="myprofile"
-                class="text-xs hover:underline ml-1"
-                buttonClass="h-full"
-                @clicked="invite"
-              >
-                Freunde<br />
-                einladen
-              </baseButton> -->
             </div>
           </div>
         </div>
@@ -194,18 +185,28 @@ export default {
     loadMore($state) {
       this.loading = true
       this.start = false
-      PostService.getPosts(this.group.id, this.$auth.user.pk, this.next)
-        .then((response) => {
-          this.next = response.data.next
-          this.posts.push(...response.data.results)
+      if (this.$auth.loggedIn) {
+        PostService.getPosts({
+          group: this.group.id,
+          user: this.$auth.user.pk,
+          next: this.next
         })
-        .then((this.loading = false))
-        .catch((e) => {
-          this.error({
-            statusCode: 503,
-            message: 'Unable to get group'
+          .then((response) => {
+            this.next = response.data.next
+            this.posts.push(...response.data.results)
           })
+          .then((this.loading = false))
+      } else {
+        PostService.getPosts({
+          group: this.group.id,
+          next: this.next
         })
+          .then((response) => {
+            this.next = response.data.next
+            this.posts.push(...response.data.results)
+          })
+          .then((this.loading = false))
+      }
     },
     action() {
       if (this.myprofile) this.$router.push(this.group.id + '/edit')

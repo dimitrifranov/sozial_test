@@ -15,7 +15,7 @@
           </nuxt-link>
           <nuxt-link
             :to="group_link"
-            class="text-white font-light text-opacity-50 ml-3 -mt-2 text-2xs"
+            class="text-white font-light ml-3 -mt-2 text-2xs"
           >
             @{{ post.group_name }}
           </nuxt-link>

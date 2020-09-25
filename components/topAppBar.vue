@@ -21,7 +21,7 @@
             TSCHAU
           </p>
           <p />
-          <p class="text-blue">
+          <p class="opacity-75">
             .app
           </p>
         </h1>
