@@ -35,7 +35,7 @@
           <img :src="profilepicture" :width="profile_width" />
           <div class="text-white w-full grid grid-cols-3 profile-info z-20 ">
             <div class="center-items">
-              <p class="text-center align-middle">
+              <p class="text-center text-xs align-middle">
                 {{ group.description }}
               </p>
             </div>

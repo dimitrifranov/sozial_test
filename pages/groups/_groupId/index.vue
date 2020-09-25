@@ -59,19 +59,20 @@ export default {
         login_first: false,
         group: groupRequest.data
       }
-    }
-    const groupRequest = await $axios
-      .get($config.apiUrl + '/groups/' + route.params.groupId + '/')
-      .catch((e) => {
-        error({
-          statusCode: 503,
-          message: 'Unable to get this Group'
+    } else {
+      const groupRequest = await $axios
+        .get($config.apiUrl + '/groups/' + route.params.groupId + '/')
+        .catch((e) => {
+          error({
+            statusCode: 503,
+            message: 'Unable to get this Group'
+          })
         })
-      })
 
-    return {
-      login_first: false,
-      group: groupRequest.data
+      return {
+        login_first: false,
+        group: groupRequest.data
+      }
     }
   },
   mounted() {

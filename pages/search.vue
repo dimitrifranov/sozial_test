@@ -112,7 +112,14 @@ export default {
     loadMore($state) {
       if (this.search_text) {
         this.loading = true
-        if (this.isActive('groups')) {
+        if (this.isActive('groups') && this.$auth.loggedIn) {
+          this.$store
+            .dispatch('search/searchGroups', {
+              text: this.search_text,
+              user: this.$auth.user.pk
+            })
+            .then((this.loading = false))
+        } else if (this.isActive('groups')) {
           this.$store
             .dispatch('search/searchGroups', {
               text: this.search_text

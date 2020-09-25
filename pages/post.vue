@@ -176,7 +176,7 @@ export default {
         const store = this.$store
         // eslint-disable-next-line no-new
         new Compressor(this.dataURItoBlob(this.file), {
-          quality: 0.6,
+          quality: 0.8,
           strict: true,
           maxWidth: 1000,
           maxHeight: 1000,

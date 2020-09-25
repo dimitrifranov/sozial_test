@@ -128,10 +128,10 @@ export default {
         this.crop()
         // eslint-disable-next-line no-new
         await new Compressor(this.dataURItoBlob(this.file), {
-          quality: 0.2,
+          quality: 0.4,
           strict: true,
-          maxWidth: 150,
-          maxHeight: 150,
+          maxWidth: 200,
+          maxHeight: 200,
           convertSize: 0,
           async success(result) {
             const formData = new FormData()
