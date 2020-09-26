@@ -37,6 +37,12 @@
         </nuxt-link>
       </div>
       <div
+        v-if="
+          isActive('index') ||
+            isActive('groups-new') ||
+            isActive('post') ||
+            isActive('notifications')
+        "
         class="block bg-white h-px slider w-1/3"
         :style="{ marginLeft: sliderMargin }"
       />
