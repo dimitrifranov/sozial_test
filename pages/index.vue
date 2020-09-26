@@ -6,29 +6,31 @@
   >
     <section
       v-if="$auth.loggedIn"
-      class="flex mt-12 justify-around fixed h-8 w-screen max-w-md bg-grey1"
+      class="flex flex-col mt-12 justify-between fixed h-8 w-screen max-w-md bg-grey1 shadow-lg"
     >
-      <button
-        class="text-white font-light w-full"
-        :class="{ active: isActive('feed') }"
-        @click="setActive('feed')"
-      >
-        Feed
-      </button>
-      <button
-        class="text-white font-light w-full"
-        :class="{ active: isActive('groups') }"
-        @click="setActive('groups')"
-      >
-        Gruppen
-      </button>
-      <button
-        class="text-white font-light w-full"
-        :class="{ active: isActive('all') }"
-        @click="setActive('all')"
-      >
-        Alles
-      </button>
+      <div class="flex justify-around h-full w-screen max-w-md">
+        <button class="text-white font-light w-full" @click="setActive('feed')">
+          Feed
+        </button>
+        <button
+          class="text-white font-light w-full"
+          @click="setActive('groups')"
+        >
+          Gruppen
+        </button>
+        <button
+          class="text-white font-light w-full"
+          :class="{ active: isActive('all') }"
+          @click="setActive('all')"
+        >
+          Alles
+        </button>
+      </div>
+
+      <div
+        class="block bg-white h-px slider w-1/3 right-0 "
+        :style="{ marginLeft: sliderMargin }"
+      />
     </section>
     <section
       v-infinite-scroll="loadMore"
@@ -82,6 +84,11 @@ export default {
     },
     finish() {
       return !this.start && !this.next
+    },
+    sliderMargin() {
+      if (this.isActive('feed')) return '0%'
+      else if (this.isActive('groups')) return '33%'
+      else return '66%'
     },
     ...mapState({
       posts: (state) => state.posts.posts,
@@ -172,7 +179,7 @@ export default {
 </script>
 
 <style scoped>
-.active {
-  border-bottom: 1px solid white;
+.slider {
+  transition: margin-left 0.2s ease-in-out;
 }
 </style>
