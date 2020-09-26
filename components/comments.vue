@@ -48,7 +48,7 @@ export default {
       if (!this.$auth.loggedIn) this.$router.push('/login')
       else {
         PostService.commentPost({
-          group: 1,
+          group: this.$route.params.groupId,
           post: this.post,
           data: {
             comment_content: this.comment,
@@ -59,6 +59,7 @@ export default {
         })
           .then((response) => {
             this.comments.push(response.data)
+            this.comment = ''
           })
           .catch((e) => {
             this.error({
