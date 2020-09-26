@@ -45,7 +45,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Personen, die' + this.user.username + 'folgen'
+          content: 'Personen, die ' + this.user.username + ' folgen'
         }
       ]
     }
