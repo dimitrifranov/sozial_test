@@ -1,9 +1,9 @@
 <template>
   <div class="center-items">
     <div class="h-screen w-screen max-w-md felx felx-col items-center pt-16">
-      <h1 class="text-white text-xl">
+      <h2 class="text-white text-xl">
         INFO
-      </h1>
+      </h2>
       <!-- <h2 class="text-white">
         About
       </h2> -->

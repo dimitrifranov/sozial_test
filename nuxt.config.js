@@ -1,7 +1,7 @@
 export default {
   mode: 'universal',
   // todo CHANGE
-  debug: false,
+  debug: process.env.DEBUG,
   /*
    ** Headers of the page
    */
@@ -95,7 +95,11 @@ export default {
         mobileAppIOS: true,
         theme_color: '#FFFFFF',
         lang: 'de',
-        nativeUI: true
+        nativeUI: true,
+        name: 'Tschau',
+        author: 'Dimitri Franov',
+        description:
+          'Tschau.app ist ein sicheres soziales Netzwerk. Erstelle Gruppen mit deinen Freunden und teile tolle Bilder.'
       },
       shortcuts: [
         {
@@ -103,6 +107,14 @@ export default {
           short_name: 'Posten',
           description: 'Teile deine Bilder mit Freunden',
           url: '/post/',
+          icons: [{ src: '/icon.png', sizes: '192x192' }]
+        },
+        {
+          name: 'Eine Gruppe erstellen',
+          short_name: 'Gruppe',
+          description:
+            'Erstelle eine neue Gruppe um Bilder nur mit deinen Freunden zu teilen.',
+          url: '/groups/new/',
           icons: [{ src: '/icon.png', sizes: '192x192' }]
         }
       ]
@@ -145,7 +157,7 @@ export default {
   },
   'google-gtag': { id: 'UA-147350224-2' },
   publicRuntimeConfig: {
-    baseUrl: process.env.BASE_URL || 'https://social-tests.herokuapp.com',
+    baseUrl: process.env.BASE_URL || 'https://tschau.app',
     apiUrl: process.env.API_URL
   },
   privateRuntimeConfig: {

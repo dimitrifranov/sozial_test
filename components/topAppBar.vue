@@ -17,10 +17,7 @@
       </button>
       <div class="float-left  h-full ml-8 flex items-center">
         <h1 class="text-xl flex text-white">
-          <p>
-            TSCHAU
-          </p>
-          <p />
+          TSCHAU
           <p class="opacity-75">
             .app
           </p>

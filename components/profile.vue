@@ -1,9 +1,9 @@
 <template>
   <div class="center-items">
     <div class="h-screen max-w-md">
-      <h1 class="text-2xl text-white text-center font-light pt-20">
+      <h2 class="text-2xl text-white text-center font-light pt-20">
         {{ user.username }}
-      </h1>
+      </h2>
 
       <div class="w-screen max-w-md relative pt-3">
         <img
@@ -17,9 +17,9 @@
           <img :src="profilepicture" :width="profile_width" />
           <div class="text-white w-full grid grid-cols-3 profile-info z-20 ">
             <div class="center-items">
-              <p class="text-center align-middle text-xs">
+              <h3 class="text-center align-middle text-xs">
                 {{ user.bio }}
-              </p>
+              </h3>
             </div>
             <div class="center-items ">
               <button

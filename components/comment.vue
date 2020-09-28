@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <nuxt-link :to="creator_link" class="flex flex-row">
       <img
         :src="comment.profile_pic"
@@ -14,7 +14,7 @@
         </p>
       </div>
     </nuxt-link>
-  </div>
+  </section>
 </template>
 
 <script>

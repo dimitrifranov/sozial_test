@@ -4,9 +4,9 @@
       class=" w-full max-w-xs h-screen center-items flex-col"
       @submit.prevent="postData"
     >
-      <h1 class="text-white font-light mb-6">
+      <h2 class="text-white font-light mb-6">
         Neue Gruppe:
-      </h1>
+      </h2>
       <baseInput
         v-model="name"
         value="name"

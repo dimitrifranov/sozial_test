@@ -4,14 +4,14 @@
       :src="notification.profile_pic"
       class="h-8 w-8 border border-white mr-4"
     />
-    <div>
+    <section>
       <p>
         {{ notification.content }}
       </p>
       <p class="text-xs -mt-1">
         {{ date }}
       </p>
-    </div>
+    </section>
   </nuxt-link>
 </template>
 

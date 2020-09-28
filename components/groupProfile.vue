@@ -2,15 +2,15 @@
   <div class="center-items">
     <div class="h-screen max-w-md">
       <div class="clearfix relative">
-        <h1 class="text-2xl text-white text-center font-light pt-20">
+        <h2 class="text-2xl text-white text-center font-light pt-20">
           {{ group.name }}
-        </h1>
+        </h2>
         <nuxt-link class="center-items w-full" :to="creator_link">
-          <h2
+          <h3
             class="text-l text-white text-opacity-75 text-center font-light hover:underline"
           >
             erstellt von {{ group.creator_name }}
-          </h2>
+          </h3>
         </nuxt-link>
 
         <baseButton
@@ -35,9 +35,9 @@
           <img :src="profilepicture" :width="profile_width" />
           <div class="text-white w-full grid grid-cols-3 profile-info z-20 ">
             <div class="center-items">
-              <p class="text-center text-xs align-middle">
+              <section class="text-center text-xs align-middle">
                 {{ group.description }}
-              </p>
+              </section>
             </div>
             <div class="center-items ">
               <button

@@ -53,9 +53,9 @@
       />
       <div class=" h-8 w-full clearfix">
         <div class="h-full float-left center-items ml-3 text-xs">
-          <p class="text-white">
+          <h3 class="text-white">
             {{ post.title }}
-          </p>
+          </h3>
         </div>
 
         <div class="h-full float-right center-items w-8">
