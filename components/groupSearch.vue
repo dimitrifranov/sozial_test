@@ -9,7 +9,7 @@
       >
         X
       </baseButton>
-      <div class=" w-full max-w-xs center-items flex-col">
+      <section class=" w-full max-w-xs center-items flex-col">
         <baseInput
           v-model="search_text"
           inputClass="sticky"
@@ -17,8 +17,8 @@
           label="Suchen: "
           @input="search"
         />
-      </div>
-      <div
+      </section>
+      <section
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="autoLoadDisabled"
         infinite-scroll-distance="10"
@@ -30,7 +30,7 @@
           :group="result"
           @clicked="groupChosen($event)"
         />
-      </div>
+      </section>
     </div>
   </div>
 </template>
