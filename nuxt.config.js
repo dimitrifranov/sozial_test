@@ -61,7 +61,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/onesignal',
     '@nuxtjs/pwa',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/google-gtag'
   ],
   /*
    ** Axios module configuration
@@ -142,6 +143,7 @@ export default {
       }
     }
   },
+  'google-gtag': { id: 'UA-147350224-2' },
   publicRuntimeConfig: {
     baseUrl: process.env.BASE_URL || 'https://social-tests.herokuapp.com',
     apiUrl: process.env.API_URL

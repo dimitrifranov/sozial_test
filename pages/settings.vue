@@ -39,8 +39,8 @@ export default {
         like_notifs: this.$auth.user.like_notifs,
         comments_notifs: this.$auth.user.comments_notifs,
         pk: this.$auth.user.pk,
-        username: this.$auth.user.username,
-        password: this.$auth.user.password
+        username: this.$auth.user.username
+        // password: this.$auth.user.password
       }
     }
   },
