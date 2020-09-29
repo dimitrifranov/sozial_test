@@ -62,7 +62,7 @@
     </header>
     <section
       v-if="$nuxt.isOffline"
-      class="text-error w-full fixed pt-2 text-center z-10"
+      class="text-error w-full fixed text-2xs text-center z-30"
     >
       Keine Internetverbindung!
     </section>
