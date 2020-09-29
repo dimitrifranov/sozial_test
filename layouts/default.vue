@@ -44,15 +44,8 @@ export default {
   },
   head() {
     return {
-      title: 'Website',
-      titleTemplate: '%s - sozial_test',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Das beste soziale netzwerk'
-        }
-      ]
+      title: 'App',
+      titleTemplate: '%s | Tschau'
     }
   }
 }
