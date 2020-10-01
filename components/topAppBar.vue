@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="w-screen h-12 clearfix bg-grey1 fixed shadow-lg z-30">
+    <header class="w-screen h-12 clearfix bg-grey1 fixed z-30">
       <nuxt-link
         v-if="home"
         to="/users/me"

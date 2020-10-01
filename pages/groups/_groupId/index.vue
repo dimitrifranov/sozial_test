@@ -17,16 +17,18 @@ export default {
 
     if (!$auth.loggedIn && secret) {
       return { login_first: true, group: {} }
-    } else if (secret) {
+    } else if (secret && $auth.loggedIn) {
       await GroupService.joinGroup({
         group: route.params.groupId,
         user: $auth.user.pk,
         secret
       }).then((res) => {
         if (res.data.id) {
+          console.log(res)
           const groupRequest = $axios
             .get($config.apiUrl + '/groups/' + route.params.groupId + '/')
             .catch((e) => {
+              console.log(e)
               error({
                 statusCode: 503,
                 message: 'Unable to get this Group'
