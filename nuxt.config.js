@@ -118,6 +118,17 @@ export default {
           icons: [{ src: '/icon.png', sizes: '192x192' }]
         }
       ]
+    },
+    workbox: {
+      //   config: { debug: true },
+      offlineAnalytics: true
+      //   preCaching: ['/', '/index.html', '/users/me.html', '/notifications.html'],
+      //   cacheOptions: {
+      //     cacheId: '<npm package name> || nuxt',
+      //     directoryIndex: '/',
+      //     revision: null
+      //   },
+      //   offlinePage: 'offline.html'
     }
   },
   auth: {
