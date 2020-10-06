@@ -1,4 +1,3 @@
-import SearchService from '@/services/SearchService.js'
 export const state = () => ({
   results: [],
   next: null
@@ -17,10 +16,18 @@ export const mutations = {
 export const actions = {
   searchUsers({ commit, state }, data) {
     if (state.results.length === 0 || state.next) {
-      return SearchService.getUsers(data, state.next).then((response) => {
-        commit('SET_NEXT', response.data.next)
-        commit('SET_RESULTS', response.data)
-      })
+      if (state.next)
+        return this.$axios.get(state.next).then((response) => {
+          commit('SET_NEXT', response.data.next)
+          commit('SET_RESULTS', response.data)
+        })
+      else
+        return this.$axios
+          .get('/users/?search=' + data.text)
+          .then((response) => {
+            commit('SET_NEXT', response.data.next)
+            commit('SET_RESULTS', response.data)
+          })
     }
   },
   deleteResults({ commit }) {
@@ -28,10 +35,27 @@ export const actions = {
   },
   searchGroups({ commit, state }, data) {
     if (state.results.length === 0 || state.next) {
-      return SearchService.getGroups(data, state.next).then((response) => {
-        commit('SET_NEXT', response.data.next)
-        commit('SET_RESULTS', response.data)
-      })
+      if (state.next)
+        return this.$axios.get(state.next).then((response) => {
+          commit('SET_NEXT', response.data.next)
+          commit('SET_RESULTS', response.data)
+        })
+      else if (data.user)
+        return this.$axios
+          .get('/groups/?search=' + data.text, {
+            params: { user: data.user }
+          })
+          .then((response) => {
+            commit('SET_NEXT', response.data.next)
+            commit('SET_RESULTS', response.data)
+          })
+      else
+        return this.$axios
+          .get('/groups/?search=' + data.text)
+          .then((response) => {
+            commit('SET_NEXT', response.data.next)
+            commit('SET_RESULTS', response.data)
+          })
     }
   }
 }

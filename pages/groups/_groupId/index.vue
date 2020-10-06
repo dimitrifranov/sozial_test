@@ -5,9 +5,7 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 import groupProfile from '@/components/groupProfile.vue'
-import GroupService from '@/services/GroupService.js'
 export default {
   components: {
     groupProfile
@@ -18,36 +16,36 @@ export default {
     if (!$auth.loggedIn && secret) {
       return { login_first: true, group: {} }
     } else if (secret && $auth.loggedIn) {
-      await GroupService.joinGroup({
-        group: route.params.groupId,
-        user: $auth.user.pk,
-        secret
-      }).then((res) => {
-        if (res.data.id) {
-          console.log(res)
-          const groupRequest = $axios
-            .get($config.apiUrl + '/groups/' + route.params.groupId + '/')
-            .catch((e) => {
-              console.log(e)
-              error({
-                statusCode: 503,
-                message: 'Unable to get this Group'
+      await this.$axios
+        .post('/memberships/', {
+          group: route.params.groupId,
+          user: $auth.user.pk,
+          secret
+        })
+        .then((res) => {
+          if (res.data.id) {
+            const groupRequest = $axios
+              .get('groups/' + route.params.groupId + '/')
+              .catch((e) => {
+                error({
+                  statusCode: 503,
+                  message: 'Unable to get this Group'
+                })
               })
-            })
 
-          return {
-            login_first: false,
-            group: groupRequest.data
-          }
-        } else
-          error({
-            statusCode: 503,
-            message: 'Unable to join this Group'
-          })
-      })
+            return {
+              login_first: false,
+              group: groupRequest.data
+            }
+          } else
+            error({
+              statusCode: 503,
+              message: 'Unable to join this Group'
+            })
+        })
     } else if ($auth.loggedIn) {
       const groupRequest = await $axios
-        .get($config.apiUrl + '/groups/' + route.params.groupId + '/', {
+        .get('groups/' + route.params.groupId + '/', {
           params: { user: $auth.user.pk }
         })
         .catch((e) => {
@@ -63,7 +61,7 @@ export default {
       }
     } else {
       const groupRequest = await $axios
-        .get($config.apiUrl + '/groups/' + route.params.groupId + '/')
+        .get('groups/' + route.params.groupId + '/')
         .catch((e) => {
           error({
             statusCode: 503,

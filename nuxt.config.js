@@ -42,7 +42,8 @@ export default {
     '@plugins/global.js',
     { src: '@/plugins/vue-infinite-scroll.js', ssr: false },
     { src: '@/plugins/vue-touch.js', ssr: false },
-    { src: '@/plugins/vuelidate', mode: 'client' }
+    { src: '@/plugins/vuelidate', mode: 'client' },
+    '~/plugins/axios'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -69,7 +70,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseUrl: process.env.API_URL
+    baseUrl: process.env.API_URL,
+    credentials: true
   },
   /*
    ** Build configuration
@@ -132,6 +134,12 @@ export default {
     }
   },
   auth: {
+    // plugins: ['~/plugins/auth.js'],
+    cookie: {
+      options: {
+        secure: true
+      }
+    },
     strategies: {
       local: {
         endpoints: {

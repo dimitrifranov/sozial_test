@@ -69,7 +69,6 @@
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import Compressor from 'compressorjs'
-import postingService from '@/services/postingService.js'
 export default {
   middleware: 'auth',
   mixins: [validationMixin],
@@ -144,7 +143,12 @@ export default {
     // },
     postData() {
       this.$v.$touch()
-
+      const apiClient = this.$axios.create({
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       if (!this.$v.$invalid) {
         const name = this.name
         const publicGroup = this.publicGroup
@@ -168,7 +172,7 @@ export default {
               formData.append('description', description)
               formData.append('creator', user)
               formData.append('public', publicGroup)
-              postingService.postGroup(formData).then(router.push('/'))
+              apiClient.post('/groups', formData).then(router.push('/'))
             }
           })
         } else {
@@ -177,7 +181,7 @@ export default {
           formData.append('description', description)
           formData.append('creator', user)
           formData.append('public', publicGroup)
-          postingService.postGroup(formData).then((res) => {
+          apiClient.post('/groups', formData).then((res) => {
             router.push('/groups/' + res.data.id)
           })
         }

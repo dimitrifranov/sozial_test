@@ -1,4 +1,3 @@
-import GroupService from '@/services/GroupService.js'
 export const state = () => ({
   groups: [],
   joining: {}
@@ -16,9 +15,12 @@ export const mutations = {
 }
 export const actions = {
   fetchGroups({ commit }, user) {
-    return GroupService.getGroups(user).then((response) => {
-      commit('SET_GROUPS', response.data)
-    })
+    if (user) {
+      return this.$axios.get('/groups/', { params: { user } })
+    } else
+      return this.$axios.get('/groups/').then((response) => {
+        commit('SET_GROUPS', response.data)
+      })
   },
   setJoining({ commit }, joining) {
     commit('SET_JOINING', joining)

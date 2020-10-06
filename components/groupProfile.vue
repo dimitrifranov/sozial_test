@@ -88,8 +88,6 @@
 </template>
 
 <script>
-import PostService from '@/services/PostService.js'
-import GroupService from '@/services/GroupService.js'
 import postPreview from '@/components/postPreview.vue'
 export default {
   components: {
@@ -182,11 +180,26 @@ export default {
     }
   },
   methods: {
+    getPosts(data) {
+      if (data.next) return this.$axios.get(data.next)
+      else if (data.user) {
+        return this.$axios.get(
+          '/groups/' + data.group + '/posts/?ordering=-pub_date',
+          {
+            params: { user: data.user }
+          }
+        )
+      } else {
+        return this.$axios.get(
+          '/groups/' + data.group + '/posts/?ordering=-pub_date'
+        )
+      }
+    },
     loadMore($state) {
       this.loading = true
       this.start = false
       if (this.$auth.loggedIn) {
-        PostService.getPosts({
+        this.getPosts({
           group: this.group.id,
           user: this.$auth.user.pk,
           next: this.next
@@ -197,7 +210,7 @@ export default {
           })
           .then((this.loading = false))
       } else {
-        PostService.getPosts({
+        this.getPosts({
           group: this.group.id,
           next: this.next
         })
@@ -215,22 +228,29 @@ export default {
     },
     joinGroup() {
       if (!this.$auth.loggedIn) this.$router.push('/login')
-      GroupService.joinGroup({
-        group: this.group.id,
-        user: this.$auth.user.pk
-      }).then((res) => {
-        this.group.group_members.push(res.data)
-      })
+      this.$axios
+        .post('/memberships/', {
+          group: this.group.id,
+          user: this.$auth.user.pk
+        })
+        .then((res) => {
+          this.group.group_members.push(res.data)
+        })
     },
     leaveGroup() {
-      GroupService.leaveGroup(
-        this.group.group_members.find((obj) => obj.user === this.$auth.user.pk)
-          .id
-      ).then(() => {
-        this.group.group_members = this.group.group_members.filter(
-          (members) => members.user !== this.$auth.user.pk
+      this.$axios
+        .delete(
+          '/memberships' +
+            this.group.group_members.find(
+              (obj) => obj.user === this.$auth.user.pk
+            ).id +
+            '/'
         )
-      })
+        .then(() => {
+          this.group.group_members = this.group.group_members.filter(
+            (members) => members.user !== this.$auth.user.pk
+          )
+        })
     },
     async invite() {
       const url =

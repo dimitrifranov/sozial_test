@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import UserService from '@/services/UserService.js'
 export default {
   middleware: 'auth',
   data() {
@@ -46,10 +45,12 @@ export default {
   },
   methods: {
     updateUser() {
-      UserService.updateUser(this.data).then((response) => {
-        this.$auth.setUser(response.data)
-        this.$router.push('/')
-      })
+      this.$axios
+        .put('/users/' + this.data.pk + '/', this.data)
+        .then((response) => {
+          this.$auth.setUser(response.data)
+          this.$router.push('/')
+        })
     }
   },
   head() {

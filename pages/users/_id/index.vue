@@ -11,42 +11,41 @@ export default {
   components: {
     profile
   },
-  asyncData({ $axios, route, error }) {
-    const userRequest = $axios({
-      url:
-        'https://social-tests-api.herokuapp.com/users/' + route.params.id + '/',
-      withCredentials: false,
+  async asyncData({ $axios, route, error }) {
+    const userRequest = await $axios({
+      url: 'users/' + route.params.id + '/',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
       }
-    })
-    const userPostsRequest = $axios({
-      url:
-        'https://social-tests-api.herokuapp.com/users/' +
-        route.params.id +
-        '/posts/',
-      withCredentials: false,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-
-    return Promise.all([userRequest, userPostsRequest])
-      .then((results) => {
-        return {
-          user: results[0].data,
-          posts: results[1].data.results
-        }
+    }).catch((e) => {
+      error({
+        statusCode: 503,
+        message: 'Unable to get this Users'
       })
+    })
+    // const userPostsRequest = $axios({
+    //   url:
+    //     'https://social-tests-api.herokuapp.com/users/' +
+    //     route.params.id +
+    //     '/posts/',
+    //   withCredentials: false,
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
 
-      .catch((e) => {
-        error({
-          statusCode: 503,
-          message: 'Unable to get this Users'
-        })
-      })
+    return {
+      user: userRequest.data
+    }
+    // return Promise.all([userRequest, userPostsRequest])
+    //   .then((results) => {
+    //     return {
+    //       user: results[0].data,
+    //       posts: results[1].data.results
+    //     }
+    //   })
   },
   head() {
     return {

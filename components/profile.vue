@@ -86,7 +86,6 @@
 </template>
 
 <script>
-import UserService from '@/services/UserService.js'
 import postPreview from '@/components/postPreview.vue'
 export default {
   components: {
@@ -171,10 +170,14 @@ export default {
     }
   },
   methods: {
+    getPosts(id, next) {
+      if (next) return this.$axios.get(next)
+      else return this.$axios.get('/users/' + id + '/posts/')
+    },
     loadMore($state) {
       this.loading = true
       this.start = false
-      UserService.getPosts(this.postId, this.next)
+      this.getPosts(this.postId, this.next)
         .then((response) => {
           this.next = response.data.next
           this.posts.push(...response.data.results)
@@ -194,22 +197,29 @@ export default {
     },
     follow() {
       if (!this.$auth.loggedIn) this.$router.push('/login')
-      UserService.followUser({
-        user_to: this.user.pk,
-        user_from: this.$auth.user.pk
-      }).then((res) => {
-        this.user.follower.push(res.data)
-      })
+      this.$axios
+        .post('/follow/', {
+          user_to: this.user.pk,
+          user_from: this.$auth.user.pk
+        })
+        .then((res) => {
+          this.user.follower.push(res.data)
+        })
     },
     unfollow() {
-      UserService.unfollowUser(
-        this.user.follower.find((obj) => obj.user_from === this.$auth.user.pk)
-          .id
-      ).then(() => {
-        this.user.follower = this.user.follower.filter(
-          (follower) => follower.user_from !== this.$auth.user.pk
+      this.$axios
+        .delete(
+          '/follow/' +
+            this.user.follower.find(
+              (obj) => obj.user_from === this.$auth.user.pk
+            ).id +
+            '/'
         )
-      })
+        .then(() => {
+          this.user.follower = this.user.follower.filter(
+            (follower) => follower.user_from !== this.$auth.user.pk
+          )
+        })
     },
     toggle() {
       this.hover = !this.hover

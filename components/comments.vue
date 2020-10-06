@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import PostService from '@/services/PostService.js'
 import comment from '@/components/comment.vue'
 export default {
   components: {
@@ -47,16 +46,20 @@ export default {
     postComment() {
       if (!this.$auth.loggedIn) this.$router.push('/login')
       else {
-        PostService.commentPost({
-          group: this.$route.params.groupId,
-          post: this.post,
-          data: {
-            comment_content: this.comment,
-            creator: this.$auth.user.pk,
-            post: this.post,
-            reply_to: null
-          }
-        })
+        this.$axios
+          .post(
+            '/groups/' +
+              this.$route.params.groupId +
+              '/posts/' +
+              this.post +
+              '/comments/',
+            {
+              comment_content: this.comment,
+              creator: this.$auth.user.pk,
+              post: this.post,
+              reply_to: null
+            }
+          )
           .then((response) => {
             this.comments.push(response.data)
             this.comment = ''

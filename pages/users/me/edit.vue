@@ -55,7 +55,6 @@
 
 <script>
 import Compressor from 'compressorjs'
-import UserFormService from '@/services/UserFormService.js'
 export default {
   middleware: 'auth',
   data() {
@@ -123,6 +122,12 @@ export default {
     async updateUser() {
       delete this.user.password2
       const context = this
+      const apiClient = this.$axios.create({
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      })
 
       if (this.file) {
         this.crop()
@@ -149,8 +154,8 @@ export default {
               formData.append('password', context.user.password)
             else formData.append('password', context.$auth.user.password)
 
-            const response = await UserFormService.updateUser(
-              context.$auth.user.pk,
+            const response = await apiClient.put(
+              '/users/' + context.$auth.user.pk + '/',
               formData
             )
             await context.$auth.setUser(response.data)
@@ -173,8 +178,8 @@ export default {
         formData.append('like_notifs', this.$auth.user.like_notifs)
         formData.append('comments_notifs', this.$auth.user.comments_notifs)
 
-        const response = await UserFormService.updateUser(
-          this.$auth.user.pk,
+        const response = await apiClient.put(
+          '/users/' + this.$auth.user.pk + '/',
           formData
         )
 

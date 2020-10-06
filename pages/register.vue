@@ -120,8 +120,6 @@
 import { mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
-import GroupService from '@/services/GroupService.js'
-import UserService from '@/services/UserService.js'
 export default {
   mixins: [validationMixin],
 
@@ -176,7 +174,7 @@ export default {
     async registerUser() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
-        await UserService.registerUser(this.user)
+        await this.$axios.post('/users/', this.user)
         await this.$auth
           .loginWith('local', {
             data: {
@@ -188,15 +186,17 @@ export default {
             this.user.error = 'Benutzer existiert bereits'
           })
         if (this.joining.group) {
-          await GroupService.joinGroup({
-            group: this.joining.group,
-            user: this.$auth.user.pk,
-            secret: this.joining.secret
-          }).then((res) => {
-            const group = this.joining.group
-            this.$store.dispatch('groups/delJoining')
-            if (res.data.id) this.$router.push('/groups/' + group)
-          })
+          await this.$axios
+            .post('/memberships/', {
+              group: this.joining.group,
+              user: this.$auth.user.pk,
+              secret: this.joining.secret
+            })
+            .then((res) => {
+              const group = this.joining.group
+              this.$store.dispatch('groups/delJoining')
+              if (res.data.id) this.$router.push('/groups/' + group)
+            })
         }
         this.$router.push('/')
       }

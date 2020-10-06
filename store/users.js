@@ -1,4 +1,3 @@
-import UserService from '@/services/UserService.js'
 export const state = () => ({
   user: {},
   notifications: []
@@ -13,18 +12,22 @@ export const mutations = {
 }
 export const actions = {
   fetchUser({ commit }, id) {
-    return UserService.getUser(id).then((response) => {
+    return this.$axios.get('/users/' + id + '/').then((response) => {
       commit('SET_USER', response.data)
     })
   },
   updateUser({ commit }, data) {
-    return UserService.updateUser(data).then((response) => {
+    return this.$axios.put('/users/' + data.pk + '/', data).then((response) => {
       commit('SET_USER', response.data)
     })
   },
   getNotifications({ commit }, user) {
-    return UserService.getNotifications({ user }).then((response) => {
-      commit('SET_NOTIFICATIONS', response.data.results)
-    })
+    return this.$axios
+      .get('/notifications/?ordering=-time', {
+        params: { user }
+      })
+      .then((response) => {
+        commit('SET_NOTIFICATIONS', response.data.results)
+      })
   }
 }

@@ -16,7 +16,6 @@ export default {
   asyncData({ $axios, error, $auth, $config }) {
     const apiClient = $axios.create({
       baseURL: $config.apiUrl,
-      withCredentials: false,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'

@@ -1,5 +1,3 @@
-import PostService from '@/services/PostService.js'
-import postingService from '@/services/postingService.js'
 export const state = () => ({
   posts: [],
   next: null,
@@ -54,52 +52,107 @@ export const actions = {
   },
   fetchPosts({ commit, state }, data) {
     commit('SET_START', false)
-    return PostService.getPosts(data).then((response) => {
-      commit('SET_NEXT', response.data.next)
-      commit('SET_POSTS', response.data)
-    })
+    if (state.next)
+      return this.$axios.get(state.next).then((response) => {
+        commit('SET_NEXT', response.data.next)
+        commit('SET_POSTS', response.data)
+      })
+    else if (data.user) {
+      return this.$axios
+        .get('/groups/' + data.group + '/posts/?ordering=-pub_date', {
+          params: { user: data.user }
+        })
+        .then((response) => {
+          commit('SET_NEXT', response.data.next)
+          commit('SET_POSTS', response.data)
+        })
+    } else {
+      return this.$axios
+        .get('groups/' + data.group + '/posts/?ordering=-pub_date')
+        .then((response) => {
+          commit('SET_NEXT', response.data.next)
+          commit('SET_POSTS', response.data)
+        })
+    }
   },
   fetchFeed({ commit, state }, user) {
     commit('SET_START', false)
-    return PostService.getFeed(user, state.next).then((response) => {
-      commit('SET_NEXT', response.data.next)
-      commit('SET_POSTS', response.data)
-    })
+    if (state.next)
+      return this.$axios.get(state.next).then((response) => {
+        commit('SET_NEXT', response.data.next)
+        commit('SET_POSTS', response.data)
+      })
+    else
+      return this.$axios
+        .get('feed/?ordering=-pub_date', { params: { user } })
+        .then((response) => {
+          commit('SET_NEXT', response.data.next)
+          commit('SET_POSTS', response.data)
+        })
   },
   publicPosts({ commit, state }) {
     commit('SET_START', false)
-    return PostService.publicPosts(state.next).then((response) => {
-      commit('SET_NEXT', response.data.next)
-      commit('SET_POSTS', response.data)
-    })
+    if (state.next)
+      return this.$axios.get(state.next).then((response) => {
+        commit('SET_NEXT', response.data.next)
+        commit('SET_POSTS', response.data)
+      })
+    else
+      return this.$axios
+        .get('public_posts/?ordering=-pub_date')
+        .then((response) => {
+          commit('SET_NEXT', response.data.next)
+          commit('SET_POSTS', response.data)
+        })
   },
   likePost({ commit }, params) {
-    return PostService.likePost(params).then((response) => {
-      commit('ADD_LIKE', response.data)
-    })
+    return this.$axios
+      .post(
+        '/groups/' + params.group + '/posts/' + params.post + '/likes/',
+        params.data
+      )
+      .then((response) => {
+        commit('ADD_LIKE', response.data)
+      })
   },
   unlikePost({ commit, state }, params) {
-    return PostService.unlikePost(params.group, params.post, params.like).then(
-      () => {
+    return this.$axios
+      .delete(
+        '/groups/' +
+          params.group +
+          '/posts/' +
+          params.post +
+          '/likes/' +
+          params.like +
+          '/'
+      )
+      .then(() => {
         commit('DEL_LIKE', params)
-      }
-    )
+      })
   },
   commentPost({ commit }, params) {
-    return PostService.commentPost(params).then((response) => {
-      commit('ADD_COMMENT', response.data)
-    })
-  },
-  postPost({ commit }, params) {
-    return postingService
-      .postPost(params.group, params.data)
+    return this.$axios
+      .post(
+        '/groups/' + params.group + '/posts/' + params.post + '/comments/',
+        params.data
+      )
       .then((response) => {
-        commit('ADD_POST', response.data)
+        commit('ADD_COMMENT', response.data)
       })
   },
   deletePost({ commit }, params) {
-    return PostService.deletePost(params).then(() => {
-      commit('DEL_POST', params.post)
-    })
+    return this.$axios
+      .delete('/groups/' + params.group + '/posts/' + params.post + '/')
+      .then(() => {
+        commit('DEL_POST', params.post)
+      })
+  },
+
+  postPost({ commit }, params) {
+    return this.$axios
+      .post('/groups/' + params.group + '/posts/', params)
+      .then((response) => {
+        commit('ADD_POST', response.data)
+      })
   }
 }

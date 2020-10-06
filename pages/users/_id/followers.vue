@@ -13,23 +13,15 @@ export default {
   components: {
     userPeek
   },
-  async asyncData({ $axios, error, route, $auth, $config }) {
-    const apiClient = $axios.create({
-      baseURL: $config.apiUrl,
-      withCredentials: false,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+  async asyncData({ $axios, error, route, $auth }) {
     let user
-    await apiClient.get('/users/' + route.params.id + '/').then((res) => {
+    await $axios.get('/users/' + route.params.id + '/').then((res) => {
       user = res.data
     })
 
     const followers = []
     for (const follower of user.follower) {
-      apiClient.get('/users/' + follower.user_from + '/').then((res) => {
+      $axios.get('/users/' + follower.user_from + '/').then((res) => {
         followers.push(res.data)
       })
     }

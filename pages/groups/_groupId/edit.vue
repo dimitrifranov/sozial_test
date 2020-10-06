@@ -46,7 +46,6 @@
 
 <script>
 import Compressor from 'compressorjs'
-import postingService from '@/services/postingService.js'
 export default {
   middleware: 'auth',
   data() {
@@ -110,8 +109,13 @@ export default {
     },
     async updateGroup() {
       const context = this
-      const groupId = context.$route.params.id
-
+      const groupId = context.$route.params.groupId
+      const apiClient = this.$axios.create({
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       if (this.file) {
         this.crop()
         // eslint-disable-next-line no-new
@@ -130,33 +134,24 @@ export default {
               formData.append('description', context.change_to.description)
             formData.append('creator', context.$auth.user.pk)
 
-            await postingService.updateGroup(groupId, formData)
+            await apiClient.put('/groups/' + groupId + '/', formData, {
+              params: { user: this.$auth.user.pk }
+            })
             context.$router.push('/groups/' + groupId)
           }
         })
       } else {
         const formData = new FormData()
-        if (this.user.username) formData.append('username', this.user.username)
-        else formData.append('username', this.$auth.user.username)
-        if (this.user.email) formData.append('email', this.user.email)
-        if (this.user.bio) formData.append('bio', this.user.bio)
-        if (this.user.password) formData.append('password', this.user.password)
-        else formData.append('password', this.$auth.user.password)
-        formData.append(
-          'follow_post_notifs',
-          this.$auth.user.follow_post_notifs
-        )
-        formData.append('new_follow_notifs', this.$auth.user.new_follow_notifs)
-        formData.append('like_notifs', this.$auth.user.like_notifs)
-        formData.append('comments_notifs', this.$auth.user.comments_notifs)
+        if (context.change_to.name)
+          formData.append('name', context.change_to.name)
+        if (context.change_to.description)
+          formData.append('description', context.change_to.description)
+        formData.append('creator', context.$auth.user.pk)
 
-        const response = await postingService.updateUser(
-          this.$auth.user.pk,
-          formData
-        )
-
-        await this.$auth.setUser(response.data)
-        this.$router.push('/users/me')
+        await apiClient.put('/groups/' + groupId + '/', formData, {
+          params: { user: this.$auth.user.pk }
+        })
+        context.$router.push('/groups/' + groupId)
       }
     }
   },

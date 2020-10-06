@@ -51,7 +51,6 @@
 import { mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
-import GroupService from '@/services/GroupService.js'
 
 export default {
   mixins: [validationMixin],
@@ -92,16 +91,18 @@ export default {
           })
 
         if (this.joining.group) {
-          await GroupService.joinGroup({
-            group: this.joining.group,
-            user: this.$auth.user.pk,
-            secret: this.joining.secret
-          }).then((res) => {
-            const group = this.joining.group
-            this.$store.dispatch('groups/delJoining')
-            if (res.data.id) this.$router.push('/groups/' + group)
-            this.$router.push('/')
-          })
+          await this.$axios
+            .post('/memberships/', {
+              group: this.joining.group,
+              user: this.$auth.user.pk,
+              secret: this.joining.secret
+            })
+            .then((res) => {
+              const group = this.joining.group
+              this.$store.dispatch('groups/delJoining')
+              if (res.data.id) this.$router.push('/groups/' + group)
+              this.$router.push('/')
+            })
         }
       }
     }
