@@ -171,7 +171,7 @@ export default {
           hid: 'description',
           name: 'description',
           content:
-            'Tschau! Auf der Suche nach einem sicheren Sozialen Netzwerk, wo du Gruppen mit deinen Freunden erstellen und tolle Bilder teilen kannst? Dann bist du hier genau richtig!'
+            'Tschau! Auf der Suche nach einem sicheren Sozialen Netzwerk, wo du Gruppen erstellen und tolle Bilder teilen kannst? Dann bist du hier genau richtig!'
         }
       ]
     }
