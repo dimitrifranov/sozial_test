@@ -100,7 +100,7 @@ export default {
       lang: 'de',
       background_color: '#121212',
       description:
-        'Tschau.app ist ein sicheres soziales Netzwerk. Erstelle Gruppen mit deinen Freunden und teile tolle Bilder.',
+        'Tschau! Auf der Suche nach einem sicheren Sozialen Netzwerk, wo du Gruppen mit deinen Freunden erstellen und tolle Bilder teilen kannst? Dann bist du hier genau richtig! | Tschau',
       meta: {
         mobileAppIOS: true,
         theme_color: '#FFFFFF',
@@ -109,7 +109,7 @@ export default {
         name: 'Tschau',
         author: 'Dimitri Franov',
         description:
-          'Tschau.app ist ein sicheres soziales Netzwerk. Erstelle Gruppen mit deinen Freunden und teile tolle Bilder.'
+          'Tschau! Auf der Suche nach einem sicheren Sozialen Netzwerk, wo du Gruppen mit deinen Freunden erstellen und tolle Bilder teilen kannst? Dann bist du hier genau richtig! | Tschau'
       },
       shortcuts: [
         {

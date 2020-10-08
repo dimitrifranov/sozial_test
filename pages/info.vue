@@ -1,10 +1,24 @@
 <template>
   <div class="center-items">
     <div class="h-screen w-screen max-w-md felx felx-col items-center pt-16">
-      <!-- <h2 class="text-white text-xl">
-        INFO
-      </h2> -->
-      <h2 class="text-white text-2xl">
+      <h2 class="text-white text-2xl pb-2">
+        Informationen
+      </h2>
+      <section class="text-white font-light">
+        <p>
+          Die Website Tschau.app wurde im Rahmen der Maturarbeit von Dimitri
+          Franov entwickelt. Die Maturarbeit wurde von Dr.Uli Dammer betreut.
+        </p>
+        <a
+          href="/Nutzungsbedingungen-Tschau.pdf"
+          download="Maturarbeit-Dimitri-Franov"
+          class="my-2 block font-light bg-transparent h-10 hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200 disabled:opacity-75 disbaled:text-error"
+          >Maturarbeit als PDF</a
+        >
+        Wer einen Blick au den Quellcode von Tschau.app werfen will, kann mich
+        gerne unter der E-mail: dimitri@tschau.app kontaktieren.
+      </section>
+      <h2 class="text-white text-2xl pt-6">
         Impressum
       </h2>
       <section class="text-white font-light pb-10">
@@ -89,13 +103,13 @@
       </section>
       <a
         href="/Datenschutzerklärung.pdf"
-        download="download"
+        download="Datenschutzerklärung"
         class="mb-5 block font-light bg-transparent h-10 hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200 disabled:opacity-75 disbaled:text-error"
         >Datenschutzerklärung als PDF</a
       >
       <a
         href="/Nutzungsbedingungen-Tschau.pdf"
-        download="download"
+        download="Nutzungsbedingungen-Tschau"
         class="mb-16 block font-light bg-transparent h-10 hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200 disabled:opacity-75 disbaled:text-error"
         >Nutzungsbedingungen als PDF</a
       >

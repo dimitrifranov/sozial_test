@@ -165,13 +165,13 @@ export default {
   },
   head() {
     return {
-      title: 'TSCHAU.app das Beste und Sicherste Soziale Netzwerk',
+      title: 'Das beste und sicherste Soziale Netzwerk',
       meta: [
         {
           hid: 'description',
           name: 'description',
           content:
-            'Tschau! Auf der suche nach einem sicheren Sozialen Netzwerk, wo du Gruppen mit deinen Freunden erstellen und tolle Bilder teilen kannst? Dann bist du hier genau richtig! Willkommen bei Tschau, dem besten Sozialen Netzwerk.'
+            'Tschau! Auf der Suche nach einem sicheren Sozialen Netzwerk, wo du Gruppen mit deinen Freunden erstellen und tolle Bilder teilen kannst? Dann bist du hier genau richtig!'
         }
       ]
     }
