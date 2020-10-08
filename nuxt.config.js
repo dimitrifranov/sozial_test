@@ -1,11 +1,17 @@
 export default {
   mode: 'universal',
-  // todo CHANGE
   debug: process.env.DEBUG,
   /*
    ** Headers of the page
    */
   head: {
+    meta: [
+      {
+        name: 'google-site-verification',
+        content: 'kzW2KiVf07F2vPMD3NtNGgpxG3meyiLDb5zwjuKvKtQ'
+      },
+      { name: 'msvalidate.01', content: '1636892432B7A73367EC8F10284EFE52' }
+    ],
     link: [
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
