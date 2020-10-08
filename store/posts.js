@@ -149,8 +149,14 @@ export const actions = {
   },
 
   postPost({ commit }, params) {
-    return this.$axios
-      .post('/groups/' + params.group + '/posts/', params)
+    const apiClient = this.$axios.create({
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    return apiClient
+      .post('/groups/' + params.group + '/posts/', params.data)
       .then((response) => {
         commit('ADD_POST', response.data)
       })
