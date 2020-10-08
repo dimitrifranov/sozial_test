@@ -165,7 +165,7 @@ export default {
   },
   head() {
     return {
-      title: 'TSCHAU.app das beste und sicherste Soziale Netzwerk',
+      title: 'TSCHAU.app das Beste und Sicherste Soziale Netzwerk',
       meta: [
         {
           hid: 'description',

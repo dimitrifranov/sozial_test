@@ -69,7 +69,9 @@ export default {
     '@nuxtjs/onesignal',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
-    '@nuxtjs/google-gtag'
+    '@nuxtjs/google-gtag',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap'
   ],
   /*
    ** Axios module configuration
