@@ -88,7 +88,7 @@ export default {
   },
   head() {
     return {
-      title: this.group.name,
+      title: this.groupName,
       meta: [
         {
           hid: 'description',
