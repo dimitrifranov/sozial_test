@@ -1,7 +1,7 @@
 <template>
-  <div class="center-items">
+  <div class="center-items flex-col">
     <form
-      class=" w-full max-w-xs h-screen center-items flex-col"
+      class=" w-full max-w-xs center-items flex-col pt-16"
       @submit.prevent="updateUser"
     >
       <baseInput v-model="user.username" value="username" label="Username:" />
@@ -50,6 +50,9 @@
         Update
       </baseButton>
     </form>
+    <button class="btn text-error mb-16" @click="deleteUser">
+      Profil löschen
+    </button>
   </div>
 </template>
 
@@ -76,6 +79,14 @@ export default {
     }
   },
   methods: {
+    async deleteUser() {
+      await this.$axios
+        .delete('/users/' + this.$auth.user.pk + '/')
+        .catch((e) => {
+          console.log(e)
+        })
+      this.$auth.logout()
+    },
     crop() {
       const { coordinates, canvas } = this.$refs.cropper.getResult()
       this.coordinates = coordinates
@@ -205,7 +216,7 @@ export default {
 
 <style scoped>
 .btn {
-  @apply font-light bg-transparent text-white py-2 px-4 mt-2 border border-white transition-colors duration-200;
+  @apply bg-transparent py-2 px-4 mt-2 border border-white transition-colors duration-200;
 }
 .btn:hover {
   @apply bg-white text-grey border-transparent;

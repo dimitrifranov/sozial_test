@@ -172,7 +172,12 @@ export default {
   methods: {
     getPosts(id, next) {
       if (next) return this.$axios.get(next)
-      else return this.$axios.get('/users/' + id + '/posts/')
+      else if (this.$auth.loggedIn)
+        return this.$axios.get('/users/' + id + '/posts/?ordering=-pub_date/', {
+          params: { user: this.$auth.user.pk }
+        })
+      else
+        return this.$axios.get('/users/' + id + '/posts/?ordering=-pub_date/')
     },
     loadMore($state) {
       this.loading = true
