@@ -49,6 +49,14 @@ export default {
     return {
       title: this.post.title,
       meta: [
+        // {
+        //   property: 'og:title',
+        //   content: this.post.title + ' | Tschau'
+        // },
+        // {
+        //   property: 'og:url',
+        //   content: this.$config.baseUrl + this.$route.path
+        // },
         {
           hid: 'description',
           name: 'description',

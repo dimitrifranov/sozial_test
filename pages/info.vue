@@ -9,12 +9,12 @@
           Die Website Tschau.app wurde im Rahmen der Maturarbeit von Dimitri
           Franov entwickelt. Die Maturarbeit wurde von Dr.Uli Dammer betreut.
         </p>
-        <a
+        <!-- <a
           href="/Nutzungsbedingungen-Tschau.pdf"
           download="Maturarbeit-Dimitri-Franov"
           class="my-2 block font-light bg-transparent h-10 hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200 disabled:opacity-75 disbaled:text-error"
           >Maturarbeit als PDF</a
-        >
+        > -->
         Wer einen Blick auf den Quellcode von Tschau.app werfen will, kann mich
         gerne unter der E-mail: dimitri@tschau.app kontaktieren.
       </section>

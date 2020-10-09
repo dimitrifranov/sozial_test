@@ -16,7 +16,7 @@ export default {
     if (!$auth.loggedIn && secret) {
       return { login_first: true, group: {} }
     } else if (secret && $auth.loggedIn) {
-      await this.$axios
+      await $axios
         .post('/memberships/', {
           group: route.params.groupId,
           user: $auth.user.pk,
