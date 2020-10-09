@@ -71,6 +71,12 @@ export default {
       }
     }
   },
+  computed: {
+    groupName() {
+      if (this.login_first) return 'Gruppen Profil'
+      else return this.group.name
+    }
+  },
   mounted() {
     if (this.login_first) {
       this.$store.dispatch('groups/setJoining', {
@@ -87,7 +93,7 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: 'Das Profil von der Gruppe ' + this.group.name
+          content: 'Das Profil von der Gruppe ' + this.groupName
         }
       ]
     }
