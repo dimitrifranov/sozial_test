@@ -195,10 +195,9 @@ export default {
             .then((res) => {
               const group = this.joining.group
               this.$store.dispatch('groups/delJoining')
-              if (res.data.id) this.$router.push('/groups/' + group)
+              this.$router.push('/groups/' + group)
             })
         }
-        this.$router.push('/')
       }
     }
   },

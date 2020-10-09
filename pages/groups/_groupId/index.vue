@@ -23,25 +23,21 @@ export default {
           secret
         })
         .then((res) => {
-          if (res.data.id) {
-            const groupRequest = $axios
-              .get('groups/' + route.params.groupId + '/')
-              .catch((e) => {
-                error({
-                  statusCode: 503,
-                  message: 'Unable to get this Group'
-                })
-              })
-
-            return {
-              login_first: false,
-              group: groupRequest.data
-            }
-          } else
-            error({
-              statusCode: 503,
-              message: 'Unable to join this Group'
+          const groupRequest = $axios
+            .get('groups/' + route.params.groupId + '/', {
+              params: { user: $auth.user.pk }
             })
+            .catch((e) => {
+              error({
+                statusCode: 503,
+                message: 'Unable to get this Group'
+              })
+            })
+
+          return {
+            login_first: false,
+            group: groupRequest.data
+          }
         })
     } else if ($auth.loggedIn) {
       const groupRequest = await $axios
