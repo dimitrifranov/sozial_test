@@ -10,7 +10,7 @@
       </nuxt-link>
       <button
         v-else
-        class="center-items float-left  h-full w-12"
+        class="center-items float-left h-full w-12"
         @click="$router.go(-1)"
       >
         <arrow-left-icon fillColor="#ffffff" />

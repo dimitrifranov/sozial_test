@@ -14,6 +14,7 @@ export default {
     const secret = route.query.secret
 
     if (!$auth.loggedIn && secret) {
+      console.log($auth)
       return { login_first: true, group: {} }
     } else if (secret && $auth.loggedIn) {
       await $axios
@@ -55,6 +56,7 @@ export default {
         group: groupRequest.data
       }
     } else {
+      console.log($auth)
       const groupRequest = await $axios
         .get('/groups/' + route.params.groupId + '/')
         .catch((e) => {
