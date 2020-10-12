@@ -153,7 +153,7 @@ export default {
       return '/users/' + this.group.creator
     },
     member() {
-      if (!this.$auth.loggedIn) return false
+      if (!this.$auth.loggedIn || !this.group.group_members) return false
       return this.group.group_members.find(
         (obj) => obj.user === this.$auth.user.pk
       )
