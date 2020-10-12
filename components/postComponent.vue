@@ -26,11 +26,7 @@
         >
           <share-icon fillColor="#ffffff" class="" @click="shareViaWebShare" />
         </div>
-        <div
-          v-if="my_post"
-          class="float-right h-full w-8 center-items"
-          @click="toggle"
-        >
+        <div class="float-right h-full w-8 center-items" @click="toggle">
           <dots-vertical-icon fillColor="#ffffff" />
         </div>
         <transition name="scale">
@@ -39,8 +35,15 @@
             v-click-outside="close"
             class="w-1/3 max-w-xs z-10 bg-grey3 text-white absolute right-0 flex flex-col"
           >
-            <button @click="delete_post">
-              Delete
+            <button v-if="!my_post" class="hover:underline" @click="report">
+              melden
+            </button>
+            <button
+              v-else
+              class="text-error hover:underline"
+              @click="delete_post"
+            >
+              löschen
             </button>
           </ul>
         </transition>
@@ -147,6 +150,9 @@ export default {
     }
   },
   methods: {
+    report() {
+      return null
+    },
     likePost() {
       if (!this.liked && this.$auth.loggedIn) {
         this.just_disliked = false

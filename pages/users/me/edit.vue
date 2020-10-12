@@ -4,19 +4,23 @@
       class=" w-full max-w-xs center-items flex-col pt-16"
       @submit.prevent="updateUser"
     >
-      <baseInput v-model="user.username" value="username" label="Username:" />
+      <baseInput
+        v-model="user.username"
+        value="username"
+        label="Benutzername:"
+      />
       <baseInput v-model="user.email" value="email" label="E-mail:" />
       <baseInput v-model="user.bio" value="bio" label="Bio:" />
       <baseInput
         v-model="user.password"
         value="password"
-        label="Password:"
+        label="Passwort:"
         type="password"
       />
       <baseInput
         v-model="user.password2"
         value="password2"
-        label="Password again:"
+        label="Passwort nochmal:"
         type="password"
       />
 
@@ -34,7 +38,7 @@
       <label
         class="cursor-pointer font-light bg-transparent hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200"
         for="file"
-        >Upload Picture</label
+        >Profilbild wählen</label
       >
       <input
         id="file"
@@ -47,7 +51,7 @@
       />
 
       <baseButton type="submit">
-        Update
+        Speichern
       </baseButton>
     </form>
     <button class="btn text-error mb-16" @click="deleteUser">
