@@ -67,7 +67,7 @@ export default {
         })
       return {
         login_first: false,
-        group: groupRequest
+        group: groupRequest.data
       }
     }
   },
