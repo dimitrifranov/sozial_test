@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     groupName() {
-      if (this.login_first) return 'Gruppen Profil'
+      if (this.group.name) return 'Gruppen Profil'
       else return this.group.name
     }
   },
