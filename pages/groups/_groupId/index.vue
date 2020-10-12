@@ -15,7 +15,7 @@ export default {
     console.log(secret)
     if (!$auth.loggedIn && secret) {
       console.log(secret + ' 1')
-      return { login_first: true, group: {} }
+      return { login_first: true }
     } else if (secret && $auth.loggedIn) {
       await $axios
         .post('/memberships/', {
