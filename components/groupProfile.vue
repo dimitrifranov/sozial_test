@@ -159,7 +159,7 @@ export default {
       return '/users/' + this.group.creator
     },
     memberLength() {
-      if (this.group.members) return this.group.group_members.length
+      if (this.group.group_members) return this.group.group_members.length
       else return 0
     },
     member() {
