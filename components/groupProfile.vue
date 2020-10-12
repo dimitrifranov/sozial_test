@@ -98,14 +98,14 @@ export default {
       type: Object,
       default() {
         return {
-          id: 1,
-          creator_name: '',
-          group_members: [],
-          name: '',
-          description: '',
-          pic: '',
-          public: true,
-          creator: 1
+          // id: 1,
+          // creator_name: '',
+          // group_members: [],
+          // name: '',
+          // description: '',
+          // pic: '',
+          // public: true,
+          // creator: 1
         }
       }
     }
