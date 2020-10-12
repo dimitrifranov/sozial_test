@@ -73,8 +73,9 @@ export default {
   },
   computed: {
     groupName() {
-      if (this.group) return 'Gruppen Profil'
-      else return this.group.name
+      // if (this.group)
+      return 'Gruppen Profil'
+      // else return this.group.name
     }
   },
   mounted() {
