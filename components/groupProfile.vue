@@ -3,7 +3,7 @@
     <div class="h-screen max-w-md">
       <div class="clearfix relative">
         <h2 class="text-2xl text-white text-center font-light pt-20">
-          <!-- {{ group.name }} -->
+          {{ group.name }}
         </h2>
         <nuxt-link class="center-items w-full" :to="creator_link">
           <h3
@@ -96,7 +96,12 @@ export default {
   props: {
     group: {
       type: Object,
-      default: () => {}
+      default: () => {
+        return {}
+        // id: 1,
+        // creator_name: 'dimi',
+        // group_members: [],
+      }
     }
   },
   data() {
