@@ -12,9 +12,9 @@ export default {
   },
   async asyncData({ $axios, route, error, $auth, $config }) {
     const secret = route.query.secret
-
+    console.log(secret)
     if (!$auth.loggedIn && secret) {
-      console.log($auth)
+      console.log(secret + ' 1')
       return { login_first: true, group: {} }
     } else if (secret && $auth.loggedIn) {
       await $axios
@@ -56,7 +56,7 @@ export default {
         group: groupRequest.data
       }
     } else {
-      console.log($auth)
+      console.log(secret + ' 2')
       const groupRequest = await $axios
         .get('/groups/' + route.params.groupId + '/')
         .catch((e) => {
