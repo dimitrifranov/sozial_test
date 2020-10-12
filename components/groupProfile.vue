@@ -96,7 +96,7 @@ export default {
   props: {
     group: {
       type: Object,
-      default: () => {
+      default() {
         return {
           id: 1,
           creator_name: '',
