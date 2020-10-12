@@ -158,8 +158,12 @@ export default {
     creator_link() {
       return '/users/' + this.group.creator
     },
+    memberLength() {
+      if (this.group.members) return this.group.group_members.length
+      else return 0
+    },
     member() {
-      if (!this.$auth.loggedIn) return false
+      if (!this.$auth.loggedIn || !this.group.group_members) return false
       return this.group.group_members.find(
         (obj) => obj.user === this.$auth.user.pk
       )
