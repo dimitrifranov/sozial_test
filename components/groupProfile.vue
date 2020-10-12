@@ -97,10 +97,16 @@ export default {
     group: {
       type: Object,
       default: () => {
-        return {}
-        // id: 1,
-        // creator_name: 'dimi',
-        // group_members: [],
+        return {
+          id: 1,
+          creator_name: '',
+          group_members: [],
+          name: '',
+          description: '',
+          pic: '',
+          public: true,
+          creator: 1
+        }
       }
     }
   },
@@ -153,7 +159,7 @@ export default {
       return '/users/' + this.group.creator
     },
     member() {
-      if (!this.$auth.loggedIn || !this.group.group_members) return false
+      if (!this.$auth.loggedIn) return false
       return this.group.group_members.find(
         (obj) => obj.user === this.$auth.user.pk
       )
@@ -245,7 +251,7 @@ export default {
     leaveGroup() {
       this.$axios
         .delete(
-          '/memberships' +
+          '/memberships/' +
             this.group.group_members.find(
               (obj) => obj.user === this.$auth.user.pk
             ).id +
