@@ -68,7 +68,7 @@
                   Members
                 </p>
                 <p class="-mt-1 text-lg">
-                  {{ group.group_members.length }}
+                  {{ memberLength }}
                 </p>
               </div>
             </div>
