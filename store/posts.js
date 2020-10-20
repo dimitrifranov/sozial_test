@@ -10,6 +10,7 @@ export const mutations = {
   },
   DEL_POSTS(state) {
     state.posts = []
+    state.gotposts = false
   },
   DEL_POST(state, post) {
     const postObj = state.posts.find((obj) => obj.id === post)
