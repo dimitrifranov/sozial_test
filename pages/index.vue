@@ -33,10 +33,25 @@
       />
     </section>
     <section
+      v-if="noposts"
+      class="text-white text-xl text-center h-screen w-screen center-items flex-col px-2"
+    >
+      <h3>Willkommen bei Tschau.app</h3>
+      <p class="text-sm opacity-75 pt-3">
+        Drücke unten auf das Plus, um einen neuen Post oder eine neue Gruppe zu
+        erstellen.
+      </p>
+      <p class="text-sm opacity-75 pt-3">
+        Drücke oben links auf das Icon, um dein Profil zu sehen und zu
+        bearbeiten.
+      </p>
+    </section>
+    <section
+      v-else
       v-infinite-scroll="loadMore"
       class="w-screen flex flex-col items-center pb-16 pt-24"
       infinite-scroll-disabled="autoLoadDisabled"
-      infinite-scroll-distance="10"
+      infinite-scroll-distance="20"
     >
       <section
         v-if="$auth.loggedIn && isActive('groups')"
@@ -90,10 +105,15 @@ export default {
       else if (this.isActive('groups')) return '33%'
       else return '66%'
     },
+    noposts() {
+      if (this.posts.length <= 0 && this.gotposts) return true
+      else return false
+    },
     ...mapState({
       posts: (state) => state.posts.posts,
       next: (state) => state.posts.next,
-      start: (state) => state.posts.start
+      start: (state) => state.posts.start,
+      gotposts: (state) => state.posts.gotposts
     })
   },
 

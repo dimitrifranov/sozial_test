@@ -1,6 +1,7 @@
 export const state = () => ({
   user: {},
-  notifications: []
+  notifications: [],
+  gotnotifs: false
 })
 export const mutations = {
   SET_USER(state, user) {
@@ -8,6 +9,9 @@ export const mutations = {
   },
   SET_NOTIFICATIONS(state, notifications) {
     state.notifications = notifications
+  },
+  GOT_NOTIFS(state) {
+    state.gotnotifs = true
   }
 }
 export const actions = {
@@ -28,6 +32,7 @@ export const actions = {
       })
       .then((response) => {
         commit('SET_NOTIFICATIONS', response.data.results)
+        commit('GOT_NOTIFS')
       })
   }
 }

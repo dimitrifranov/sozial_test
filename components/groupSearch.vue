@@ -21,7 +21,7 @@
       <section
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="autoLoadDisabled"
-        infinite-scroll-distance="10"
+        infinite-scroll-distance="20"
         infinite-scroll-immediate-check="false"
       >
         <groupPeek

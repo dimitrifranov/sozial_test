@@ -1,5 +1,5 @@
 <template>
-  <div class="center-items">
+  <div class="center-items px-2">
     <div class="h-screen w-screen max-w-md felx felx-col items-center pt-16">
       <h2 class="text-white text-2xl pb-2">
         Informationen

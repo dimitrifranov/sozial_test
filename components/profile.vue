@@ -76,7 +76,7 @@
       <div
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="autoLoadDisabled"
-        infinite-scroll-distance="10"
+        infinite-scroll-distance="20"
         class="grid grid-cols-3 gap-1 pb-16"
       >
         <postPreview v-for="(post, i) in posts" :key="i" :post="post" />

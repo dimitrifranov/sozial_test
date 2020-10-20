@@ -1,7 +1,8 @@
 export const state = () => ({
   posts: [],
   next: null,
-  start: true
+  start: true,
+  gotposts: false
 })
 export const mutations = {
   SET_POSTS(state, response) {
@@ -42,6 +43,9 @@ export const mutations = {
       //   return obj.id !== data.like
       // })
     }
+  },
+  GOT_POSTS(state) {
+    state.gotposts = true
   }
 }
 export const actions = {
@@ -56,6 +60,7 @@ export const actions = {
       return this.$axios.get(state.next).then((response) => {
         commit('SET_NEXT', response.data.next)
         commit('SET_POSTS', response.data)
+        commit('GOT_POSTS')
       })
     else if (data.user) {
       return this.$axios
@@ -65,6 +70,7 @@ export const actions = {
         .then((response) => {
           commit('SET_NEXT', response.data.next)
           commit('SET_POSTS', response.data)
+          commit('GOT_POSTS')
         })
     } else {
       return this.$axios
@@ -72,6 +78,7 @@ export const actions = {
         .then((response) => {
           commit('SET_NEXT', response.data.next)
           commit('SET_POSTS', response.data)
+          commit('GOT_POSTS')
         })
     }
   },
@@ -81,6 +88,7 @@ export const actions = {
       return this.$axios.get(state.next).then((response) => {
         commit('SET_NEXT', response.data.next)
         commit('SET_POSTS', response.data)
+        commit('GOT_POSTS')
       })
     else
       return this.$axios
@@ -88,6 +96,7 @@ export const actions = {
         .then((response) => {
           commit('SET_NEXT', response.data.next)
           commit('SET_POSTS', response.data)
+          commit('GOT_POSTS')
         })
   },
   publicPosts({ commit, state }) {
@@ -96,6 +105,7 @@ export const actions = {
       return this.$axios.get(state.next).then((response) => {
         commit('SET_NEXT', response.data.next)
         commit('SET_POSTS', response.data)
+        commit('GOT_POSTS')
       })
     else
       return this.$axios
@@ -103,6 +113,7 @@ export const actions = {
         .then((response) => {
           commit('SET_NEXT', response.data.next)
           commit('SET_POSTS', response.data)
+          commit('GOT_POSTS')
         })
   },
   likePost({ commit }, params) {
