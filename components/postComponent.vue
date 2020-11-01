@@ -195,7 +195,7 @@ export default {
         navigator.share({
           title: this.post.title,
           text: '',
-          url: this.$config.baseUrl + '/post/' + this.post.id + '/'
+          url: this.$config.baseUrl + this.post_link
         })
       } catch (e) {
         this.error({
