@@ -46,6 +46,12 @@
       >
         Der Benutzername sollte mindestens 4 Zeichen lang sein
       </p>
+      <p
+        v-if="!$v.user.username.valid && $v.user.username.$error"
+        class="text-xs text-error font-light -mt-4 mb-4 w-full"
+      >
+        Der Benutzername ist nicht gültig
+      </p>
       <baseInput
         v-model.trim="user.email"
         value="email"
@@ -119,7 +125,20 @@
 <script>
 import { mapState } from 'vuex'
 import { validationMixin } from 'vuelidate'
-import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
+import {
+  helpers,
+  required,
+  minLength,
+  email,
+  sameAs
+  // alpha,
+  // alphaNum
+  // numeric,
+  // or
+} from 'vuelidate/lib/validators'
+// eslint-disable-next-line no-useless-escape
+const username = helpers.regex('username', /^[a-zA-Z0-9_@+.\-]{4,150}$/)
+
 export default {
   mixins: [validationMixin],
 
@@ -148,7 +167,9 @@ export default {
     user: {
       username: {
         required,
-        minLength: minLength(4)
+        minLength: minLength(4),
+        valid: username
+        // alphaNum
       },
       password: {
         required,
