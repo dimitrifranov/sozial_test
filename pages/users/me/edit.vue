@@ -184,7 +184,7 @@ export default {
         if (this.user.email) formData.append('email', this.user.email)
         if (this.user.bio) formData.append('bio', this.user.bio)
         if (this.user.password) formData.append('password', this.user.password)
-        // else formData.append('password', this.$auth.user.password)
+        else formData.append('password', this.$auth.user.password)
         formData.append(
           'follow_post_notifs',
           this.$auth.user.follow_post_notifs
