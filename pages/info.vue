@@ -30,7 +30,12 @@
         4450 Sissach,<br />
         Schweiz <br />
         <br />
-        E-Mail: dimitri@tschau.app
+        E-Mail: dimitri@tschau.app <br />
+        <a
+          href="https://dimitri.franov.ch/"
+          class="mb-5 block font-light bg-transparent h-10 hover:bg-white text-white hover:text-grey py-2 px-4 mt-2 border border-white hover:border-transparent transition-colors duration-200 disabled:opacity-75 disbaled:text-error"
+          >Website</a
+        >
       </section>
       <section class="font-light text-sm text-white pb-10">
         <h3 class="text-xl pb-2">
