@@ -71,7 +71,8 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/google-gtag',
     '@nuxtjs/robots',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/sentry'
   ],
   /*
    ** Axios module configuration
@@ -182,6 +183,18 @@ export default {
       }
     }
   },
+
+  sentry: {
+    dsn:
+      'https://2b0e4b67301d4e8cb422c2eb0a339abe@o452704.ingest.sentry.io/5783653', // Enter your project's DSN here
+    // Additional Module Options go here
+    // https://sentry.nuxtjs.org/sentry/options
+    config: {
+      // Add native Sentry config here
+      // https://docs.sentry.io/platforms/javascript/guides/vue/configuration/options/
+    }
+  },
+
   'google-gtag': { id: 'UA-147350224-2' },
   publicRuntimeConfig: {
     baseUrl: process.env.BASE_URL || 'https://tschau.app',
