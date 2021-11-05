@@ -1,5 +1,4 @@
 export default {
-  mode: 'universal',
   debug: process.env.DEBUG,
   /*
    ** Headers of the page
